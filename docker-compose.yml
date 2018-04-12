@@ -1,0 +1,18 @@
+version: '2'
+
+volumes:
+  sqlite_data_local: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    volumes:
+      - .:/app
+      - sqlite_data_local:/app/data
+    env_file:
+      - ./.envs/.local/.django
+    ports:
+      - "8000:8000"
+    command: /start.sh

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "user detail" %}{% endblock %}
+
+{% block content %}
+<div class="hijos">
+  <h1>{% trans "User Profile" %}</h1>
+  <h3>{{ user.last_name }}, {{ user.first_name }} ({{ user.degree }})</h3>
+  {% if user.initiated %}
+  <p class="lead">{% trans "Initiated on" %} {{ user.initiated }}</p>
+  <br>
+  {% endif %}
+  {% if user.passed %}
+  <p class="lead">{% trans "Passed on" %} {{ user.passed }}</p>
+  <br>
+  {% endif %}
+  {% if user.raised %}
+  <p class="lead">{% trans "Raised on" %} {{ user.passed }}</p>
+  <br>
+  {% endif %}
+  <p class="lead">{% trans "Title: " %}
+  {% if user.most_worshipful %}
+    {% trans "Most Worshipful Brother" %}
+  {% elif user.worshipful %}
+    {% trans "Worshipful Brother" %}
+  {% elif user.past_master %}
+    {% trans "Worshipful Master" %}
+  {% else %}
+    {% trans "Brother" %}
+  {% endif %}
+</div>
+{% endblock %}

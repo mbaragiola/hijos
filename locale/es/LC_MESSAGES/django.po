@@ -1,0 +1,617 @@
+# hijos -- a lodge management system.
+# Copyright (C) 2018
+# This file is distributed under the same license as the hijos package.
+# Mariano Baragiola <mbaragiola@linux.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-11 19:50+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: hijos/templates/__base.html:53 hijos/templates/base.html:50
+msgid "My Profile"
+msgstr "Mi Perfil"
+
+#: hijos/templates/__base.html:57 hijos/templates/account/logout.html:5
+#: hijos/templates/account/logout.html:8 hijos/templates/account/logout.html:17
+#: hijos/templates/base.html:54
+msgid "Sign Out"
+msgstr "Cerrar Sesión"
+
+#: hijos/templates/__base.html:62 hijos/templates/account/signup.html:9
+#: hijos/templates/account/signup.html:19
+msgid "Sign Up"
+msgstr "Registrarse"
+
+#: hijos/templates/__base.html:66 hijos/templates/account/login.html:6
+#: hijos/templates/account/login.html:10 hijos/templates/account/login.html:35
+msgid "Sign In"
+msgstr "Iniciar Sesión"
+
+#: hijos/templates/account/account_inactive.html:5
+#: hijos/templates/account/account_inactive.html:8
+msgid "Account Inactive"
+msgstr "Cuenta Inactiva"
+
+#: hijos/templates/account/account_inactive.html:10
+msgid "This account is inactive."
+msgstr "Esta cuenta está inactiva"
+
+#: hijos/templates/account/email.html:7
+msgid "Account"
+msgstr "Cuenta"
+
+#: hijos/templates/account/email.html:10
+msgid "E-mail Addresses"
+msgstr "Correos Electrónicos"
+
+#: hijos/templates/account/email.html:13
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "Los siguientes correos electrónicos están asociados a tu cuenta."
+
+#: hijos/templates/account/email.html:27
+msgid "Verified"
+msgstr "Verificado"
+
+#: hijos/templates/account/email.html:29
+msgid "Unverified"
+msgstr "Sin verificar"
+
+#: hijos/templates/account/email.html:31
+msgid "Primary"
+msgstr "Primario"
+
+#: hijos/templates/account/email.html:37
+msgid "Make Primary"
+msgstr "Hacer primario"
+
+#: hijos/templates/account/email.html:38
+msgid "Re-send Verification"
+msgstr "Re-enviar verificación"
+
+#: hijos/templates/account/email.html:39
+msgid "Remove"
+msgstr "Remover"
+
+#: hijos/templates/account/email.html:46
+msgid "Warning:"
+msgstr "Alerta:"
+
+#: hijos/templates/account/email.html:46
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+"Actualmente no tienes ningún correo electrónico. Deberia agregar uno para "
+"recibir notificaciones, re-establecer su contraseña, etc."
+
+#: hijos/templates/account/email.html:51
+msgid "Add E-mail Address"
+msgstr "Agregar Correo Electrónico"
+
+#: hijos/templates/account/email.html:56
+msgid "Add E-mail"
+msgstr "Agregar Correo Electrónico"
+
+#: hijos/templates/account/email.html:66
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr "¿Desea remover el correo electrónico seleccionado?"
+
+#: hijos/templates/account/email_confirm.html:6
+#: hijos/templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr "Confirmar Correo Electrónico"
+
+#: hijos/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+"Por favor confirme que <a href=\"mailto:%(email)s\">%(email)s</a> es un "
+"correo electrónico para el usuario %(user_display)s."
+
+#: hijos/templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: hijos/templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+"Este correo de confirmación ha expirado o es inválido. Por favor <a href="
+"\"%(email_url)s\">realice otra solicitud de confirmación.</a>."
+
+#: hijos/templates/account/login.html:21
+msgid "or"
+msgstr "o"
+
+#: hijos/templates/account/logout.html:10
+msgid "Are you sure you want to sign out?"
+msgstr "¿Seguro desea cerrar sesión?"
+
+#: hijos/templates/account/password_change.html:6
+#: hijos/templates/account/password_change.html:9
+#: hijos/templates/account/password_change.html:14
+msgid "Change Password"
+msgstr "Cambiar Contraseña"
+
+#: hijos/templates/account/password_set.html:6
+#: hijos/templates/account/password_set.html:9
+#: hijos/templates/account/password_set.html:14
+msgid "Set Password"
+msgstr "Almacenar Contraseña"
+
+#: hijos/templates/account/signup.html:6
+msgid "Signup"
+msgstr "Registrarse"
+
+#: hijos/templates/account/signup.html:11
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: hijos/templates/account/signup_closed.html:5
+#: hijos/templates/account/signup_closed.html:8
+msgid "Sign Up Closed"
+msgstr "Registro Cerrado"
+
+#: hijos/templates/account/signup_closed.html:10
+msgid "We are sorry, but the sign up is currently closed."
+msgstr "No se puede registrar."
+
+#: hijos/templates/account/verification_sent.html:5
+#: hijos/templates/account/verification_sent.html:8
+#: hijos/templates/account/verified_email_required.html:5
+#: hijos/templates/account/verified_email_required.html:8
+msgid "Verify Your E-mail Address"
+msgstr "Verifique su correo electrónico."
+
+#: hijos/templates/account/verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+
+#: hijos/templates/account/verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: hijos/templates/account/verified_email_required.html:16
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: hijos/templates/account/verified_email_required.html:20
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
+#: hijos/templates/users/user_detail.html:5
+msgid "user detail"
+msgstr "detalle de usuario"
+
+#: hijos/templates/users/user_detail.html:9 hijos/users/admin.py:38
+msgid "User Profile"
+msgstr "Perfil de Usuario"
+
+#: hijos/templates/users/user_detail.html:12
+msgid "Initiated on"
+msgstr "Iniciado el"
+
+#: hijos/templates/users/user_detail.html:16
+msgid "Passed on"
+msgstr "Ascendido el"
+
+#: hijos/templates/users/user_detail.html:20
+msgid "Raised on"
+msgstr "Exaltado el"
+
+#: hijos/templates/users/user_detail.html:23
+msgid "Title: "
+msgstr "Título: "
+
+#: hijos/templates/users/user_detail.html:25
+msgid "Most Worshipful Brother"
+msgstr "Muy Respetable Hermano"
+
+#: hijos/templates/users/user_detail.html:27
+msgid "Worshipful Brother"
+msgstr "Respetable Hermano"
+
+#: hijos/templates/users/user_detail.html:29
+msgid "Worshipful Master"
+msgstr "Venerable Maestro"
+
+#: hijos/templates/users/user_detail.html:31
+msgid "Brother"
+msgstr "Hermano"
+
+#: hijos/treasure/apps.py:8
+msgid "treasure"
+msgstr "tesoro"
+
+#: hijos/treasure/models.py:18 hijos/treasure/models.py:196
+#: hijos/users/models.py:137 hijos/users/models.py:148
+msgid "lodge"
+msgstr "logia"
+
+#: hijos/treasure/models.py:25
+msgid "code"
+msgstr "código"
+
+#: hijos/treasure/models.py:29 hijos/users/models.py:128
+msgid "name"
+msgstr "nombre"
+
+#: hijos/treasure/models.py:33 hijos/treasure/models.py:106
+#: hijos/treasure/models.py:296 hijos/treasure/models.py:363
+#: hijos/treasure/models.py:414 hijos/treasure/models.py:467
+msgid "description"
+msgstr "descripción"
+
+#: hijos/treasure/models.py:39 hijos/treasure/models.py:67
+msgid "balance"
+msgstr "balance"
+
+#: hijos/treasure/models.py:50 hijos/treasure/models.py:99
+msgid "lodge account"
+msgstr "cuenta de logia"
+
+#: hijos/treasure/models.py:51
+msgid "lodge accounts"
+msgstr "cuentas de logias"
+
+#: hijos/treasure/models.py:61 hijos/treasure/models.py:244
+#: hijos/treasure/models.py:278 hijos/treasure/models.py:345
+#: hijos/users/models.py:172
+msgid "affiliation"
+msgstr "afiliación"
+
+#: hijos/treasure/models.py:78 hijos/treasure/models.py:154
+msgid "account"
+msgstr "cuenta"
+
+#: hijos/treasure/models.py:79
+msgid "accounts"
+msgstr "cuentas"
+
+#: hijos/treasure/models.py:88
+msgid "Ingress"
+msgstr "Ingreso"
+
+#: hijos/treasure/models.py:89
+msgid "Egress"
+msgstr "Egreso"
+
+#: hijos/treasure/models.py:90 hijos/treasure/models.py:144
+msgid "Deposit"
+msgstr "Depósito"
+
+#: hijos/treasure/models.py:110 hijos/treasure/models.py:161
+#: hijos/treasure/models.py:251 hijos/treasure/models.py:290
+#: hijos/treasure/models.py:352 hijos/treasure/models.py:403
+#: hijos/treasure/models.py:456
+msgid "amount"
+msgstr "monto"
+
+#: hijos/treasure/models.py:115
+msgid "lodge account movement type"
+msgstr "tipo de movimiento en cuenta de logia"
+
+#: hijos/treasure/models.py:133
+msgid "lodge account movement"
+msgstr "movimiento en cuenta de logia"
+
+#: hijos/treasure/models.py:134
+msgid "lodge account movements"
+msgstr "movimientos en cuenta de logia"
+
+#: hijos/treasure/models.py:143
+msgid "Invoice"
+msgstr "Cápita"
+
+#: hijos/treasure/models.py:145
+msgid "Charge"
+msgstr "Cargo"
+
+#: hijos/treasure/models.py:166
+msgid "account movement type"
+msgstr "tipo de movimiento en cuenta"
+
+#: hijos/treasure/models.py:184
+msgid "account movement"
+msgstr "movimiento en cuenta"
+
+#: hijos/treasure/models.py:185
+msgid "account movements"
+msgstr "movimientos en cuenta"
+
+#: hijos/treasure/models.py:203
+msgid "begin"
+msgstr "comienzo"
+
+#: hijos/treasure/models.py:206
+msgid "end"
+msgstr "final"
+
+#: hijos/treasure/models.py:209
+msgid "simple affiliation price"
+msgstr "precio de afiliación simple"
+
+#: hijos/treasure/models.py:212
+msgid "Usually GL price plus an extra."
+msgstr "Usualmente el precio de GL más un extra."
+
+#: hijos/treasure/models.py:215
+msgid "multiple affiliation price"
+msgstr "precio de afiliación múltiple"
+
+#: hijos/treasure/models.py:218
+msgid "Usually just the GL price."
+msgstr "Usualmente sólo el precio GL."
+
+#: hijos/treasure/models.py:225 hijos/treasure/models.py:236
+msgid "period"
+msgstr "período"
+
+#: hijos/treasure/models.py:226
+msgid "periods"
+msgstr "períodos"
+
+#: hijos/treasure/models.py:267
+msgid "invoice"
+msgstr "recibo"
+
+#: hijos/treasure/models.py:268
+msgid "invoices"
+msgstr "recibos"
+
+#: hijos/treasure/models.py:285
+msgid "to grand lodge"
+msgstr "a gran logia"
+
+#: hijos/treasure/models.py:300 hijos/treasure/models.py:367
+#: hijos/treasure/models.py:418 hijos/treasure/models.py:471
+msgid "Optional description."
+msgstr "Descripción opcional."
+
+#: hijos/treasure/models.py:303 hijos/treasure/models.py:421
+#: hijos/treasure/models.py:474
+msgid "receipt"
+msgstr "recibo"
+
+#: hijos/treasure/models.py:322
+msgid "deposit"
+msgstr "depósito"
+
+#: hijos/treasure/models.py:323
+msgid "deposits"
+msgstr "depósitos"
+
+#: hijos/treasure/models.py:333
+msgid "Initiation"
+msgstr "Iniciación"
+
+#: hijos/treasure/models.py:334
+msgid "Pass"
+msgstr "Ascenso"
+
+#: hijos/treasure/models.py:335
+msgid "Raise"
+msgstr "Exaltación"
+
+#: hijos/treasure/models.py:336 hijos/treasure/models.py:395
+#: hijos/treasure/models.py:448
+msgid "Other"
+msgstr "Otro"
+
+#: hijos/treasure/models.py:358
+#| msgid "charge"
+msgid "charge type"
+msgstr "tipo de cargo"
+
+#: hijos/treasure/models.py:377
+msgid "charge"
+msgstr "cargo"
+
+#: hijos/treasure/models.py:378
+msgid "charges"
+msgstr "cargos"
+
+#: hijos/treasure/models.py:390 hijos/treasure/models.py:445
+msgid "Donation"
+msgstr "Donación"
+
+#: hijos/treasure/models.py:391 hijos/treasure/models.py:446
+msgid "Philantropy"
+msgstr "Filantropía"
+
+#: hijos/treasure/models.py:392
+msgid "Expenses"
+msgstr "Gastos"
+
+#: hijos/treasure/models.py:393
+msgid "Loan"
+msgstr "Préstamo"
+
+#: hijos/treasure/models.py:394
+msgid "Grand Lodge Transfer"
+msgstr "Transferencia a Gran Logia"
+
+#: hijos/treasure/models.py:409
+msgid "egress type"
+msgstr "tipo de egreso"
+
+#: hijos/treasure/models.py:434
+msgid "lodge account egress"
+msgstr "egreso de cuenta de logia"
+
+#: hijos/treasure/models.py:435
+msgid "lodge account egresses"
+msgstr "egresos de cuenta de logia"
+
+#: hijos/treasure/models.py:447
+msgid "Payment"
+msgstr "Pago"
+
+#: hijos/treasure/models.py:462
+msgid "ingress type"
+msgstr "tipo de ingreso"
+
+#: hijos/treasure/models.py:487
+msgid "lodge account ingress"
+msgstr "ingreso de cuenta de logia"
+
+#: hijos/treasure/models.py:488
+msgid "lodge account ingresses"
+msgstr "ingresos de cuenta de logia"
+
+#: hijos/treasure/signals.py:20
+msgid "Invalid affiliation type."
+msgstr "Tipo de afiliación inválido."
+
+#: hijos/treasure/signals.py:39
+msgid "Invalid account movement type."
+msgstr "Tipo de movimiento de cuenta inválido."
+
+#: hijos/treasure/signals.py:71
+msgid "Lodge account not found."
+msgstr "No se encontró cuenta de logia."
+
+#: hijos/users/apps.py:8 hijos/users/models.py:79
+msgid "users"
+msgstr "usuarios"
+
+#: hijos/users/models.py:10
+msgid "Entered Apprentice"
+msgstr "Aprendiz"
+
+#: hijos/users/models.py:11
+msgid "Fellow Craft"
+msgstr "Compañero"
+
+#: hijos/users/models.py:12
+msgid "Master Mason"
+msgstr "Maestro Masón"
+
+#: hijos/users/models.py:18
+msgid "Simple"
+msgstr "Simple"
+
+#: hijos/users/models.py:19
+msgid "Multiple"
+msgstr "Múltiple"
+
+#: hijos/users/models.py:27
+msgid "degree"
+msgstr "grado"
+
+#: hijos/users/models.py:33
+msgid "initiated"
+msgstr "iniciado"
+
+#: hijos/users/models.py:36
+msgid "Initiation date."
+msgstr "Fecha de iniciación."
+
+#: hijos/users/models.py:39
+msgid "passed"
+msgstr "ascendido"
+
+#: hijos/users/models.py:42
+msgid "Passed to Fellow Craft date."
+msgstr "Fecha de ascenso."
+
+#: hijos/users/models.py:45
+msgid "raised"
+msgstr "exaltado"
+
+#: hijos/users/models.py:48
+msgid "Raised to Master Mason date."
+msgstr "Fecha de exaltación."
+
+#: hijos/users/models.py:51
+msgid "past master"
+msgstr "ex venerable"
+
+#: hijos/users/models.py:54
+msgid "Is or was Worshipful Master."
+msgstr "Es o fue Venerable Maestro."
+
+#: hijos/users/models.py:57
+msgid "worshipful"
+msgstr "respetable"
+
+#: hijos/users/models.py:60
+msgid "Is or was elected official of the Grand Lodge."
+msgstr "Ocupa o ha ocupado cargo electo en la Gran Logia."
+
+#: hijos/users/models.py:63
+msgid "most worshipful"
+msgstr "muy respetable"
+
+#: hijos/users/models.py:67
+msgid "Is or was elected as Most Worshipful Master of the Grand Lodge."
+msgstr "Ocupa o ha ocupado el cargo de Gran Maestre."
+
+#: hijos/users/models.py:78 hijos/users/models.py:155
+msgid "user"
+msgstr "usuario"
+
+#: hijos/users/models.py:92
+msgid "is active?"
+msgstr "¿es activo?"
+
+#: hijos/users/models.py:96
+msgid "created on"
+msgstr "creado en"
+
+#: hijos/users/models.py:100
+msgid "last modified on"
+msgstr "modificado en"
+
+#: hijos/users/models.py:105
+msgid "created by"
+msgstr "creado por"
+
+#: hijos/users/models.py:113
+msgid "last modified by"
+msgstr "modificado por"
+
+#: hijos/users/models.py:138
+msgid "lodges"
+msgstr "logias"
+
+#: hijos/users/models.py:161
+msgid "affiliation type"
+msgstr "tipo de afiliación"
+
+#: hijos/users/models.py:173
+msgid "affiliations"
+msgstr "afiliaciones"
+
+#: hijos/users/signals.py:11
+msgid "Global Account"
+msgstr "Cuenta Global"

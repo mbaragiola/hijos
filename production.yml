@@ -1,0 +1,30 @@
+version: '2'
+
+volumes:
+  sqlite_data: {}
+  caddy: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    env_file:
+      - ./.envs/.production/.django
+    volumes:
+      - sqlite_data:/app/data
+    command: /gunicorn.sh
+
+  caddy:
+    build:
+      context: .
+      dockerfile: ./compose/production/caddy/Dockerfile
+    depends_on:
+      - django
+    volumes:
+      - caddy:/root/.caddy
+    env_file:
+      - ./.envs/.production/.caddy
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
