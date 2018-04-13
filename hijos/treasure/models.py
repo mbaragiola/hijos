@@ -10,24 +10,46 @@ from django.utils.translation import ugettext_lazy as _
 from hijos.users import models as users
 
 
-class LodgeAccount(users.Model):
+class LodgeGlobalAccount(users.Model):
     """
     """
-    lodge = models.ForeignKey(
+    lodge = models.OneToOneField(
         users.Lodge,
         verbose_name=_('lodge'),
+        related_name='lodge_global_account',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
+    balance = models.DecimalField(
+        _('balance'),
+        max_digits=15,
+        decimal_places=2,
+        default=Decimal('0.00'),
+        blank=True
+    )
+
+    def __str__(self):
+        return str(self.lodge)
+
+    class Meta:
+        verbose_name = _('lodge global account')
+        verbose_name_plural = _('lodge global accounts')
+        default_permissions = ('add', 'change', 'delete', 'view')
+        ordering = ['lodge']
+
+
+class LodgeAccount(users.Model):
+    """
+    There could be multiple brothers receiving payments, making payments on
+    behalf of the lodge, or simply stashing lodge's funds.
+    """
+    handler = models.ForeignKey(
+        users.Affiliation,
+        verbose_name=_('handler'),
         related_name='lodge_accounts',
         related_query_name='lodge_account',
         on_delete=models.PROTECT,
         db_index=True
-    )
-    code = models.CharField(
-        _('code'),
-        max_length=10
-    )
-    name = models.CharField(
-        _('name'),
-        max_length=150
     )
     description = models.CharField(
         _('description'),
@@ -44,17 +66,18 @@ class LodgeAccount(users.Model):
     )
 
     def __str__(self):
-        return str(self.code) + ' - ' + str(self.name)
+        return str(self.handler)
 
     class Meta:
         verbose_name = _('lodge account')
         verbose_name_plural = _('lodge accounts')
         default_permissions = ('add', 'change', 'delete', 'view')
-        ordering = ['code']
+        ordering = ['handler']
 
 
 class Account(users.Model):
     """
+    Each user has an account for every lodge he is affiliated with.
     """
     affiliation = models.OneToOneField(
         users.Affiliation,
@@ -93,6 +116,7 @@ LODGEACCOUNT_MOVEMENT_TYPES = (
 
 class LodgeAccountMovement(users.Model):
     """
+    Logs every transaction between lodge accounts.
     """
     lodge_account = models.ForeignKey(
         LodgeAccount,
@@ -109,6 +133,11 @@ class LodgeAccountMovement(users.Model):
     amount = models.DecimalField(
         _('amount'),
         max_digits=12,
+        decimal_places=2
+    )
+    balance = models.DecimalField(
+        _('balance'),
+        max_digits=15,
         decimal_places=2
     )
     lodgeaccount_movement_type = models.CharField(
@@ -136,12 +165,54 @@ class LodgeAccountMovement(users.Model):
         ordering = ['-created_on']
 
 
+class LodgeAccountTransfer(users.Model):
+    """
+    Internal transfer between accounts.
+    """
+    lodge_account_from = models.ForeignKey(
+        LodgeAccount,
+        verbose_name=_('lodge account from'),
+        related_name='transfers_from',
+        related_query_name='transfer_from',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
+    lodge_account_to = models.ForeignKey(
+        LodgeAccount,
+        verbose_name=_('lodge account to'),
+        related_name='transfers_to',
+        related_query_name='transfer_to',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
+    description = models.CharField(
+        _('description'),
+        max_length=150
+    )
+    amount = models.DecimalField(
+        _('amount'),
+        max_digits=12,
+        decimal_places=2
+    )
+
+    def __str__(self):
+        return str(self.amount)
+
+    class Meta:
+        verbose_name = _('lodge account transfer')
+        verbose_name_plural = _('lodge account transfers')
+        default_permissions = ('add', 'change', 'delete', 'view')
+        ordering = ['-created_on']
+
+
 ACCOUNTMOVEMENT_INVOICE = 'I'
 ACCOUNTMOVEMENT_DEPOSIT = 'D'
+ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT = 'G'
 ACCOUNTMOVEMENT_CHARGE = 'C'
 ACCOUNT_MOVEMENT_TYPES = (
     (ACCOUNTMOVEMENT_INVOICE, _('Invoice')),
     (ACCOUNTMOVEMENT_DEPOSIT, _('Deposit')),
+    (ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT, _('Grand Lodge Deposit')),
     (ACCOUNTMOVEMENT_CHARGE, _('Charge'))
 )
 
@@ -160,6 +231,11 @@ class AccountMovement(users.Model):
     amount = models.DecimalField(
         _('amount'),
         max_digits=12,
+        decimal_places=2
+    )
+    balance = models.DecimalField(
+        _('balance'),
+        max_digits=15,
         decimal_places=2
     )
     account_movement_type = models.CharField(
@@ -205,17 +281,16 @@ class Period(users.Model):
     end = models.DateField(
         _('end')
     )
-    simple_affiliation_price = models.DecimalField(
-        _('simple affiliation price'),
-        max_digits=12,
-        decimal_places=2,
-        help_text=_("Usually GL price plus an extra.")
-    )
-    multiple_affiliation_price = models.DecimalField(
-        _('multiple affiliation price'),
-        max_digits=12,
-        decimal_places=2,
-        help_text=_("Usually just the GL price.")
+    price_multiplier = models.PositiveSmallIntegerField(
+        _('price multiplier'),
+        default=1,
+        blank=True,
+        validators=[MinValueValidator(1)],
+        help_text=_(
+            "Usually the category price is defined by a single unit price, "
+            "but a period may have multiple units. For example, a unit can "
+            "be a month, but a period could be 3, 4 or 12 months."
+        )
     )
 
     def __str__(self):
@@ -272,19 +347,23 @@ class Invoice(users.Model):
 
 class Deposit(users.Model):
     """
+    A `payer` deposits money to one of the lodge accounts' handler.
     """
-    affiliation = models.ForeignKey(
+    payer = models.ForeignKey(
         users.Affiliation,
-        verbose_name=_('affiliation'),
+        verbose_name=_('payer'),
         related_name='deposits',
         related_query_name='deposit',
         on_delete=models.PROTECT,
         db_index=True
     )
-    to_grand_lodge = models.BooleanField(
-        _('to grand lodge'),
-        default=False,
-        blank=True
+    lodge_account = models.ForeignKey(
+        LodgeAccount,
+        verbose_name=_('lodge account'),
+        related_name='deposits',
+        related_query_name='deposit',
+        on_delete=models.PROTECT,
+        db_index=True
     )
     amount = models.DecimalField(
         _('amount'),
@@ -318,9 +397,80 @@ class Deposit(users.Model):
         object_id_field='object_id'
     )
 
+    def __str__(self):
+        return str(self.payer) + '->' + (
+            str(self.lodge_account.handler) + ' $ ' + str(self.amount)
+        )
+
     class Meta:
         verbose_name = _('deposit')
         verbose_name_plural = _('deposits')
+        default_permissions = ('add', 'change', 'delete', 'view')
+        ordering = ['-created_on']
+
+
+GRANDLODGEDEPOSIT_PENDING = 'P'
+GRANDLODGEDEPOSIT_ACCREDITED = 'A'
+GRANDLODGEDEPOSIT_REJECTED = 'R'
+GRANDLODGEDEPOSIT_STATUSES = (
+    (GRANDLODGEDEPOSIT_PENDING, _('Pending')),
+    (GRANDLODGEDEPOSIT_ACCREDITED, _('Accredited')),
+    (GRANDLODGEDEPOSIT_REJECTED, _('Rejected'))
+)
+
+
+class GrandLodgeDeposit(users.Model):
+    """
+    A `payer` deposits money directly to the Grand Lodge's bank account.
+    Need to confirm it has been properly accredited by both the bank and the GL.
+    """
+    payer = models.ForeignKey(
+        users.Affiliation,
+        verbose_name=_('payer'),
+        related_name='grand_lodge_deposits',
+        related_query_name='grand_lodge_deposit',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
+    amount = models.DecimalField(
+        _('amount'),
+        max_digits=12,
+        decimal_places=2,
+        validators=[MinValueValidator('0.01')]
+    )
+    description = models.CharField(
+        _('description'),
+        max_length=300,
+        default="",
+        blank=True,
+        help_text=_("Optional description.")
+    )
+    receipt = models.FileField(
+        _('receipt'),
+        upload_to='receipts',
+        blank=True,
+        null=True
+    )
+    status = models.CharField(
+        _('status'),
+        max_length=1,
+        choices=GRANDLODGEDEPOSIT_STATUSES,
+        default=GRANDLODGEDEPOSIT_PENDING,
+        blank=True
+    )
+    account_movement = GenericRelation(
+        AccountMovement,
+        related_query_name='treasure_account_grandlodgedeposit',
+        content_type_field='object_ct',
+        object_id_field='object_id'
+    )
+
+    def __str__(self):
+        return str(self.payer) + ': $ ' + str(self.amount)
+
+    class Meta:
+        verbose_name = _('grand lodge deposit')
+        verbose_name_plural = _('grand lodge deposits')
         default_permissions = ('add', 'change', 'delete', 'view')
         ordering = ['-created_on']
 
@@ -339,10 +489,11 @@ CHARGE_TYPES = (
 
 class Charge(users.Model):
     """
+    An special ocassion charge, like an initiation, a raise, etc.
     """
-    affiliation = models.ForeignKey(
+    debtor = models.ForeignKey(
         users.Affiliation,
-        verbose_name=_('affiliation'),
+        verbose_name=_('debtor'),
         related_name='charges',
         related_query_name='charge',
         on_delete=models.PROTECT,
@@ -373,6 +524,9 @@ class Charge(users.Model):
         object_id_field='object_id'
     )
 
+    def __str__(self):
+        return str(self.debtor) + '- $ ' + str(self.amount)
+
     class Meta:
         verbose_name = _('charge')
         verbose_name_plural = _('charges')
@@ -398,7 +552,16 @@ EGRESS_TYPES = (
 
 class LodgeAccountEgress(users.Model):
     """
+    Money that leaves the lodge.
     """
+    lodge_account = models.ForeignKey(
+        LodgeAccount,
+        verbose_name=_('lodge account'),
+        related_name='egresses',
+        related_query_name='egress',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
     amount = models.DecimalField(
         _('amount'),
         max_digits=12,
@@ -430,6 +593,9 @@ class LodgeAccountEgress(users.Model):
         object_id_field='object_id'
     )
 
+    def __str__(self):
+        return str(self.lodge_account) + '- $ ' + str(self.amount)
+
     class Meta:
         verbose_name = _('lodge account egress')
         verbose_name_plural = _('lodge account egresses')
@@ -451,7 +617,16 @@ INGRESS_TYPES = (
 
 class LodgeAccountIngress(users.Model):
     """
+    Money entering our lodge from the outside.
     """
+    lodge_account = models.ForeignKey(
+        LodgeAccount,
+        verbose_name=_('lodge account'),
+        related_name='ingresses',
+        related_query_name='ingress',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
     amount = models.DecimalField(
         _('amount'),
         max_digits=12,
@@ -482,6 +657,9 @@ class LodgeAccountIngress(users.Model):
         content_type_field='object_ct',
         object_id_field='object_id'
     )
+
+    def __str__(self):
+        return str(self.lodge_account) + '+ $ ' + str(self.amount)
 
     class Meta:
         verbose_name = _('lodge account ingress')

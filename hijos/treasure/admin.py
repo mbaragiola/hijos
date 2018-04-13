@@ -4,6 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from hijos.treasure import models
 
 
+@admin.register(models.LodgeGlobalAccount)
+class LodgeGlobalAccountAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(models.LodgeAccount)
 class LodgeAccountAdmin(admin.ModelAdmin):
     pass
@@ -36,6 +41,11 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 @admin.register(models.Deposit)
 class DepositAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.GrandLodgeDeposit)
+class GrandLodgeDepositAdmin(admin.ModelAdmin):
     pass
 
 

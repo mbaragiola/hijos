@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -10,13 +12,6 @@ DEGREES = (
     (DEGREE_ENTEREDAPPRENTICE, _('Entered Apprentice')),
     (DEGREE_FELLOWCRAFT, _('Fellow Craft')),
     (DEGREE_MASTERMASON, _('Master Mason'))
-)
-
-AFFILIATION_SIMPLE = 'S'
-AFFILIATION_MULTIPLE = 'M'
-AFFILIATIONS = (
-    (AFFILIATION_SIMPLE, _('Simple')),
-    (AFFILIATION_MULTIPLE, _('Multiple'))
 )
 
 
@@ -140,6 +135,71 @@ class Lodge(Model):
         ordering = ['name']
 
 
+class Category(Model):
+    """
+    Categories range from normal, discount for students, discount for under
+    25yo, discount for multiple affiliations, etc.
+    """
+    name = models.CharField(
+        _('name'),
+        max_length=50,
+        unique=True
+    )
+    description = models.CharField(
+        _('description'),
+        max_length=300,
+        default="",
+        blank=True
+    )
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+        default_permissions = ('add', 'change', 'delete', 'view')
+        ordering = ['name']
+
+
+class CategoryPrice(Model):
+    """
+    Prices are valid through a range of time.
+    """
+    category = models.ForeignKey(
+        Category,
+        verbose_name=_('category'),
+        related_name='prices',
+        related_query_name='price',
+        on_delete=models.PROTECT,
+        db_index=True
+    )
+    price = models.DecimalField(
+        _('price'),
+        max_digits=10,
+        decimal_places=2
+    )
+    date_from = models.DateField(
+        _('date from')
+    )
+    date_until = models.DateField(
+        _('date until'),
+        default=date(year=3000, month=12, day=31),
+        blank=True
+    )
+
+    def __str__(self):
+        return str(self.price) + ':' + (
+            str(self.date_from) + '-' + str(self.date_until)
+        )
+
+    class Meta:
+        verbose_name = _('price')
+        verbose_name_plural = _('prices')
+        default_permissions = ('add', 'change', 'delete', 'view')
+        ordering = ['-date_until', '-date_from']
+
+
 class Affiliation(Model):
     """
     """
@@ -148,19 +208,24 @@ class Affiliation(Model):
         verbose_name=_('lodge'),
         related_name='affiliations',
         related_query_name='affiliation',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        db_index=True
     )
     user = models.ForeignKey(
         User,
         verbose_name=_('user'),
         related_name='affiliations',
         related_query_name='affiliation',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        db_index=False
     )
-    affiliation_type = models.CharField(
-        _('affiliation type'),
-        max_length=1,
-        choices=AFFILIATIONS
+    category = models.ForeignKey(
+        Category,
+        verbose_name=_('category'),
+        related_name='affiliations',
+        related_query_name='affiliation',
+        on_delete=models.PROTECT,
+        db_index=False
     )
 
     def __str__(self):
