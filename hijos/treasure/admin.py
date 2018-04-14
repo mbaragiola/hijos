@@ -14,6 +14,11 @@ class LodgeAccountAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(models.LodgeAccountTransfer)
+class LodgeAccountTransferAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(models.Account)
 class AccountAdmin(admin.ModelAdmin):
     pass

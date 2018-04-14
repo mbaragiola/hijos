@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class TreasureConfig(AppConfig):
-    name = 'treasure'
+    name = 'hijos.treasure'
     verbose_name = _('treasure')
 
     def ready(self):
@@ -44,5 +44,29 @@ class TreasureConfig(AppConfig):
             receiver=signals.lodge_account_movement,
             sender=models.LodgeAccountMovement,
             dispatch_uid='Treasure_LodgeAccountMovement_SyncLodgeAccount',
+            weak=False
+        )
+        post_save.connect(
+            receiver=signals.lodge_account_ingress_and_egress,
+            sender=models.LodgeAccountIngress,
+            dispatch_uid=(
+                'Treasure_LodgeAccountIngress_SyncLodgeAccountMovement'
+            ),
+            weak=False
+        )
+        post_save.connect(
+            receiver=signals.lodge_account_ingress_and_egress,
+            sender=models.LodgeAccountEgress,
+            dispatch_uid=(
+                'Treasure_LodgeAccountEgress_SyncLodgeAccountMovement'
+            ),
+            weak=False
+        )
+        post_save.connect(
+            receiver=signals.lodge_account_transfer,
+            sender=models.LodgeAccountTransfer,
+            dispatch_uid=(
+                'Treasure_LodgeAccountTransfer_SyncLodgeAccountMovement'
+            ),
             weak=False
         )

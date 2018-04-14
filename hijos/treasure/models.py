@@ -106,10 +106,12 @@ class Account(users.Model):
 
 LODGEACCOUNTMOVEMENT_INGRESS = 'I'
 LODGEACCOUNTMOVEMENT_EGRESS = 'E'
+LODGEACCOUNTMOVEMENT_TRANSFER = 'T'
 LODGEACCOUNTMOVEMENT_DEPOSIT = 'D'
 LODGEACCOUNT_MOVEMENT_TYPES = (
     (LODGEACCOUNTMOVEMENT_INGRESS, _('Ingress')),
     (LODGEACCOUNTMOVEMENT_EGRESS, _('Egress')),
+    (LODGEACCOUNTMOVEMENT_TRANSFER, _('Transfer')),
     (LODGEACCOUNTMOVEMENT_DEPOSIT, _('Deposit'))
 )
 
@@ -187,7 +189,9 @@ class LodgeAccountTransfer(users.Model):
     )
     description = models.CharField(
         _('description'),
-        max_length=150
+        max_length=150,
+        default="",
+        blank=True
     )
     amount = models.DecimalField(
         _('amount'),
@@ -326,7 +330,7 @@ class Invoice(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     account_movement = GenericRelation(
         AccountMovement,
@@ -369,7 +373,7 @@ class Deposit(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     description = models.CharField(
         _('description'),
@@ -436,7 +440,7 @@ class GrandLodgeDeposit(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     description = models.CharField(
         _('description'),
@@ -503,7 +507,7 @@ class Charge(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     charge_type = models.CharField(
         _('charge type'),
@@ -566,7 +570,7 @@ class LodgeAccountEgress(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     egress_type = models.CharField(
         _('egress type'),
@@ -631,7 +635,7 @@ class LodgeAccountIngress(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator('0.01')]
+        validators=[MinValueValidator(Decimal('0.01'))]
     )
     ingress_type = models.CharField(
         _('ingress type'),
