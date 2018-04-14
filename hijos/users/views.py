@@ -14,12 +14,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            account = treasure.Account.objects.get(user=self.user)
-        except treasure.Account.DoesNotExist:
-            context['account'] = None
-        else:
-            context['account'] = account
+        affiliations = models.Affiliation.objects.filter(user=self.object)
+        context['affiliations'] = affiliations.all()
+        return context
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):

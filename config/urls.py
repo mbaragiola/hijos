@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^users/', include('hijos.users.urls', namespace='users')),
     url(r'^accounts/login/$', allauth.login, name='account_login'),
     url(r'^accounts/logout/$', allauth.logout, name='account_logout'),
+    # redirect signup to login
+    url(r'^accounts/signup/$', allauth.login, name='account_signup'),
     url(
         r'^accounts/password/change/$',
         allauth.password_change,
