@@ -72,7 +72,17 @@
           {% for movement in affiliation.account.movements.all %}
             {% if movement.is_active %}
             <tr>
-              <td>{{ movement.account_movement_type }}</td>
+              {% if movement.account_movement_type == "I" %}
+              <td>{% trans "Deposit" %}</td>
+              {% elif movement.account_movement_type == "D" %}
+              <td>{% trans "Invoice" %}</td>
+              {% elif movement.account_movement_type == "C" %}
+              <td>{% trans "Charge" %}</td>
+              {% elif movement.account_movement_type == "G" %}
+              <td>{% trans "Grand Lodge Deposit" %}</td>
+              {% else %}
+              <td>{% trans "Unknown" %}</td>
+              {% endif %}
               <td>$ {{ movement.amount }}</td>
               <td>$ {{ movement.balance }}</td>
               <td>{{ movement.created_by }}</td>
