@@ -5,37 +5,83 @@
 {% block title %}{% trans "user detail" %}{% endblock %}
 
 {% block content %}
-<div class="hijos">
-  <h1>{% trans "User Profile" %}</h1>
-  <h3>{{ user.last_name }}, {{ user.first_name }} ({{ user.degree }})</h3>
-  {% if user.initiated %}
-  <p class="lead">{% trans "Initiated on" %} {{ user.initiated }}</p>
-  <br>
-  {% endif %}
-  {% if user.passed %}
-  <p class="lead">{% trans "Passed on" %} {{ user.passed }}</p>
-  <br>
-  {% endif %}
-  {% if user.raised %}
-  <p class="lead">{% trans "Raised on" %} {{ user.passed }}</p>
-  <br>
-  {% endif %}
-  <p class="lead">{% trans "Title: " %}
-  {% if user.most_worshipful %}
-    {% trans "Most Worshipful Brother" %}
-  {% elif user.worshipful %}
-    {% trans "Worshipful Brother" %}
-  {% elif user.past_master %}
-    {% trans "Worshipful Master" %}
-  {% else %}
-    {% trans "Brother" %}
-  {% endif %}
-  <div>
-    <h2>{% trans "Treasure" %}</h2>
+<div class="row">
+  <div class="col"><h1>{% trans "User Profile" %}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <h3>{{ user.last_name }}, {{ user.first_name }} ({{ user.degree }})</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Title" %}: 
+    {% if user.most_worshipful %}
+      {% trans "Most Worshipful Brother" %}
+    {% elif user.worshipful %}
+      {% trans "Worshipful Brother" %}
+    {% elif user.past_master %}
+      {% trans "Worshipful Master" %}
+    {% else %}
+      {% trans "Brother" %}
+    {% endif %}
+  </div>
+</div>
+{% if user.initiated %}
+<div class="row">
+  <div class="col">{% trans "Initiated on" %} {{ user.initiated }}</div>
+</div>
+{% endif %}
+{% if user.passed %}
+<div class="row">
+  <div class="col">{% trans "Passed on" %} {{ user.passed }}</div>
+</div>
+{% endif %}
+{% if user.raised %}
+<div class="row">
+  <div class="col">{% trans "Raised on" %} {{ user.passed }}</div>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col"><h2>{% trans "Treasure" %}</h2></div>
+</div>
+<div class="row">
+  <div class="col">
     <ul>
       {% for affiliation in affiliations %}
-        <li>{{ affiliation.lodge.name }}</li>
-        <li>{% trans "Balance" %}: $ {{ affiliation.account.balance }}</li>
+        <div class="row">
+          <div class="col"><b>{{ affiliation.lodge.name }}</b></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <b>{% trans "Balance" %} $ {{ affiliation.account.balance }}</b>
+          </div>
+        </div>
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{% trans "Movement" %}</th>
+              <th>{% trans "Amount" %}</th>
+              <th>{% trans "Balance" %}</th>
+              <th>{% trans "Created by" %}</th>
+              <th>{% trans "Created on" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for movement in affiliation.account.movements.all %}
+            {% if movement.is_active %}
+            <tr>
+              <td>{{ movement.account_movement_type }}</td>
+              <td>$ {{ movement.amount }}</td>
+              <td>$ {{ movement.balance }}</td>
+              <td>{{ movement.created_by }}</td>
+              <td>{{ movement.created_on  }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
       {% endfor %}
     </ul>
   </div>
