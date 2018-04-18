@@ -68,6 +68,9 @@ class LodgeAccount(users.Model):
     def __str__(self):
         return str(self.handler)
 
+    def get_absolute_url(self):
+        return reverse('treasure:lodgeaccount-detail')
+
     class Meta:
         verbose_name = _('lodge account')
         verbose_name_plural = _('lodge accounts')
@@ -96,6 +99,9 @@ class Account(users.Model):
 
     def __str__(self):
         return str(self.affiliation) + ' - $ ' + str(self.balance)
+
+    def get_absolute_url(self):
+        return reverse('treasure:account-detail')
 
     class Meta:
         verbose_name = _('account')
@@ -127,10 +133,6 @@ class LodgeAccountMovement(users.Model):
         related_query_name='movement',
         on_delete=models.PROTECT,
         db_index=True
-    )
-    description = models.CharField(
-        _('description'),
-        max_length=150
     )
     amount = models.DecimalField(
         _('amount'),
@@ -298,7 +300,7 @@ class Period(users.Model):
     )
 
     def __str__(self):
-        return str(self.begin) + '-' + str(self.end)
+        return str(self.begin) + ':' + str(self.end)
 
     class Meta:
         verbose_name = _('period')
@@ -340,7 +342,12 @@ class Invoice(users.Model):
     )
 
     def __str__(self):
-        return str(self.period) + ': $ ' + str(self.amount)
+        return str(self.period) + ' $ ' + str(self.amount) + (
+            ' (#' + str(self.id) + ')'
+        )
+
+    def get_absolute_url(self):
+        return reverse('treasure:invoice-detail')
 
     class Meta:
         verbose_name = _('invoice')
@@ -404,7 +411,10 @@ class Deposit(users.Model):
     def __str__(self):
         return str(self.payer) + '->' + (
             str(self.lodge_account.handler) + ' $ ' + str(self.amount)
-        )
+        ) + ' (#' + str(self.id) + ')'
+
+    def get_absolute_url(self):
+        return reverse('treasure:deposit-detail')
 
     class Meta:
         verbose_name = _('deposit')
@@ -470,7 +480,12 @@ class GrandLodgeDeposit(users.Model):
     )
 
     def __str__(self):
-        return str(self.payer) + ': $ ' + str(self.amount)
+        return str(self.payer) + ': $ ' + str(self.amount) + (
+            ' (#' + str(self.id) + ')'
+        )
+
+    def get_absolute_url(self):
+        return reverse('treasure:grandlodgedeposit-detail')
 
     class Meta:
         verbose_name = _('grand lodge deposit')
@@ -529,7 +544,12 @@ class Charge(users.Model):
     )
 
     def __str__(self):
-        return str(self.debtor) + '- $ ' + str(self.amount)
+        return str(self.debtor) + '- $ ' + str(self.amount) + (
+            ' (#' + str(self.id) + ')'
+        )
+
+    def get_absolute_url(self):
+        return reverse('treasure:charge-detail')
 
     class Meta:
         verbose_name = _('charge')
