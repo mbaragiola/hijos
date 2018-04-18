@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Accounts" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Global Balance" %} $ {{ lodge.lodge_global_account.balance }}
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for lodge_account in lodge_accounts %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:lodgeaccount-detail' lodge_account.id %}">
+            <b>{{ lodge_account.handler }}</b>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <b>{% trans "Balance" %} $ {{ lodge_account.balance }}</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          {{ lodge_account.description }}
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

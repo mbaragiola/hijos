@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "charge detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Charge" %} #{{ charge.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Debtor" %}: 
+    <a href="{% url 'users:user-detail' charge.debtor.user.username %}">
+      <b>{{ charge.debtor }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Charge Type" %}: 
+    {% if charge.charge_type == "I" %}
+      {% trans "Initiation" %}
+    {% elif charge.charge_type == "P" %}
+      {% trans "Passed" %}
+    {% elif charge.charge_type == "R" %}
+      {% trans "Raised" %}
+    {% elif charge.charge_type == "O" %}
+      {% trans "Other" %}
+    {% else %}
+      {% trans "Unknown" %}
+    {% endif %}
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ charge.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ charge.description }}</div>
+</div>
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=charge.created_by created_on=charge.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if charge.created_on != charge.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=charge.last_modified_by last_modified_on=dcharge.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

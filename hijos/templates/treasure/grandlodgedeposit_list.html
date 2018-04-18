@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "grand lodge deposit list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Grand Lodge Deposits" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for grand_lodge_deposit in grand_lodge_deposits %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:grandlodgedeposit-detail' grand_lodge_deposit.id %}">
+            <b>{{ grand_lodge_deposit }}</b>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

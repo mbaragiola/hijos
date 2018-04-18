@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "deposit detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Deposit" %} #{{ deposit.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Payer" %}: 
+    <a href="{% url 'users:user-detail' deposit.payer.user.username %}">
+      <b>{{ deposit.payer }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge Account" %}: 
+    <a href="{% url 'treasure:lodgeaccount-detail' deposit.lodge_account.id %}">
+      {{ deposit.lodge_account.handler }}
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ deposit.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ deposit.description }}</div>
+</div>
+{% if deposit.receipt %}
+<div class="row">
+  <div class="col">
+    <img src="{{ deposit.receipt.url }}">
+  </div>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=deposit.created_by created_on=deposit.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if deposit.created_on != deposit.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=deposit.last_modified_by last_modified_on=deposit.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

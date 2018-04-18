@@ -8,7 +8,7 @@ from hijos.users import models
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = models.User
-    object_name = 'user'
+    context_object_name = 'user'
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
@@ -23,7 +23,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse('users:detail',
+        return reverse('users:user-detail',
                        kwargs={'username': self.request.user.username})
 
 

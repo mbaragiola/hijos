@@ -64,10 +64,12 @@ class User(AbstractUser):
     )
 
     def __str__(self):
-        return self.last_name + ', ' + self.first_name
+        return self.last_name + ', ' + self.first_name + (
+            ' (' + self.degree + ')'
+        )
 
     def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'username': self.username})
+        return reverse('users:user-detail', kwargs={'username': self.username})
 
     class Meta:
         verbose_name = _('user')
@@ -128,6 +130,9 @@ class Lodge(Model):
     def __str__(self):
         return str(self.name)
 
+    def get_absolute_url(self):
+        return reverse('users:lodge-detail')
+
     class Meta:
         verbose_name = _('lodge')
         verbose_name_plural = _('lodges')
@@ -154,6 +159,9 @@ class Category(Model):
 
     def __str__(self):
         return str(self.name)
+
+    def get_absolute_url(self):
+        return reverse('users:category-detail')
 
     class Meta:
         verbose_name = _('category')
@@ -193,6 +201,9 @@ class CategoryPrice(Model):
             str(self.date_from) + '-' + str(self.date_until)
         )
 
+    def get_absolute_url(self):
+        return reverse('users:categoryprice-detail')
+
     class Meta:
         verbose_name = _('price')
         verbose_name_plural = _('prices')
@@ -230,6 +241,9 @@ class Affiliation(Model):
 
     def __str__(self):
         return str(self.user) + ' @ ' + str(self.lodge)
+
+    def get_absolute_url(self):
+        return reverse('users:affiliation-detail')
 
     class Meta:
         index_together = ('lodge', 'user')

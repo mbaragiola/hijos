@@ -1,22 +1,22 @@
-from django.conf.urls import url
+from django.urls import path
 
-from . import views
+from hijos.users import views
 
 app_name = 'users'
 urlpatterns = [
-    url(
-        regex=r'^$',
+    path(
+        '',
         view=views.UserListView.as_view(),
-        name='list'
+        name='user-list'
     ),
-    url(
-        regex=r'^~redirect/$',
+    path(
+        '~redirect/',
         view=views.UserRedirectView.as_view(),
-        name='redirect'
+        name='user-redirect'
     ),
-    url(
-        regex=r'^(?P<username>[\w.@+-]+)/$',
+    path(
+        '<username>/',
         view=views.UserDetailView.as_view(),
-        name='detail'
+        name='user-detail'
     )
 ]

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "invoice detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Invoice" %} #{{ invoice.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Affiliation" %}: 
+    <a href="{% url 'users:user-detail' invoice.affiliation.user.username %}">
+      <b>{{ invoice.affiliation }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Period" %}: 
+    <a href="{% url 'treasure:period-detail' invoice.period.id %}">
+      {{ invoice.period }}
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ invoice.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=invoice.created_by created_on=invoice.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if invoice.created_on != invoice.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=invoice.last_modified_by last_modified_on=invoice.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

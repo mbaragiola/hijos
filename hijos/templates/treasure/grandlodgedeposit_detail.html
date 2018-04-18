@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "grand lodge deposit detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Grand Lodge Deposit" %} #{{ grand_lodge_deposit.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Payer" %}: 
+    <a href="{% url 'users:user-detail' grand_lodge_deposit.payer.user.username %}">
+      <b>{{ grand_lodge_deposit.payer }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ grand_lodge_deposit.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ grand_lodge_deposit.description }}</div>
+</div>
+{% if grand_lodge_deposit.receipt %}
+<div class="row">
+  <div class="col">
+    <img src="{{ grand_lodge_deposit.receipt.url }}">
+  </div>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=grand_lodge_deposit.created_by created_on=grand_lodge_deposit.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if grand_lodge_deposit.created_on != grand_lodge_deposit.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=grand_lodge_deposit.last_modified_by last_modified_on=grand_lodge_deposit.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

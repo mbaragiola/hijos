@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Account" %}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <h3>{{ lodge_account.handler }}</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <b>{% trans "Balance" %} $ {{ lodge_account.balance }}</b>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{% trans "Movement" %}</th>
+          <th>{% trans "Amount" %}</th>
+          <th>{% trans "Balance" %}</th>
+          <th>{% trans "Created by" %}</th>
+          <th>{% trans "Created on" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for movement in lodge_account.movements.all %}
+      {% if movement.is_active %}
+        <tr>
+          {% if movement.lodgeaccount_movement_type == "I" %}
+          <td>{% trans "Ingress" %}</td>
+          {% elif movement.lodgeaccount_movement_type == "E" %}
+          <td>{% trans "Egress" %}</td>
+          {% elif movement.lodgeaccount_movement_type == "T" %}
+          <td>{% trans "Transfer" %}</td>
+          {% elif movement.lodgeaccount_movement_type == "D" %}
+          <td>{% trans "Deposit" %}</td>
+          {% else %}
+          <td>{% trans "Unknown" %}</td>
+          {% endif %}
+          <td>$ {{ movement.amount }}</td>
+          <td>$ {{ movement.balance }}</td>
+          <td>{{ movement.created_by }}</td>
+          <td>{{ movement.created_on  }}</td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
