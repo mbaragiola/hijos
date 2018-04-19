@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "period detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Period" %}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge" %}: <a href="{% url 'users:lodge-detail' period.lodge.id %}">{{ period.lodge }}</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Begin" %}: {{ period.begin }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "End" %}: {{ period.end }}</div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Price Multiplier" %}: {{ period.price_multiplier }}
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for invoice in period.invoices.all %}
+      {% if invoice.is_active %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:invoice-detail' invoice.id %}">
+            <b>{{ invoice }}</b>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

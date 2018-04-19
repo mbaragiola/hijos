@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.shortcuts import get_object_or_404
 
@@ -7,7 +6,7 @@ from hijos.users import models as users
 from hijos.treasure import models
 
 
-class LodgeAccountsByLodgeList(ListView):
+class LodgeAccountsByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/lodgeaccount_list.html'
     context_object_name = 'lodge_accounts'
 
@@ -31,7 +30,7 @@ class LodgeAccountDetailView(LoginRequiredMixin, DetailView):
     template_name = 'treasure/lodgeaccount_detail.html'
 
 
-class PeriodsByLodgeList(ListView):
+class PeriodsByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/period_list.html'
     context_object_name = 'periods'
 
@@ -55,7 +54,7 @@ class PeriodDetailView(LoginRequiredMixin, DetailView):
     template_name = 'treasure/period_detail.html'
 
 
-class InvoicesByLodgeList(ListView):
+class InvoicesByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/invoice_list.html'
     context_object_name = 'invoices'
 
@@ -79,7 +78,7 @@ class InvoiceDetailView(LoginRequiredMixin, DetailView):
     template_name = 'treasure/invoice_detail.html'
 
 
-class DepositsByLodgeList(ListView):
+class DepositsByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/deposit_list.html'
     context_object_name = 'deposits'
 
@@ -103,7 +102,7 @@ class DepositDetailView(LoginRequiredMixin, DetailView):
     template_name = 'treasure/deposit_detail.html'
 
 
-class ChargesByLodgeList(ListView):
+class ChargesByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/charge_list.html'
     context_object_name = 'charges'
 
@@ -127,7 +126,7 @@ class ChargeDetailView(LoginRequiredMixin, DetailView):
     template_name = 'treasure/charge_detail.html'
 
 
-class GrandLodgeDepositsByLodgeList(ListView):
+class GrandLodgeDepositsByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/grandlodgedeposit_list.html'
     context_object_name = 'grand_lodge_deposits'
 

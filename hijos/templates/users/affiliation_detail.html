@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "affiliation detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Affiliation" %} #{{ affiliation.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge" %}: <a href="{% url 'users:lodge-detail' affiliation.lodge.id %}">{{ affiliation.lodge }}</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "User" %}: <a href="{% url 'users:user-detail' affiliation.user.id %}">{{ affiliation.user }}</a>
+  </div>
+</div>
+{% endblock %}

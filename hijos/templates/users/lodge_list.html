@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodges" %}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for lodge in lodges %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'users:lodge-detail' lodge.id %}">
+            <b>{{ lodge }}</b>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

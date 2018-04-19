@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "period list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Periods" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for period in periods %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:period-detail' period.id %}">
+            <b>{{ period }}</b>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

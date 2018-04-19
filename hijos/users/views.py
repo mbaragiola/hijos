@@ -1,8 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-from django.views.generic import DetailView, ListView, RedirectView
+from django.views.generic import DetailView, ListView
+from django.shortcuts import get_object_or_404
 
-from hijos.treasure import models as treasure
 from hijos.users import models
 
 
@@ -12,23 +11,42 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+
+class LodgesList(LoginRequiredMixin, ListView):
+    template_name = 'treasure/lodge_list.html'
+    context_object_name = 'lodges'
+
+    def get_queryset(self):
+        return models.Lodge.objects.filter(is_active=True)
+
+
+class LodgeDetailView(LoginRequiredMixin, DetailView):
+    model = models.Lodge
+    context_object_name = 'lodge'
+
+
+class AffiliationsByLodgeList(LoginRequiredMixin, ListView):
+    template_name = 'users/affiliation_list.html'
+    context_object_name = 'affiliations'
+
+    def get_queryset(self):
+        self.lodge = get_object_or_404(
+            models.Lodge, pk=self.kwargs['pk']
+        )
+        return models.Affiliation.objects.filter(lodge=self.lodge)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        affiliations = models.Affiliation.objects.filter(user=self.object)
-        context['affiliations'] = affiliations.all()
+        context['lodge'] = self.lodge
         return context
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse('users:user-detail',
-                       kwargs={'username': self.request.user.username})
+class AffiliationDetailView(LoginRequiredMixin, DetailView):
+    model = models.Affiliation
+    context_object_name = 'affiliation'
 
 
 class UserListView(LoginRequiredMixin, ListView):
     model = models.User
-    # These next two lines tell the view to index lookups by username
     slug_field = 'username'
     slug_url_kwarg = 'username'

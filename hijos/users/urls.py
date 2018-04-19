@@ -10,13 +10,28 @@ urlpatterns = [
         name='user-list'
     ),
     path(
-        '~redirect/',
-        view=views.UserRedirectView.as_view(),
-        name='user-redirect'
-    ),
-    path(
         '<username>/',
         view=views.UserDetailView.as_view(),
         name='user-detail'
+    ),
+    path(
+        'lodges/',
+        view=views.LodgesList.as_view(),
+        name='lodge-list'
+    ),
+    path(
+        'lodges/<pk>/',
+        view=views.LodgeDetailView.as_view(),
+        name='lodge-detail'
+    ),
+    path(
+        'lodges/<pk>/affiliations/',
+        view=views.AffiliationsByLodgeList.as_view(),
+        name='affiliations-list'
+    ),
+    path(
+        'affiliations/<pk>/',
+        view=views.AffiliationDetailView.as_view(),
+        name='affiliation-detail'
     )
 ]
