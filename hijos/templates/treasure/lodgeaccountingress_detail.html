@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account ingress detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Account Ingress" %} #{{ ingress.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge Account" %}: 
+    <a href="{% url 'treasure:lodgeaccount-detail' ingress.lodge_account.id %}">
+      <b>{{ ingress.lodge_account }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Ingress Type" %}: 
+    {% if ingress.ingress_type == "D" %}
+      {% trans "Donation" %}
+    {% elif ingress.ingress_type == "PH" %}
+      {% trans "Philantropy" %}
+    {% elif ingress.ingress_type == "PA" %}
+      {% trans "Payment" %}
+    {% elif ingress.ingress_type == "O" %}
+      {% trans "Other" %}
+    {% else %}
+      {% trans "Unknown" %}
+    {% endif %}
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ ingress.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ ingress.description }}</div>
+</div>
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=ingress.created_by created_on=ingress.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if ingress.created_on != ingress.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=ingress.last_modified_by last_modified_on=ingress.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

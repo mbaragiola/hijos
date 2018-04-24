@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "add lodge account transfer" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Lodge Account Transfer" %} {{ lodgeaccounttransfer.id }}</h1>
+  <form class="form-horizontal" method="post" action="{% url 'treasure:lodgeaccounttransfer-create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn">{% trans "Add" %}</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

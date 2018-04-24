@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -126,12 +127,22 @@ class Lodge(Model):
         max_length=150,
         unique=True
     )
+    treasurer = models.ForeignKey(
+        User,
+        verbose_name=_('treasurer'),
+        related_name='+',
+        related_query_name='+',
+        on_delete=models.PROTECT,
+        db_index=False,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return str(self.name)
 
     def get_absolute_url(self):
-        return reverse('users:lodge-detail')
+        return reverse('users:lodge-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('lodge')
@@ -161,7 +172,7 @@ class Category(Model):
         return str(self.name)
 
     def get_absolute_url(self):
-        return reverse('users:category-detail')
+        return reverse('users:category-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('category')
@@ -202,7 +213,7 @@ class CategoryPrice(Model):
         )
 
     def get_absolute_url(self):
-        return reverse('users:categoryprice-detail')
+        return reverse('users:categoryprice-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('price')
@@ -243,7 +254,28 @@ class Affiliation(Model):
         return str(self.user) + ' @ ' + str(self.lodge)
 
     def get_absolute_url(self):
-        return reverse('users:affiliation-detail')
+        return reverse('users:affiliation-detail', kwargs={'pk': self.pk})
+
+    def send_treasure_mail(self, title, content):
+        if self.user.most_worshipful:
+            body = _("Dear M.·.W.·.B.·. %(full_name)s:")
+        elif self.user.worshipful:
+            body = _("Dear W.·.B.·. %(full_name)s:")
+        elif self.user.past_master:
+            body = _("Dear P.·.M.·. %(full_name)s:")
+        else:
+            body = _("Dear B.·. %(full_name)s:")
+
+        body = body % {'full_name': self.user.get_full_name()}
+        body += "\n\t" + content + "\n\t"
+        body += (
+            "Your current account balance with %(lodge)s is of $ %(balance)s"
+        ) % {
+            'lodge': str(self.lodge),
+            'balance': str(self.account.balance)
+        }
+        from_email = self.lodge.treasurer.email
+        send_mail(title, body, from_email, [self.user.email])
 
     class Meta:
         index_together = ('lodge', 'user')

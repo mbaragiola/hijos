@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account transfer detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Account Transfer" %} #{{ transfer.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge Account From" %}: 
+    <a href="{% url 'treasure:lodgeaccount-detail' transfer.lodge_account_from.id %}">
+      <b>{{ transfer.lodge_account_from }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge Account To" %}: 
+    <a href="{% url 'treasure:lodgeaccount-detail' transfer.lodge_account_to.id %}">
+      <b>{{ transfer.lodge_account_to }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ transfer.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ transfer.description }}</div>
+</div>
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=transfer.created_by created_on=transfer.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if transfer.created_on != transfer.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=transfer.last_modified_by last_modified_on=transfer.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

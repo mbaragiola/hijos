@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account ingress list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Account Ingresses" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for ingress in ingresses %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:lodgeaccountingress-detail' ingress.id %}">
+            <b>{{ ingress }}</b>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

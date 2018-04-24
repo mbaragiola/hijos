@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -30,6 +29,7 @@ def period(sender, instance, created, **kwargs):
                     period=instance,
                     affiliation=affiliation,
                     amount=category_price.price * instance.price_multiplier,
+                    send_email=instance.send_email,
                     created_by=instance.created_by,
                     last_modified_by=instance.last_modified_by
                 )
@@ -42,8 +42,20 @@ def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
         )
         if type(instance) is models.Invoice:
             account_movement_type = models.ACCOUNTMOVEMENT_INVOICE
+            title = _("New invoice")
+            content = _(
+                "A new invoice has been issued to you for the period "
+                "%(period)s of an amount $ %(amount)s."
+            ) % {
+                'period': str(instance.period),
+                'amount': str(instance.amount)
+            }
         elif type(instance) is models.Charge:
             account_movement_type = models.ACCOUNTMOVEMENT_CHARGE
+            title = _("New charge")
+            content = _(
+                "A new charge has been issued to you of an amount $ %(amount)s."
+            ) % {'amount': str(instance.amount)}
         else:
             raise Exception(_("Invalid account movement type."))
 
@@ -56,6 +68,9 @@ def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
             created_by=instance.created_by,
             last_modified_by=instance.last_modified_by
         )
+        if instance.send_email:
+            instance.affiliation.send_treasure_mail(title, content)
+
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account_movement.is_active = instance.is_active
         instance.account_movement.last_modified_by = instance.last_modified_by
@@ -88,6 +103,14 @@ def deposit(sender, instance, created, update_fields, **kwargs):
             created_by=instance.created_by,
             last_modified_by=instance.last_modified_by
         )
+        if instance.send_email:
+            title = _("New deposit")
+            content = _(
+                "A new deposit on your behalf has been made of an amount "
+                "$ %(amount)s."
+            ) % {'amount': str(instance.amount)}
+            instance.payer.send_treasure_mail(title, content)
+
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account_movement.is_active = instance.is_active
         instance.account_movement.last_modified_by = instance.last_modified_by

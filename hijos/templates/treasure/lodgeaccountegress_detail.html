@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "lodge account egress detail" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Lodge Account Egress" %} #{{ egress.id }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Lodge Account" %}: 
+    <a href="{% url 'treasure:lodgeaccount-detail' egress.lodge_account.id %}">
+      <b>{{ egress.lodge_account }}</b>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Egress Type" %}: 
+    {% if egress.egress_type == "D" %}
+      {% trans "Donation" %}
+    {% elif egress.egress_type == "PH" %}
+      {% trans "Philantropy" %}
+    {% elif egress.egress_type == "E" %}
+      {% trans "Expenses" %}
+    {% elif egress.egress_type == "L" %}
+      {% trans "Loan" %}
+    {% elif egress.egress_type == "GLT" %}
+      {% trans "Grand Lodge Transfer" %}
+    {% elif egress.egress_type == "O" %}
+      {% trans "Other" %}
+    {% else %}
+      {% trans "Unknown" %}
+    {% endif %}
+  </div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Amount" %}: $ {{ egress.amount }}</div>
+</div>
+<div class="row">
+  <div class="col">{% trans "Description" %}: {{ egress.description }}</div>
+</div>
+<div class="row">
+  <div class="col">
+  {% blocktrans with created_by=egress.created_by created_on=egress.created_on %}
+  Created by {{ created_by }} on {{ created_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% if egress.created_on != egress.last_modified_on %}
+<div class="row">
+  <div class="col">
+  {% blocktrans with last_modified_by=egress.last_modified_by last_modified_on=egress.last_modified_on %}
+  Last modified by {{ last_modified_by }} on {{ last_modified_on }}.
+  {% endblocktrans %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -31,6 +31,9 @@ class LodgeGlobalAccount(users.Model):
     def __str__(self):
         return str(self.lodge)
 
+    def get_absolute_url(self):
+        return reverse('treasure:lodgeglobalaccount-detail', {'pk': self.pk})
+
     class Meta:
         verbose_name = _('lodge global account')
         verbose_name_plural = _('lodge global accounts')
@@ -69,7 +72,7 @@ class LodgeAccount(users.Model):
         return str(self.handler)
 
     def get_absolute_url(self):
-        return reverse('treasure:lodgeaccount-detail')
+        return reverse('treasure:lodgeaccount-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('lodge account')
@@ -101,7 +104,7 @@ class Account(users.Model):
         return str(self.affiliation) + ' - $ ' + str(self.balance)
 
     def get_absolute_url(self):
-        return reverse('treasure:account-detail')
+        return reverse('treasure:account-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('account')
@@ -162,6 +165,11 @@ class LodgeAccountMovement(users.Model):
     def __str__(self):
         return str(self.amount)
 
+    def get_absolute_url(self):
+        return reverse(
+            'treasure:lodgeaccountmovement-detail', {'pk': self.pk}
+        )
+
     class Meta:
         verbose_name = _('lodge account movement')
         verbose_name_plural = _('lodge account movements')
@@ -203,6 +211,9 @@ class LodgeAccountTransfer(users.Model):
 
     def __str__(self):
         return str(self.amount)
+
+    def get_absolute_url(self):
+        return reverse('treasure:lodgeaccounttransfer-detail', {'pk': self.pk})
 
     class Meta:
         verbose_name = _('lodge account transfer')
@@ -262,6 +273,9 @@ class AccountMovement(users.Model):
     def __str__(self):
         return str(self.amount)
 
+    def get_absolute_url(self):
+        return reverse('treasure:accountmovement-detail', {'pk': self.pk})
+
     class Meta:
         verbose_name = _('account movement')
         verbose_name_plural = _('account movements')
@@ -298,9 +312,16 @@ class Period(users.Model):
             "be a month, but a period could be 3, 4 or 12 months."
         )
     )
+    send_email = models.BooleanField(
+        _('send email'),
+        default=False
+    )
 
     def __str__(self):
         return str(self.begin) + ':' + str(self.end)
+
+    def get_absolute_url(self):
+        return reverse('treasure:period-detail', {'pk': self.pk})
 
     class Meta:
         verbose_name = _('period')
@@ -340,6 +361,10 @@ class Invoice(users.Model):
         content_type_field='object_ct',
         object_id_field='object_id'
     )
+    send_email = models.BooleanField(
+        _('send email'),
+        default=False
+    )
 
     def __str__(self):
         return str(self.period) + ' $ ' + str(self.amount) + (
@@ -347,7 +372,7 @@ class Invoice(users.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('treasure:invoice-detail')
+        return reverse('treasure:invoice-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('invoice')
@@ -407,6 +432,10 @@ class Deposit(users.Model):
         content_type_field='object_ct',
         object_id_field='object_id'
     )
+    send_email = models.BooleanField(
+        _('send email'),
+        default=False
+    )
 
     def __str__(self):
         return str(self.payer) + '->' + (
@@ -414,7 +443,7 @@ class Deposit(users.Model):
         ) + ' (#' + str(self.id) + ')'
 
     def get_absolute_url(self):
-        return reverse('treasure:deposit-detail')
+        return reverse('treasure:deposit-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('deposit')
@@ -478,6 +507,10 @@ class GrandLodgeDeposit(users.Model):
         content_type_field='object_ct',
         object_id_field='object_id'
     )
+    send_email = models.BooleanField(
+        _('send email'),
+        default=False
+    )
 
     def __str__(self):
         return str(self.payer) + ': $ ' + str(self.amount) + (
@@ -485,7 +518,9 @@ class GrandLodgeDeposit(users.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('treasure:grandlodgedeposit-detail')
+        return reverse(
+            'treasure:grandlodgedeposit-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('grand lodge deposit')
@@ -542,6 +577,10 @@ class Charge(users.Model):
         content_type_field='object_ct',
         object_id_field='object_id'
     )
+    send_email = models.BooleanField(
+        _('send email'),
+        default=False
+    )
 
     def __str__(self):
         return str(self.debtor) + '- $ ' + str(self.amount) + (
@@ -549,7 +588,7 @@ class Charge(users.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('treasure:charge-detail')
+        return reverse('treasure:charge-detail', {'pk': self.pk})
 
     class Meta:
         verbose_name = _('charge')
@@ -620,6 +659,9 @@ class LodgeAccountEgress(users.Model):
     def __str__(self):
         return str(self.lodge_account) + '- $ ' + str(self.amount)
 
+    def get_absolute_url(self):
+        return reverse('treasure:lodgeaccountegress-detail', {'pk': self.pk})
+
     class Meta:
         verbose_name = _('lodge account egress')
         verbose_name_plural = _('lodge account egresses')
@@ -684,6 +726,9 @@ class LodgeAccountIngress(users.Model):
 
     def __str__(self):
         return str(self.lodge_account) + '+ $ ' + str(self.amount)
+
+    def get_absolute_url(self):
+        return reverse('treasure:lodgeaccountegress-detail', {'pk': self.pk})
 
     class Meta:
         verbose_name = _('lodge account ingress')

@@ -20,17 +20,17 @@ urlpatterns = [
         name='lodge-list'
     ),
     path(
-        'lodges/<pk>/',
+        'lodges/<int:pk>/',
         view=views.LodgeDetailView.as_view(),
         name='lodge-detail'
     ),
     path(
-        'lodges/<pk>/affiliations/',
+        'lodges/<int:pk>/affiliations/',
         view=views.AffiliationsByLodgeList.as_view(),
         name='affiliations-list'
     ),
     path(
-        'affiliations/<pk>/',
+        'affiliations/<int:pk>/',
         view=views.AffiliationDetailView.as_view(),
         name='affiliation-detail'
     )

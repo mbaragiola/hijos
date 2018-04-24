@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "add deposit" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Deposit" %} {{ deposit.id }}</h1>
+  <form class="form-horizontal" method="post" action="{% url 'treasure:deposit-create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn">{% trans "Add" %}</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "affiliation list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Affiliations" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for affiliation in affiliations %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'treasure:affiliation-detail' affiliation.id %}">
+            <b>{{ affiliation }}</b>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
