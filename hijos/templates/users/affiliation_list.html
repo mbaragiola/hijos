@@ -14,7 +14,7 @@
       {% for affiliation in affiliations %}
       <div class="row">
         <div class="col">
-          <a href="{% url 'treasure:affiliation-detail' affiliation.id %}">
+          <a href="{% url 'users:affiliation-detail' affiliation.id %}">
             <b>{{ affiliation }}</b>
           </a>
         </div>

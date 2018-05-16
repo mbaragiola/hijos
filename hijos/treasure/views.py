@@ -1,5 +1,5 @@
-from django.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, ListView
 
@@ -319,7 +319,7 @@ class LodgeAccountEgressCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class LodgeAccountTransferByLodgeList(LoginRequiredMixin, ListView):
+class LodgeAccountTransfersByLodgeList(LoginRequiredMixin, ListView):
     template_name = 'treasure/lodgeaccounttransfer_list.html'
     context_object_name = 'transfers'
 

@@ -256,7 +256,7 @@ class Affiliation(Model):
     def get_absolute_url(self):
         return reverse('users:affiliation-detail', kwargs={'pk': self.pk})
 
-    def send_treasure_mail(self, title, content):
+    def send_treasure_mail(self, title, content=""):
         if self.user.most_worshipful:
             body = _("Dear M.·.W.·.B.·. %(full_name)s:")
         elif self.user.worshipful:

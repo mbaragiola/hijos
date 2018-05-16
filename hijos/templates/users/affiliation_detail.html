@@ -18,4 +18,54 @@
     {% trans "User" %}: <a href="{% url 'users:user-detail' affiliation.user.id %}">{{ affiliation.user }}</a>
   </div>
 </div>
+<div class="row">
+  <div class="col">
+    <b>{% trans "Balance" %} $ {{ affiliation.account.balance }}</b>
+  </div>
+</div>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{% trans "Movement" %}</th>
+      <th>{% trans "Amount" %}</th>
+      <th>{% trans "Balance" %}</th>
+      <th>{% trans "Created by" %}</th>
+      <th>{% trans "Created on" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movement in affiliation.account.movements.all %}
+    {% if movement.is_active %}
+    <tr>
+      {% if movement.account_movement_type == "I" %}
+      <td>{% trans "Invoice" %}</td>
+      {% elif movement.account_movement_type == "D" %}
+      <td>{% trans "Deposit" %}</td>
+      {% elif movement.account_movement_type == "C" %}
+      <td>{% trans "Charge" %}</td>
+      {% elif movement.account_movement_type == "G" %}
+      <td>{% trans "Grand Lodge Deposit" %}</td>
+      {% else %}
+      <td>{% trans "Unknown" %}</td>
+      {% endif %}
+      <td>$ {{ movement.amount }}</td>
+      <td>$ {{ movement.balance }}</td>
+      <td>{{ movement.created_by }}</td>
+      <td>{{ movement.created_on  }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+<form class="form-horizontal" method="post" action="{% url 'users:affiliation-detail' affiliation.id %}">
+  {% csrf_token %}
+  <div class="control-group">
+  <div class="controls">
+    <button type="submit" class="btn">
+        {% trans "Send Email with Account Balance" %}
+    </button>
+  </div>
+  </div>
+</form>
 {% endblock %}
