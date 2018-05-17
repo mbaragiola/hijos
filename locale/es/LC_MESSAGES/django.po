@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-14 13:18+0000\n"
+"POT-Creation-Date: 2018-05-16 21:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgid "or"
 msgstr "o"
 
 #: hijos/templates/account/logout.html:5 hijos/templates/account/logout.html:8
-#: hijos/templates/account/logout.html:17 hijos/templates/base.html:54
+#: hijos/templates/account/logout.html:17 hijos/templates/base.html:53
 msgid "Sign Out"
 msgstr "Cerrar Sesión"
 
@@ -178,9 +178,486 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: hijos/templates/base.html:50
+#: hijos/templates/base.html:49
 msgid "My Profile"
 msgstr "Mi Perfil"
+
+#: hijos/templates/treasure/charge_add.html:5
+#| msgid "charge"
+msgid "add charge"
+msgstr "agregar cargo"
+
+#: hijos/templates/treasure/charge_add.html:8
+#: hijos/templates/treasure/charge_detail.html:9
+#: hijos/templates/users/affiliation_detail.html:46
+#: hijos/templates/users/user_detail.html:80 hijos/treasure/models.py:233
+msgid "Charge"
+msgstr "Cargo"
+
+#: hijos/templates/treasure/charge_add.html:14
+#: hijos/templates/treasure/deposit_add.html:14
+#: hijos/templates/treasure/grandlodgedeposit_add.html:14
+#: hijos/templates/treasure/invoice_add.html:14
+#: hijos/templates/treasure/lodgeaccount_add.html:14
+#: hijos/templates/treasure/lodgeaccountegress_add.html:14
+#: hijos/templates/treasure/lodgeaccountingress_add.html:14
+#: hijos/templates/treasure/lodgeaccounttransfer_add.html:14
+#: hijos/templates/treasure/period_add.html:14
+#: hijos/templates/users/affiliation_add.html:14
+#: hijos/templates/users/user_add.html:14
+msgid "Add"
+msgstr "Agregar"
+
+#: hijos/templates/treasure/charge_detail.html:5
+msgid "charge detail"
+msgstr "detalle de cargo"
+
+#: hijos/templates/treasure/charge_detail.html:13
+msgid "Debtor"
+msgstr "Deudor"
+
+#: hijos/templates/treasure/charge_detail.html:21
+msgid "Charge Type"
+msgstr "Tipo de Cargo"
+
+#: hijos/templates/treasure/charge_detail.html:23 hijos/treasure/models.py:537
+msgid "Initiation"
+msgstr "Iniciación"
+
+#: hijos/templates/treasure/charge_detail.html:25
+msgid "Passed"
+msgstr "Ascendido"
+
+#: hijos/templates/treasure/charge_detail.html:27
+msgid "Raised"
+msgstr "Exaltado"
+
+#: hijos/templates/treasure/charge_detail.html:29
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:33
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:29
+#: hijos/treasure/models.py:540 hijos/treasure/models.py:612
+#: hijos/treasure/models.py:680
+msgid "Other"
+msgstr "Otro"
+
+#: hijos/templates/treasure/charge_detail.html:31
+#: hijos/templates/treasure/lodgeaccount_detail.html:46
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:35
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:31
+#: hijos/templates/users/affiliation_detail.html:50
+#: hijos/templates/users/user_detail.html:84
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: hijos/templates/treasure/charge_detail.html:36
+#: hijos/templates/treasure/deposit_detail.html:28
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:20
+#: hijos/templates/treasure/invoice_detail.html:28
+#: hijos/templates/treasure/lodgeaccount_detail.html:27
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:40
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:36
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:28
+#: hijos/templates/users/affiliation_detail.html:31
+#: hijos/templates/users/user_detail.html:65
+msgid "Amount"
+msgstr "Monto"
+
+#: hijos/templates/treasure/charge_detail.html:39
+#: hijos/templates/treasure/deposit_detail.html:31
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:23
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:43
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:39
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:31
+msgid "Description"
+msgstr "Descripción"
+
+#: hijos/templates/treasure/charge_detail.html:43
+#: hijos/templates/treasure/deposit_detail.html:42
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:34
+#: hijos/templates/treasure/invoice_detail.html:32
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:47
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:43
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:35
+#, python-format
+msgid ""
+"\n"
+"  Created by %(created_by)s on %(created_on)s.\n"
+"  "
+msgstr ""
+"\n"
+"  Creato por %(created_by)s en %(created_on)s.\n"
+"  "
+
+
+#: hijos/templates/treasure/charge_detail.html:51
+#: hijos/templates/treasure/deposit_detail.html:50
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:42
+#: hijos/templates/treasure/invoice_detail.html:40
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:55
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:51
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:43
+#, python-format
+msgid ""
+"\n"
+"  Last modified by %(last_modified_by)s on %(last_modified_on)s.\n"
+"  "
+msgstr ""
+"\n"
+"  Modificado última vez por %(last_modified_by)s en %(last_modified_on)s.\n"
+"  "
+
+#: hijos/templates/treasure/charge_list.html:5
+msgid "charge list"
+msgstr "lista cargos"
+
+#: hijos/templates/treasure/charge_list.html:9
+msgid "Charges"
+msgstr "Cargos"
+
+#: hijos/templates/treasure/deposit_add.html:5
+msgid "add deposit"
+msgstr "agregar depósito"
+
+#: hijos/templates/treasure/deposit_add.html:8
+#: hijos/templates/treasure/deposit_detail.html:9
+#: hijos/templates/treasure/lodgeaccount_detail.html:44
+#: hijos/templates/users/affiliation_detail.html:44
+#: hijos/templates/users/user_detail.html:78 hijos/treasure/models.py:124
+#: hijos/treasure/models.py:231
+msgid "Deposit"
+msgstr "Depósito"
+
+#: hijos/templates/treasure/deposit_detail.html:5
+msgid "deposit detail"
+msgstr "detalle de depósito"
+
+#: hijos/templates/treasure/deposit_detail.html:13
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:13
+msgid "Payer"
+msgstr "Pagador"
+
+#: hijos/templates/treasure/deposit_detail.html:21
+#: hijos/templates/treasure/lodgeaccount_add.html:8
+#: hijos/templates/treasure/lodgeaccount_detail.html:9
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:13
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:13
+msgid "Lodge Account"
+msgstr "Cuenta de Logia"
+
+#: hijos/templates/treasure/deposit_list.html:5
+msgid "deposit list"
+msgstr "lista depósitos"
+
+#: hijos/templates/treasure/deposit_list.html:9
+msgid "Deposits"
+msgstr "Depósitos"
+
+#: hijos/templates/treasure/grandlodgedeposit_add.html:5
+msgid "add grand lodge deposit"
+msgstr "agregar depósito en gran logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_add.html:8
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:9
+#: hijos/templates/users/affiliation_detail.html:48
+#: hijos/templates/users/user_detail.html:82 hijos/treasure/models.py:232
+msgid "Grand Lodge Deposit"
+msgstr "Depósito en Gran Logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:5
+msgid "grand lodge deposit detail"
+msgstr "detalle depósito en gran logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_list.html:5
+msgid "grand lodge deposit list"
+msgstr "lista depósitos en gran logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_list.html:9
+msgid "Grand Lodge Deposits"
+msgstr "Depósitos en Gran Logia"
+
+#: hijos/templates/treasure/invoice_add.html:5
+msgid "add invoice"
+msgstr "agregar recibo"
+
+#: hijos/templates/treasure/invoice_add.html:8
+#: hijos/templates/treasure/invoice_detail.html:9
+#: hijos/templates/users/affiliation_detail.html:42
+#: hijos/templates/users/user_detail.html:76 hijos/treasure/models.py:230
+msgid "Invoice"
+msgstr "Cápita"
+
+#: hijos/templates/treasure/invoice_detail.html:5
+msgid "invoice detail"
+msgstr "detalle recibo"
+
+#: hijos/templates/treasure/invoice_detail.html:13
+#: hijos/templates/users/affiliation_add.html:8
+#: hijos/templates/users/affiliation_detail.html:9
+msgid "Affiliation"
+msgstr "Afiliación"
+
+#: hijos/templates/treasure/invoice_detail.html:21
+#: hijos/templates/treasure/period_add.html:8
+#: hijos/templates/treasure/period_detail.html:9
+msgid "Period"
+msgstr "Período"
+
+#: hijos/templates/treasure/invoice_list.html:5
+msgid "invoice list"
+msgstr "lista recibos"
+
+#: hijos/templates/treasure/invoice_list.html:9
+msgid "Invoices"
+msgstr "Recibos"
+
+#: hijos/templates/treasure/lodgeaccount_add.html:5
+msgid "add lodge account"
+msgstr "agregar cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:5
+msgid "lodge account detail"
+msgstr "cuenta de logia hasta"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:18
+#: hijos/templates/treasure/lodgeaccount_detail.html:28
+#: hijos/templates/treasure/lodgeaccount_list.html:29
+#: hijos/templates/users/affiliation_detail.html:23
+#: hijos/templates/users/affiliation_detail.html:32
+#: hijos/templates/users/user_detail.html:57
+#: hijos/templates/users/user_detail.html:66
+msgid "Balance"
+msgstr "Balance"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:26
+#: hijos/templates/users/affiliation_detail.html:30
+#: hijos/templates/users/user_detail.html:64
+msgid "Movement"
+msgstr "Movimiento"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:29
+#: hijos/templates/users/affiliation_detail.html:33
+#: hijos/templates/users/user_detail.html:67
+msgid "Created by"
+msgstr "Creado por"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:30
+#: hijos/templates/users/affiliation_detail.html:34
+#: hijos/templates/users/user_detail.html:68
+msgid "Created on"
+msgstr "Creado en"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:38
+#: hijos/treasure/models.py:121
+msgid "Ingress"
+msgstr "Ingreso"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:40
+#: hijos/treasure/models.py:122
+msgid "Egress"
+msgstr "Egreso"
+
+#: hijos/templates/treasure/lodgeaccount_detail.html:42
+#: hijos/treasure/models.py:123
+msgid "Transfer"
+msgstr "Transferencia"
+
+#: hijos/templates/treasure/lodgeaccount_list.html:5
+msgid "lodge account list"
+msgstr "lista cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccount_list.html:9
+msgid "Lodge Accounts"
+msgstr "Cuentas de Logias"
+
+#: hijos/templates/treasure/lodgeaccount_list.html:13
+msgid "Global Balance"
+msgstr "Balance Global"
+
+#: hijos/templates/treasure/lodgeaccountegress_add.html:5
+msgid "add lodgeaccountegress"
+msgstr "agregar egreso de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountegress_add.html:8
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:9
+msgid "Lodge Account Egress"
+msgstr "Egreso de Cuenta de Logia"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:5
+msgid "lodge account egress detail"
+msgstr "detalle egreso de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:21
+msgid "Egress Type"
+msgstr "Tipo de Egreso"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:23
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:23
+#: hijos/treasure/models.py:607 hijos/treasure/models.py:677
+msgid "Donation"
+msgstr "Donación"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:25
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:25
+#: hijos/treasure/models.py:608 hijos/treasure/models.py:678
+msgid "Philantropy"
+msgstr "Filantropía"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:27
+#: hijos/treasure/models.py:609
+msgid "Expenses"
+msgstr "Gastos"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:29
+#: hijos/treasure/models.py:610
+msgid "Loan"
+msgstr "Préstamo"
+
+#: hijos/templates/treasure/lodgeaccountegress_detail.html:31
+#: hijos/treasure/models.py:611
+msgid "Grand Lodge Transfer"
+msgstr "Transferencia a Gran Logia"
+
+#: hijos/templates/treasure/lodgeaccountegress_list.html:5
+msgid "lodge account egress list"
+msgstr "lista egresos de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountegress_list.html:9
+msgid "Lodge Account Egresses"
+msgstr "Egresos de Cuenta de Logia"
+
+#: hijos/templates/treasure/lodgeaccountingress_add.html:5
+msgid "add lodge account ingress"
+msgstr "agregar ingreso de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountingress_add.html:8
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:9
+msgid "Lodge Account Ingress"
+msgstr "Ingreso de Cuenta de Logia"
+
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:5
+msgid "lodge account ingress detail"
+msgstr "detalle ingreso de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:21
+msgid "Ingress Type"
+msgstr "Tipo de Ingreso"
+
+#: hijos/templates/treasure/lodgeaccountingress_detail.html:27
+#: hijos/treasure/models.py:679
+msgid "Payment"
+msgstr "Pago"
+
+#: hijos/templates/treasure/lodgeaccountingress_list.html:5
+msgid "lodge account ingress list"
+msgstr "lista ingresos de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccountingress_list.html:9
+msgid "Lodge Account Ingresses"
+msgstr "Ingresos de Cuenta de Logia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_add.html:5
+msgid "add lodge account transfer"
+msgstr "agregar transferencia de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_add.html:8
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:9
+msgid "Lodge Account Transfer"
+msgstr "Transferencia de Cuenta de Logia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:5
+msgid "lodge account transfer detail"
+msgstr "detalle transferencia de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:13
+msgid "Lodge Account From"
+msgstr "Cuenta de Logia Desde"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_detail.html:21
+msgid "Lodge Account To"
+msgstr "Cuenta de Logia Hacia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_list.html:5
+msgid "lodge account transfer list"
+msgstr "lista transferencias de cuenta de logia"
+
+#: hijos/templates/treasure/lodgeaccounttransfer_list.html:9
+msgid "Lodge Account Transfers"
+msgstr "Transferencias de Cuenta de Logia"
+
+#: hijos/templates/treasure/period_add.html:5
+msgid "add period"
+msgstr "agregar período"
+
+#: hijos/templates/treasure/period_detail.html:5
+msgid "period detail"
+msgstr "detalle de período"
+
+#: hijos/templates/treasure/period_detail.html:13
+#: hijos/templates/users/affiliation_detail.html:13
+#: hijos/templates/users/lodge_detail.html:9
+msgid "Lodge"
+msgstr "Logia"
+
+#: hijos/templates/treasure/period_detail.html:17
+msgid "Begin"
+msgstr "Comienzo"
+
+#: hijos/templates/treasure/period_detail.html:20
+msgid "End"
+msgstr "Final"
+
+#: hijos/templates/treasure/period_detail.html:24
+msgid "Price Multiplier"
+msgstr "Multiplicador de Precio"
+
+#: hijos/templates/treasure/period_list.html:5
+msgid "period list"
+msgstr "lista períodos"
+
+#: hijos/templates/treasure/period_list.html:9
+msgid "Periods"
+msgstr "Períodos"
+
+#: hijos/templates/users/affiliation_add.html:5
+msgid "add affiliation"
+msgstr "agregar afiliación"
+
+#: hijos/templates/users/affiliation_detail.html:5
+msgid "affiliation detail"
+msgstr "detalle afiliación"
+
+#: hijos/templates/users/affiliation_detail.html:18
+#: hijos/templates/users/user_add.html:8
+msgid "User"
+msgstr "Usuario"
+
+#: hijos/templates/users/affiliation_detail.html:66
+msgid "Send Email with Account Balance"
+msgstr "Enviar Correo con Balance"
+
+#: hijos/templates/users/affiliation_list.html:5
+msgid "affiliation list"
+msgstr "lista afiliaciones"
+
+#: hijos/templates/users/affiliation_list.html:9
+msgid "Affiliations"
+msgstr "Afiliaciones"
+
+#: hijos/templates/users/lodge_detail.html:5
+msgid "lodge detail"
+msgstr "detalle de logia"
+
+#: hijos/templates/users/lodge_list.html:5
+msgid "lodge list"
+msgstr "logias"
+
+#: hijos/templates/users/lodge_list.html:9
+msgid "Lodges"
+msgstr "Logias"
+
+#: hijos/templates/users/user_add.html:5
+msgid "add user"
+msgstr "agregar usuario"
 
 #: hijos/templates/users/user_detail.html:5
 msgid "user detail"
@@ -190,193 +667,165 @@ msgstr "detalle de usuario"
 msgid "User Profile"
 msgstr "Perfil de Usuario"
 
-#: hijos/templates/users/user_detail.html:12
-msgid "Initiated on"
-msgstr "Iniciado el"
-
-#: hijos/templates/users/user_detail.html:16
-msgid "Passed on"
-msgstr "Ascendido el"
+#: hijos/templates/users/user_detail.html:18
+msgid "Title"
+msgstr "Título"
 
 #: hijos/templates/users/user_detail.html:20
-msgid "Raised on"
-msgstr "Exaltado el"
-
-#: hijos/templates/users/user_detail.html:23
-msgid "Title: "
-msgstr "Título: "
-
-#: hijos/templates/users/user_detail.html:25
 msgid "Most Worshipful Brother"
 msgstr "Muy Respetable Hermano"
 
-#: hijos/templates/users/user_detail.html:27
+#: hijos/templates/users/user_detail.html:22
 msgid "Worshipful Brother"
 msgstr "Respetable Hermano"
 
-#: hijos/templates/users/user_detail.html:29
+#: hijos/templates/users/user_detail.html:24
 msgid "Worshipful Master"
 msgstr "Venerable Maestro"
 
-#: hijos/templates/users/user_detail.html:31
+#: hijos/templates/users/user_detail.html:26
 msgid "Brother"
 msgstr "Hermano"
 
-#: hijos/templates/users/user_detail.html:34
+#: hijos/templates/users/user_detail.html:32
+msgid "Initiated on"
+msgstr "Iniciado el"
+
+#: hijos/templates/users/user_detail.html:37
+msgid "Passed on"
+msgstr "Ascendido el"
+
+#: hijos/templates/users/user_detail.html:42
+msgid "Raised on"
+msgstr "Exaltado el"
+
+#: hijos/templates/users/user_detail.html:46
 msgid "Treasure"
 msgstr "Tesoro"
-
-#: hijos/templates/users/user_detail.html:38
-msgid "Balance"
-msgstr "Balance"
 
 #: hijos/treasure/apps.py:8
 msgid "treasure"
 msgstr "tesoro"
 
-#: hijos/treasure/models.py:18 hijos/treasure/models.py:276
-#: hijos/users/models.py:132 hijos/users/models.py:208
+#: hijos/treasure/forms.py:14
+#, python-format
+msgid "Your current account balance on %(lodge)s"
+msgstr "Su saldo actual en %(lodge)s"
+
+#: hijos/treasure/models.py:18 hijos/treasure/models.py:292
+#: hijos/users/models.py:148 hijos/users/models.py:230
 msgid "lodge"
 msgstr "logia"
 
-#: hijos/treasure/models.py:24 hijos/treasure/models.py:61
-#: hijos/treasure/models.py:90 hijos/treasure/models.py:141
-#: hijos/treasure/models.py:241
+#: hijos/treasure/models.py:24 hijos/treasure/models.py:64
+#: hijos/treasure/models.py:96 hijos/treasure/models.py:146
+#: hijos/treasure/models.py:254
 msgid "balance"
 msgstr "balance"
 
-#: hijos/treasure/models.py:35
+#: hijos/treasure/models.py:38
 msgid "lodge global account"
 msgstr "cuenta global de logia"
 
-#: hijos/treasure/models.py:36
+#: hijos/treasure/models.py:39
 msgid "lodge global accounts"
 msgstr "cuentas globales de logias"
 
-#: hijos/treasure/models.py:48
+#: hijos/treasure/models.py:51
 msgid "handler"
 msgstr "encargado"
 
-#: hijos/treasure/models.py:55 hijos/treasure/models.py:132
-#: hijos/treasure/models.py:191 hijos/treasure/models.py:379
-#: hijos/treasure/models.py:446 hijos/treasure/models.py:518
-#: hijos/treasure/models.py:581 hijos/treasure/models.py:646
-#: hijos/users/models.py:149
+#: hijos/treasure/models.py:58 hijos/treasure/models.py:201
+#: hijos/treasure/models.py:411 hijos/treasure/models.py:485
+#: hijos/treasure/models.py:568 hijos/treasure/models.py:640
+#: hijos/treasure/models.py:708 hijos/users/models.py:165
 msgid "description"
 msgstr "descripción"
 
-#: hijos/treasure/models.py:72 hijos/treasure/models.py:125
-#: hijos/treasure/models.py:366 hijos/treasure/models.py:563
-#: hijos/treasure/models.py:628
+#: hijos/treasure/models.py:78 hijos/treasure/models.py:134
+#: hijos/treasure/models.py:398 hijos/treasure/models.py:622
+#: hijos/treasure/models.py:690
 msgid "lodge account"
 msgstr "cuenta de logia"
 
-#: hijos/treasure/models.py:73
+#: hijos/treasure/models.py:79
 msgid "lodge accounts"
 msgstr "cuentas de logias"
 
-#: hijos/treasure/models.py:84 hijos/treasure/models.py:323
-#: hijos/users/models.py:237
+#: hijos/treasure/models.py:90 hijos/treasure/models.py:346
+#: hijos/users/models.py:283
 msgid "affiliation"
 msgstr "afiliación"
 
-#: hijos/treasure/models.py:101 hijos/treasure/models.py:229
+#: hijos/treasure/models.py:110 hijos/treasure/models.py:242
 msgid "account"
 msgstr "cuenta"
 
-#: hijos/treasure/models.py:102
+#: hijos/treasure/models.py:111
 msgid "accounts"
 msgstr "cuentas"
 
-#: hijos/treasure/models.py:112
-msgid "Ingress"
-msgstr "Ingreso"
-
-#: hijos/treasure/models.py:113
-msgid "Egress"
-msgstr "Egreso"
-
-#: hijos/treasure/models.py:114
-msgid "Transfer"
-msgstr "Transferencia"
-
-#: hijos/treasure/models.py:115 hijos/treasure/models.py:218
-msgid "Deposit"
-msgstr "Depósito"
-
-#: hijos/treasure/models.py:136 hijos/treasure/models.py:197
-#: hijos/treasure/models.py:236 hijos/treasure/models.py:330
-#: hijos/treasure/models.py:373 hijos/treasure/models.py:440
-#: hijos/treasure/models.py:507 hijos/treasure/models.py:570
-#: hijos/treasure/models.py:635
+#: hijos/treasure/models.py:141 hijos/treasure/models.py:207
+#: hijos/treasure/models.py:249 hijos/treasure/models.py:353
+#: hijos/treasure/models.py:405 hijos/treasure/models.py:479
+#: hijos/treasure/models.py:557 hijos/treasure/models.py:629
+#: hijos/treasure/models.py:697
 msgid "amount"
 msgstr "monto"
 
-#: hijos/treasure/models.py:146
+#: hijos/treasure/models.py:151
 msgid "lodge account movement type"
 msgstr "tipo de movimiento en cuenta de logia"
 
-#: hijos/treasure/models.py:164
+#: hijos/treasure/models.py:174
 msgid "lodge account movement"
 msgstr "movimiento en cuenta de logia"
 
-#: hijos/treasure/models.py:165
+#: hijos/treasure/models.py:175
 msgid "lodge account movements"
 msgstr "movimientos en cuenta de logia"
 
-#: hijos/treasure/models.py:176
+#: hijos/treasure/models.py:186
 msgid "lodge account from"
 msgstr "cuenta de logia desde"
 
-#: hijos/treasure/models.py:184
+#: hijos/treasure/models.py:194
 msgid "lodge account to"
 msgstr "cuenta de logia hasta"
 
-#: hijos/treasure/models.py:206
+#: hijos/treasure/models.py:219
 msgid "lodge account transfer"
 msgstr "transferencia de cuenta de logia"
 
-#: hijos/treasure/models.py:207
+#: hijos/treasure/models.py:220
 msgid "lodge account transfers"
 msgstr "transferencias de cuenta de logia"
 
-#: hijos/treasure/models.py:217
-msgid "Invoice"
-msgstr "Cápita"
-
-#: hijos/treasure/models.py:219
-msgid "Grand Lodge Deposit"
-msgstr "Depósito en Gran Logia"
-
-#: hijos/treasure/models.py:220
-msgid "Charge"
-msgstr "Cargo"
-
-#: hijos/treasure/models.py:246
+#: hijos/treasure/models.py:259
 msgid "account movement type"
 msgstr "tipo de movimiento en cuenta"
 
-#: hijos/treasure/models.py:264
+#: hijos/treasure/models.py:280
 msgid "account movement"
 msgstr "movimiento en cuenta"
 
-#: hijos/treasure/models.py:265
+#: hijos/treasure/models.py:281
 msgid "account movements"
 msgstr "movimientos en cuenta"
 
-#: hijos/treasure/models.py:283
+#: hijos/treasure/models.py:299
 msgid "begin"
 msgstr "comienzo"
 
-#: hijos/treasure/models.py:286
+#: hijos/treasure/models.py:302
 msgid "end"
 msgstr "final"
 
-#: hijos/treasure/models.py:289
+#: hijos/treasure/models.py:305
 msgid "price multiplier"
 msgstr "multiplicador de precio"
 
-#: hijos/treasure/models.py:294
+#: hijos/treasure/models.py:310
 msgid ""
 "Usually the category price is defined by a single unit price, but a period "
 "may have multiple units. For example, a unit can be a month, but a period "
@@ -386,291 +835,317 @@ msgstr ""
 "un período puede tener múltiples unidades. Por ejemplo, una unidad puede ser "
 "un mes, pero un período puede ser 3, 4 o 12 meses."
 
-#: hijos/treasure/models.py:304 hijos/treasure/models.py:315
+#: hijos/treasure/models.py:316 hijos/treasure/models.py:365
+#: hijos/treasure/models.py:436 hijos/treasure/models.py:511
+#: hijos/treasure/models.py:581
+msgid "send email"
+msgstr "enviar correo electrónico"
+
+#: hijos/treasure/models.py:327 hijos/treasure/models.py:338
 msgid "period"
 msgstr "período"
 
-#: hijos/treasure/models.py:305
+#: hijos/treasure/models.py:328
 msgid "periods"
 msgstr "períodos"
 
-#: hijos/treasure/models.py:346
+#: hijos/treasure/models.py:378
 msgid "invoice"
 msgstr "recibo"
 
-#: hijos/treasure/models.py:347
+#: hijos/treasure/models.py:379
 msgid "invoices"
 msgstr "recibos"
 
-#: hijos/treasure/models.py:358 hijos/treasure/models.py:433
+#: hijos/treasure/models.py:390 hijos/treasure/models.py:472
 msgid "payer"
 msgstr "pagador"
 
-#: hijos/treasure/models.py:383 hijos/treasure/models.py:450
-#: hijos/treasure/models.py:522 hijos/treasure/models.py:585
-#: hijos/treasure/models.py:650
+#: hijos/treasure/models.py:415 hijos/treasure/models.py:489
+#: hijos/treasure/models.py:572 hijos/treasure/models.py:644
+#: hijos/treasure/models.py:712
 msgid "Optional description."
 msgstr "Descripción opcional."
 
-#: hijos/treasure/models.py:386 hijos/treasure/models.py:453
-#: hijos/treasure/models.py:588 hijos/treasure/models.py:653
+#: hijos/treasure/models.py:418 hijos/treasure/models.py:492
+#: hijos/treasure/models.py:647 hijos/treasure/models.py:715
 msgid "receipt"
 msgstr "recibo"
 
-#: hijos/treasure/models.py:410
+#: hijos/treasure/models.py:449
 msgid "deposit"
 msgstr "depósito"
 
-#: hijos/treasure/models.py:411
+#: hijos/treasure/models.py:450
 msgid "deposits"
 msgstr "depósitos"
 
-#: hijos/treasure/models.py:420
+#: hijos/treasure/models.py:459
 msgid "Pending"
 msgstr "Pendiente"
 
-#: hijos/treasure/models.py:421
+#: hijos/treasure/models.py:460
 msgid "Accredited"
 msgstr "Acreditado"
 
-#: hijos/treasure/models.py:422
+#: hijos/treasure/models.py:461
 msgid "Rejected"
 msgstr "Rechazado"
 
-#: hijos/treasure/models.py:459
+#: hijos/treasure/models.py:498
 msgid "status"
 msgstr "estado"
 
-#: hijos/treasure/models.py:476
+#: hijos/treasure/models.py:526
 msgid "grand lodge deposit"
 msgstr "depósito en gran logia"
 
-#: hijos/treasure/models.py:477
+#: hijos/treasure/models.py:527
 msgid "grand lodge deposits"
 msgstr "depósitos en gran logia"
 
-#: hijos/treasure/models.py:487
-msgid "Initiation"
-msgstr "Iniciación"
-
-#: hijos/treasure/models.py:488
+#: hijos/treasure/models.py:538
 msgid "Pass"
 msgstr "Ascenso"
 
-#: hijos/treasure/models.py:489
+#: hijos/treasure/models.py:539
 msgid "Raise"
 msgstr "Exaltación"
 
-#: hijos/treasure/models.py:490 hijos/treasure/models.py:553
-#: hijos/treasure/models.py:618
-msgid "Other"
-msgstr "Otro"
-
-#: hijos/treasure/models.py:500
+#: hijos/treasure/models.py:550
 msgid "debtor"
 msgstr "deudor"
 
-#: hijos/treasure/models.py:513
+#: hijos/treasure/models.py:563
 msgid "charge type"
 msgstr "tipo de cargo"
 
-#: hijos/treasure/models.py:535
+#: hijos/treasure/models.py:594
 msgid "charge"
 msgstr "cargo"
 
-#: hijos/treasure/models.py:536
+#: hijos/treasure/models.py:595
 msgid "charges"
 msgstr "cargos"
 
-#: hijos/treasure/models.py:548 hijos/treasure/models.py:615
-msgid "Donation"
-msgstr "Donación"
-
-#: hijos/treasure/models.py:549 hijos/treasure/models.py:616
-msgid "Philantropy"
-msgstr "Filantropía"
-
-#: hijos/treasure/models.py:550
-msgid "Expenses"
-msgstr "Gastos"
-
-#: hijos/treasure/models.py:551
-msgid "Loan"
-msgstr "Préstamo"
-
-#: hijos/treasure/models.py:552
-msgid "Grand Lodge Transfer"
-msgstr "Transferencia a Gran Logia"
-
-#: hijos/treasure/models.py:576
+#: hijos/treasure/models.py:635
 msgid "egress type"
 msgstr "tipo de egreso"
 
-#: hijos/treasure/models.py:604
+#: hijos/treasure/models.py:666
 msgid "lodge account egress"
 msgstr "egreso de cuenta de logia"
 
-#: hijos/treasure/models.py:605
+#: hijos/treasure/models.py:667
 msgid "lodge account egresses"
 msgstr "egresos de cuenta de logia"
 
-#: hijos/treasure/models.py:617
-msgid "Payment"
-msgstr "Pago"
-
-#: hijos/treasure/models.py:641
+#: hijos/treasure/models.py:703
 msgid "ingress type"
 msgstr "tipo de ingreso"
 
-#: hijos/treasure/models.py:669
+#: hijos/treasure/models.py:734
 msgid "lodge account ingress"
 msgstr "ingreso de cuenta de logia"
 
-#: hijos/treasure/models.py:670
+#: hijos/treasure/models.py:735
 msgid "lodge account ingresses"
 msgstr "ingresos de cuenta de logia"
 
-#: hijos/treasure/signals.py:25
+#: hijos/treasure/signals.py:24
 msgid "Category's price not found."
 msgstr "Precio de categoría no encontrado."
 
-#: hijos/treasure/signals.py:27
+#: hijos/treasure/signals.py:26
 msgid "More than one price found."
 msgstr "Se ha encontrado más de un precio."
 
-#: hijos/treasure/signals.py:48
+#: hijos/treasure/signals.py:45
+msgid "New invoice"
+msgstr "Nuevo recibo"
+
+#: hijos/treasure/signals.py:47
+#, python-format
+msgid ""
+"A new invoice has been issued to you for the period %(period)s of an amount "
+"$ %(amount)s."
+msgstr "Tiene un nuevo recibo del período %(period)s por el monto de $ %(amount)s."
+
+#: hijos/treasure/signals.py:55
+msgid "New charge"
+msgstr "Nuevo cargo"
+
+#: hijos/treasure/signals.py:57
+#, python-format
+msgid "A new charge has been issued to you of an amount $ %(amount)s."
+msgstr "Se te ha realizado un cargo de monto $ %(amount)s."
+
+#: hijos/treasure/signals.py:60
 msgid "Invalid account movement type."
 msgstr "Tipo de movimiento de cuenta inválido."
+
+#: hijos/treasure/signals.py:107
+msgid "New deposit"
+msgstr "Nuevo depósito"
+
+#: hijos/treasure/signals.py:109
+#, python-format
+msgid "A new deposit on your behalf has been made of an amount $ %(amount)s."
+msgstr "Se ha realizado un nuevo depósito de tu parte por un monto de $ %(amount)s."
 
 #: hijos/users/admin.py:18
 msgid "This username has already been taken."
 msgstr "Este nombre de usuario está ocupado."
 
-#: hijos/users/apps.py:8 hijos/users/models.py:74
+#: hijos/users/apps.py:8 hijos/users/models.py:77
 msgid "users"
 msgstr "usuarios"
 
-#: hijos/users/models.py:12
+#: hijos/users/models.py:13
 msgid "Entered Apprentice"
 msgstr "Aprendiz"
 
-#: hijos/users/models.py:13
+#: hijos/users/models.py:14
 msgid "Fellow Craft"
 msgstr "Compañero"
 
-#: hijos/users/models.py:14
+#: hijos/users/models.py:15
 msgid "Master Mason"
 msgstr "Maestro Masón"
 
-#: hijos/users/models.py:22
+#: hijos/users/models.py:23
 msgid "degree"
 msgstr "grado"
 
-#: hijos/users/models.py:28
+#: hijos/users/models.py:29
 msgid "initiated"
 msgstr "iniciado"
 
-#: hijos/users/models.py:31
+#: hijos/users/models.py:32
 msgid "Initiation date."
 msgstr "Fecha de iniciación."
 
-#: hijos/users/models.py:34
+#: hijos/users/models.py:35
 msgid "passed"
 msgstr "ascendido"
 
-#: hijos/users/models.py:37
+#: hijos/users/models.py:38
 msgid "Passed to Fellow Craft date."
 msgstr "Fecha de ascenso."
 
-#: hijos/users/models.py:40
+#: hijos/users/models.py:41
 msgid "raised"
 msgstr "exaltado"
 
-#: hijos/users/models.py:43
+#: hijos/users/models.py:44
 msgid "Raised to Master Mason date."
 msgstr "Fecha de exaltación."
 
-#: hijos/users/models.py:46
+#: hijos/users/models.py:47
 msgid "past master"
 msgstr "ex venerable"
 
-#: hijos/users/models.py:49
+#: hijos/users/models.py:50
 msgid "Is or was Worshipful Master."
 msgstr "Es o fue Venerable Maestro."
 
-#: hijos/users/models.py:52
+#: hijos/users/models.py:53
 msgid "worshipful"
 msgstr "respetable"
 
-#: hijos/users/models.py:55
+#: hijos/users/models.py:56
 msgid "Is or was elected official of the Grand Lodge."
 msgstr "Ocupa o ha ocupado cargo electo en la Gran Logia."
 
-#: hijos/users/models.py:58
+#: hijos/users/models.py:59
 msgid "most worshipful"
 msgstr "muy respetable"
 
-#: hijos/users/models.py:62
+#: hijos/users/models.py:63
 msgid "Is or was elected as Most Worshipful Master of the Grand Lodge."
 msgstr "Ocupa o ha ocupado el cargo de Gran Maestre."
 
-#: hijos/users/models.py:73 hijos/users/models.py:216
+#: hijos/users/models.py:76 hijos/users/models.py:238
 msgid "user"
 msgstr "usuario"
 
-#: hijos/users/models.py:87
+#: hijos/users/models.py:90
 msgid "is active?"
 msgstr "¿es activo?"
 
-#: hijos/users/models.py:91
+#: hijos/users/models.py:94
 msgid "created on"
 msgstr "creado en"
 
-#: hijos/users/models.py:95
+#: hijos/users/models.py:98
 msgid "last modified on"
 msgstr "modificado en"
 
-#: hijos/users/models.py:100
+#: hijos/users/models.py:103
 msgid "created by"
 msgstr "creado por"
 
-#: hijos/users/models.py:108
+#: hijos/users/models.py:111
 msgid "last modified by"
 msgstr "modificado por"
 
-#: hijos/users/models.py:123 hijos/users/models.py:144
+#: hijos/users/models.py:126 hijos/users/models.py:160
 msgid "name"
 msgstr "nombre"
 
-#: hijos/users/models.py:133
+#: hijos/users/models.py:132
+msgid "treasurer"
+msgstr "tesorero"
+
+#: hijos/users/models.py:149
 msgid "lodges"
 msgstr "logias"
 
-#: hijos/users/models.py:159 hijos/users/models.py:171
-#: hijos/users/models.py:224
+#: hijos/users/models.py:178 hijos/users/models.py:190
+#: hijos/users/models.py:246
 msgid "category"
 msgstr "categoría"
 
-#: hijos/users/models.py:160
+#: hijos/users/models.py:179
 msgid "categories"
 msgstr "categorías"
 
-#: hijos/users/models.py:178 hijos/users/models.py:197
+#: hijos/users/models.py:197 hijos/users/models.py:219
 msgid "price"
 msgstr "precio"
 
-#: hijos/users/models.py:183
+#: hijos/users/models.py:202
 msgid "date from"
 msgstr "fecha desde"
 
-#: hijos/users/models.py:186
+#: hijos/users/models.py:205
 msgid "date until"
 msgstr "fecha hasta"
 
-#: hijos/users/models.py:198
+#: hijos/users/models.py:220
 msgid "prices"
 msgstr "precios"
 
-#: hijos/users/models.py:238
+#: hijos/users/models.py:261
+#, python-format
+msgid "Dear M.·.W.·.B.·. %(full_name)s:"
+msgstr "Estimado M.·.R.·.H.·. %(full_name)s:"
+
+#: hijos/users/models.py:263
+#, python-format
+msgid "Dear W.·.B.·. %(full_name)s:"
+msgstr "Estimado R.·.H.·. %(full_name)s:"
+
+#: hijos/users/models.py:265
+#, python-format
+msgid "Dear P.·.M.·. %(full_name)s:"
+msgstr "Estimado V.·.H.·. %(full_name)s:"
+
+#: hijos/users/models.py:267
+#, python-format
+msgid "Dear B.·. %(full_name)s:"
+msgstr "Estimado Q.·.H.·. %(full_name)s:"
+
+#: hijos/users/models.py:284
 msgid "affiliations"
 msgstr "afiliaciones"
