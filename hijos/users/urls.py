@@ -5,12 +5,12 @@ from hijos.users import views
 app_name = 'users'
 urlpatterns = [
     path(
-        '',
+        'users/',
         view=views.UserListView.as_view(),
         name='user-list'
     ),
     path(
-        '<username>/',
+        'users/<username>/',
         view=views.UserDetailView.as_view(),
         name='user-detail'
     ),

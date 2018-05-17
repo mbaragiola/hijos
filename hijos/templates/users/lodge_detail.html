@@ -25,4 +25,55 @@
     </ul>
   </div>
 </div>
+<div class="row">
+  <div class="col"><h3>{% trans "Listings filtered by this lodge" %}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <li>
+      <a href="{% url 'treasure:lodgeaccount-list' lodge.id %}">
+        {% trans "List Lodge Accounts" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:period-list' lodge.id %}">
+        {% trans "List Periods" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:invoice-list' lodge.id %}">
+        {% trans "List Invoices" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:charge-list' lodge.id %}">
+        {% trans "List Charges" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:deposit-list' lodge.id %}">
+        {% trans "List Deposit" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:grandlodgedeposit-list' lodge.id %}">
+        {% trans "List Grand Lodge Deposits" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:lodgeaccountingress-list' lodge.id %}">
+        {% trans "List Ingresses" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:lodgeaccountegress-list' lodge.id %}">
+        {% trans "List Egresses" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'treasure:lodgeaccounttransfer-list' lodge.id %}">
+        {% trans "List Transfers" %}
+      </a>
+    </li>
+  </div>
 {% endblock %}
