@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-16 21:27+0000\n"
+"POT-Creation-Date: 2018-05-17 14:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgid "or"
 msgstr "o"
 
 #: hijos/templates/account/logout.html:5 hijos/templates/account/logout.html:8
-#: hijos/templates/account/logout.html:17 hijos/templates/base.html:53
+#: hijos/templates/account/logout.html:17 hijos/templates/base.html:60
 msgid "Sign Out"
 msgstr "Cerrar Sesión"
 
@@ -178,12 +178,67 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
+#: hijos/templates/base.html:30 hijos/templates/users/lodge_list.html:9
+msgid "Lodges"
+msgstr "Logias"
+
+#: hijos/templates/base.html:33
+msgid "Users"
+msgstr "Usuarios"
+
+#: hijos/templates/base.html:35
+msgid "List Lodges"
+msgstr "Listar Logias"
+
+#: hijos/templates/base.html:36
+msgid "List Users"
+msgstr "Listar Usuarios"
+
+#: hijos/templates/base.html:40 hijos/templates/users/user_detail.html:46
+msgid "Treasure"
+msgstr "Tesoro"
+
+#: hijos/templates/base.html:42
+msgid "Add Lodge Account"
+msgstr "Agregar Cuenta de Logia"
+
+#: hijos/templates/base.html:43
+msgid "Add Period"
+msgstr "Agregar Período"
+
+#: hijos/templates/base.html:44
+msgid "Add Invoice"
+msgstr "Agregar Recibo"
+
+#: hijos/templates/base.html:45
+msgid "Add Deposit"
+msgstr "Agregar Depósito"
+
+#: hijos/templates/base.html:46
+msgid "Add Charge"
+msgstr "Agregar Cargo"
+
+#: hijos/templates/base.html:47
+msgid "Add Grand Lodge Deposit"
+msgstr "Agregar Depósito en Gran Logia"
+
+#: hijos/templates/base.html:48
+msgid "Add Ingress"
+msgstr "Agregar Ingreso"
+
 #: hijos/templates/base.html:49
+msgid "Add Egress"
+msgstr "Agregar Egreso"
+
+#: hijos/templates/base.html:50
+msgid "Add Transfers"
+msgstr "Agregar Transferencia"
+
+#: hijos/templates/base.html:56
 msgid "My Profile"
 msgstr "Mi Perfil"
 
 #: hijos/templates/treasure/charge_add.html:5
-#| msgid "charge"
 msgid "add charge"
 msgstr "agregar cargo"
 
@@ -287,7 +342,6 @@ msgstr ""
 "\n"
 "  Creato por %(created_by)s en %(created_on)s.\n"
 "  "
-
 
 #: hijos/templates/treasure/charge_detail.html:51
 #: hijos/templates/treasure/deposit_detail.html:50
@@ -647,13 +701,49 @@ msgstr "Afiliaciones"
 msgid "lodge detail"
 msgstr "detalle de logia"
 
+#: hijos/templates/users/lodge_detail.html:29
+msgid "Listings filtered by this lodge"
+msgstr "Listados filtrados por esta logia"
+
+#: hijos/templates/users/lodge_detail.html:35
+msgid "List Lodge Accounts"
+msgstr "Listar Cuentas de Logias"
+
+#: hijos/templates/users/lodge_detail.html:40
+msgid "List Periods"
+msgstr "Listar Períodos"
+
+#: hijos/templates/users/lodge_detail.html:45
+msgid "List Invoices"
+msgstr "Listar Recibos"
+
+#: hijos/templates/users/lodge_detail.html:50
+msgid "List Charges"
+msgstr "Listar Cargos"
+
+#: hijos/templates/users/lodge_detail.html:55
+msgid "List Deposit"
+msgstr "Listar Depósitos"
+
+#: hijos/templates/users/lodge_detail.html:60
+msgid "List Grand Lodge Deposits"
+msgstr "Listar Depósitos en Gran Logia"
+
+#: hijos/templates/users/lodge_detail.html:65
+msgid "List Ingresses"
+msgstr "Listar Ingresos"
+
+#: hijos/templates/users/lodge_detail.html:70
+msgid "List Egresses"
+msgstr "Listar Egresos"
+
+#: hijos/templates/users/lodge_detail.html:75
+msgid "List Transfers"
+msgstr "Listar Transferencias"
+
 #: hijos/templates/users/lodge_list.html:5
 msgid "lodge list"
-msgstr "logias"
-
-#: hijos/templates/users/lodge_list.html:9
-msgid "Lodges"
-msgstr "Logias"
+msgstr "lista logias"
 
 #: hijos/templates/users/user_add.html:5
 msgid "add user"
@@ -698,10 +788,6 @@ msgstr "Ascendido el"
 #: hijos/templates/users/user_detail.html:42
 msgid "Raised on"
 msgstr "Exaltado el"
-
-#: hijos/templates/users/user_detail.html:46
-msgid "Treasure"
-msgstr "Tesoro"
 
 #: hijos/treasure/apps.py:8
 msgid "treasure"
@@ -969,7 +1055,8 @@ msgstr "Nuevo recibo"
 msgid ""
 "A new invoice has been issued to you for the period %(period)s of an amount "
 "$ %(amount)s."
-msgstr "Tiene un nuevo recibo del período %(period)s por el monto de $ %(amount)s."
+msgstr ""
+"Tiene un nuevo recibo del período %(period)s por el monto de $ %(amount)s."
 
 #: hijos/treasure/signals.py:55
 msgid "New charge"
@@ -991,7 +1078,8 @@ msgstr "Nuevo depósito"
 #: hijos/treasure/signals.py:109
 #, python-format
 msgid "A new deposit on your behalf has been made of an amount $ %(amount)s."
-msgstr "Se ha realizado un nuevo depósito de tu parte por un monto de $ %(amount)s."
+msgstr ""
+"Se ha realizado un nuevo depósito de tu parte por un monto de $ %(amount)s."
 
 #: hijos/users/admin.py:18
 msgid "This username has already been taken."
