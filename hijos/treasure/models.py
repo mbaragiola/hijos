@@ -32,7 +32,9 @@ class LodgeGlobalAccount(users.Model):
         return str(self.lodge)
 
     def get_absolute_url(self):
-        return reverse('treasure:lodgeglobalaccount-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:lodgeglobalaccount-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('lodge global account')
@@ -167,7 +169,7 @@ class LodgeAccountMovement(users.Model):
 
     def get_absolute_url(self):
         return reverse(
-            'treasure:lodgeaccountmovement-detail', {'pk': self.pk}
+            'treasure:lodgeaccountmovement-detail', kwargs={'pk': self.pk}
         )
 
     class Meta:
@@ -213,7 +215,9 @@ class LodgeAccountTransfer(users.Model):
         return str(self.amount)
 
     def get_absolute_url(self):
-        return reverse('treasure:lodgeaccounttransfer-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:lodgeaccounttransfer-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('lodge account transfer')
@@ -274,7 +278,9 @@ class AccountMovement(users.Model):
         return str(self.amount)
 
     def get_absolute_url(self):
-        return reverse('treasure:accountmovement-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:accountmovement-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('account movement')
@@ -296,10 +302,12 @@ class Period(users.Model):
         db_index=True
     )
     begin = models.DateField(
-        _('begin')
+        _('begin'),
+        help_text=_('YYYY-MM-DD')
     )
     end = models.DateField(
-        _('end')
+        _('end'),
+        help_text=_('YYYY-MM-DD')
     )
     price_multiplier = models.PositiveSmallIntegerField(
         _('price multiplier'),
@@ -321,7 +329,9 @@ class Period(users.Model):
         return str(self.begin) + ':' + str(self.end)
 
     def get_absolute_url(self):
-        return reverse('treasure:period-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:period-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('period')
@@ -588,7 +598,7 @@ class Charge(users.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('treasure:charge-detail', {'pk': self.pk})
+        return reverse('treasure:charge-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _('charge')
@@ -660,7 +670,9 @@ class LodgeAccountEgress(users.Model):
         return str(self.lodge_account) + '- $ ' + str(self.amount)
 
     def get_absolute_url(self):
-        return reverse('treasure:lodgeaccountegress-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:lodgeaccountegress-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('lodge account egress')
@@ -728,7 +740,9 @@ class LodgeAccountIngress(users.Model):
         return str(self.lodge_account) + '+ $ ' + str(self.amount)
 
     def get_absolute_url(self):
-        return reverse('treasure:lodgeaccountegress-detail', {'pk': self.pk})
+        return reverse(
+            'treasure:lodgeaccountegress-detail', kwargs={'pk': self.pk}
+        )
 
     class Meta:
         verbose_name = _('lodge account ingress')
