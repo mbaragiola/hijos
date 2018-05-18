@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-17 14:58+0000\n"
+"POT-Creation-Date: 2018-05-18 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -741,6 +741,14 @@ msgstr "Listar Egresos"
 msgid "List Transfers"
 msgstr "Listar Transferencias"
 
+#: hijos/templates/users/lodge_detail.html:81
+msgid "Actions"
+msgstr "Acciones"
+
+#: hijos/templates/users/lodge_detail.html:89
+msgid "Send Mass Email with Account Balance"
+msgstr "Enviar Correo Masivo con Balances"
+
 #: hijos/templates/users/lodge_list.html:5
 msgid "lodge list"
 msgstr "lista logias"
@@ -793,10 +801,35 @@ msgstr "Exaltado el"
 msgid "treasure"
 msgstr "tesoro"
 
-#: hijos/treasure/forms.py:14
+#: hijos/treasure/forms.py:15 hijos/treasure/forms.py:21
 #, python-format
 msgid "Your current account balance on %(lodge)s"
 msgstr "Su saldo actual en %(lodge)s"
+
+#: hijos/treasure/forms.py:28 hijos/users/models.py:261
+#, python-format
+msgid "Dear M.·.W.·.B.·. %(full_name)s:"
+msgstr "Estimado M.·.R.·.H.·. %(full_name)s:"
+
+#: hijos/treasure/forms.py:30 hijos/users/models.py:263
+#, python-format
+msgid "Dear W.·.B.·. %(full_name)s:"
+msgstr "Estimado R.·.H.·. %(full_name)s:"
+
+#: hijos/treasure/forms.py:32 hijos/users/models.py:265
+#, python-format
+msgid "Dear P.·.M.·. %(full_name)s:"
+msgstr "Estimado V.·.H.·. %(full_name)s:"
+
+#: hijos/treasure/forms.py:34 hijos/users/models.py:267
+#, python-format
+msgid "Dear B.·. %(full_name)s:"
+msgstr "Estimado Q.·.H.·. %(full_name)s:"
+
+#: hijos/treasure/forms.py:39 hijos/users/models.py:272
+#, python-format
+msgid "Your current account balance with %(lodge)s is of $ %(balance)s"
+msgstr "Su saldo actual en %(lodge)s es de $ %(balance)s"
 
 #: hijos/treasure/models.py:18 hijos/treasure/models.py:292
 #: hijos/users/models.py:148 hijos/users/models.py:230
@@ -1213,26 +1246,6 @@ msgstr "fecha hasta"
 #: hijos/users/models.py:220
 msgid "prices"
 msgstr "precios"
-
-#: hijos/users/models.py:261
-#, python-format
-msgid "Dear M.·.W.·.B.·. %(full_name)s:"
-msgstr "Estimado M.·.R.·.H.·. %(full_name)s:"
-
-#: hijos/users/models.py:263
-#, python-format
-msgid "Dear W.·.B.·. %(full_name)s:"
-msgstr "Estimado R.·.H.·. %(full_name)s:"
-
-#: hijos/users/models.py:265
-#, python-format
-msgid "Dear P.·.M.·. %(full_name)s:"
-msgstr "Estimado V.·.H.·. %(full_name)s:"
-
-#: hijos/users/models.py:267
-#, python-format
-msgid "Dear B.·. %(full_name)s:"
-msgstr "Estimado Q.·.H.·. %(full_name)s:"
 
 #: hijos/users/models.py:284
 msgid "affiliations"
