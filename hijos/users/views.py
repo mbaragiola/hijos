@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from django.views.generic import DetailView, ListView
 
-from hijos.treasure.forms import SendAccountBalance, SendAccountBalanceForm
+from hijos.treasure import forms
 from hijos.users import models
 
 
@@ -23,10 +23,26 @@ class LodgesList(LoginRequiredMixin, ListView):
         return models.Lodge.objects.filter(is_active=True)
 
 
-class LodgeDetailView(LoginRequiredMixin, DetailView):
+class LodgeDisplayView(LoginRequiredMixin, DetailView):
     model = models.Lodge
     template_name = 'users/lodge_detail.html'
     context_object_name = 'lodge'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = forms.SendAccountBalanceForm()
+        return context
+
+
+class LodgeDetailView(View):
+
+    def get(self, request, *args, **kwargs):
+        view = LodgeDisplayView.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = forms.SendMassAccountBalance.as_view()
+        return view(request, *args, **kwargs)
 
 
 class AffiliationsByLodgeList(LoginRequiredMixin, ListView):
@@ -52,7 +68,7 @@ class AffiliationDisplayView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = SendAccountBalanceForm()
+        context['form'] = forms.SendAccountBalanceForm()
         return context
 
 
@@ -63,7 +79,7 @@ class AffiliationDetailView(View):
         return view(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        view = SendAccountBalance.as_view()
+        view = forms.SendAccountBalance.as_view()
         return view(request, *args, **kwargs)
 
 

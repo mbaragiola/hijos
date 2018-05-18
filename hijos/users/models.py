@@ -268,7 +268,7 @@ class Affiliation(Model):
 
         body = body % {'full_name': self.user.get_full_name()}
         body += "\n\t" + content + "\n\t"
-        body += (
+        body += _(
             "Your current account balance with %(lodge)s is of $ %(balance)s"
         ) % {
             'lodge': str(self.lodge),
