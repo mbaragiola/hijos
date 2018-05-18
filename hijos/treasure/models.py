@@ -741,7 +741,7 @@ class LodgeAccountIngress(users.Model):
 
     def get_absolute_url(self):
         return reverse(
-            'treasure:lodgeaccountegress-detail', kwargs={'pk': self.pk}
+            'treasure:lodgeaccountingress-detail', kwargs={'pk': self.pk}
         )
 
     class Meta:

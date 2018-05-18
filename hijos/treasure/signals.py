@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,10 +16,12 @@ def period(sender, instance, created, **kwargs):
         for affiliation in affiliations.all():
             try:
                 category_price = users.CategoryPrice.objects.get(
-                    category=affiliation.category,
-                    is_active=True,
-                    date_from__lte=today,
-                    date_until__gte=today
+                    Q(category=affiliation.category),
+                    Q(is_active=True),
+                    Q(date_from__lte=instance.begin),
+                    Q(date_until__gte=instance.begin),
+                    Q(date_from__lte=instance.end),
+                    Q(date_until__gte=instance.end)
                 )
             except models.CategoryPrice.DoesNotExist:
                 raise Exception(_("Category's price not found."))
