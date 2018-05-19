@@ -10,6 +10,11 @@ urlpatterns = [
         name='user-list'
     ),
     path(
+        'users/add/',
+        view=views.UserCreateView.as_view(),
+        name='user-create'
+    ),
+    path(
         'users/<username>/',
         view=views.UserDetailView.as_view(),
         name='user-detail'
@@ -33,5 +38,10 @@ urlpatterns = [
         'affiliations/<int:pk>/',
         view=views.AffiliationDetailView.as_view(),
         name='affiliation-detail'
+    ),
+    path(
+        'affiliations/add/',
+        view=views.AffiliationCreateView.as_view(),
+        name='affiliation-create'
     )
 ]

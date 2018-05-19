@@ -5,7 +5,7 @@
 {% block title %}{% trans "add affiliation" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Affiliation" %} {{ affiliation.id }}</h1>
+  <h1>{% trans "Affiliation" %}</h1>
   <form class="form-horizontal" method="post" action="{% url 'users:affiliation-create' %}">
     {% csrf_token %}
     {{ form.as_p }}

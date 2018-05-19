@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views import View
-from django.views.generic import DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView
 
 from hijos.treasure import forms
 from hijos.users import models
@@ -11,6 +11,35 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = models.User
     template_name = 'users/user_detail.html'
     context_object_name = 'user'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+
+
+class UserCreateView(LoginRequiredMixin, CreateView):
+    model = models.User
+    fields = [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+        'degree',
+        'initiated',
+        'passed',
+        'raised',
+        'past_master',
+        'worshipful',
+        'most_worshipful'
+    ]
+    template_name = 'users/user_add.html'
+
+    def form_valid(self, form):
+        form.instance.is_active = False
+        form.instance.password = models.User.objects.make_random_password()
+        return super().form_valid(form)
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = models.User
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
@@ -83,7 +112,12 @@ class AffiliationDetailView(View):
         return view(request, *args, **kwargs)
 
 
-class UserListView(LoginRequiredMixin, ListView):
-    model = models.User
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
+class AffiliationCreateView(LoginRequiredMixin, CreateView):
+    model = models.Affiliation
+    fields = ['lodge', 'user', 'category']
+    template_name = 'users/affiliation_add.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        form.instance.last_modified_by = self.request.user
+        return super().form_valid(form)
