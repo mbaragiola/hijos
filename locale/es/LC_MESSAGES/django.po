@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-18 20:46+0000\n"
+"POT-Creation-Date: 2018-05-19 17:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgid "or"
 msgstr "o"
 
 #: hijos/templates/account/logout.html:5 hijos/templates/account/logout.html:8
-#: hijos/templates/account/logout.html:17 hijos/templates/base.html:60
+#: hijos/templates/account/logout.html:17 hijos/templates/base.html:62
 msgid "Sign Out"
 msgstr "Cerrar Sesión"
 
@@ -178,63 +178,71 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: hijos/templates/base.html:30 hijos/templates/users/lodge_list.html:9
+#: hijos/templates/base.html:31 hijos/templates/users/lodge_list.html:9
 msgid "Lodges"
 msgstr "Logias"
 
-#: hijos/templates/base.html:33
+#: hijos/templates/base.html:34
 msgid "Users"
 msgstr "Usuarios"
 
-#: hijos/templates/base.html:35
+#: hijos/templates/base.html:36
 msgid "List Lodges"
 msgstr "Listar Logias"
 
-#: hijos/templates/base.html:36
+#: hijos/templates/base.html:37
 msgid "List Users"
 msgstr "Listar Usuarios"
 
-#: hijos/templates/base.html:40 hijos/templates/users/user_detail.html:46
+#: hijos/templates/base.html:38
+msgid "Add User"
+msgstr "Agregar Usuario"
+
+#: hijos/templates/base.html:39
+msgid "Add Affiliation"
+msgstr "Agregar Afiliación"
+
+#: hijos/templates/base.html:43 hijos/templates/users/user_detail.html:46
 msgid "Treasure"
 msgstr "Tesoro"
 
-#: hijos/templates/base.html:42
+#: hijos/templates/base.html:45
 msgid "Add Lodge Account"
 msgstr "Agregar Cuenta de Logia"
 
-#: hijos/templates/base.html:43
+#: hijos/templates/base.html:46
 msgid "Add Period"
 msgstr "Agregar Período"
 
-#: hijos/templates/base.html:44
+#: hijos/templates/base.html:47
 msgid "Add Invoice"
 msgstr "Agregar Recibo"
 
-#: hijos/templates/base.html:45
+#: hijos/templates/base.html:48
 msgid "Add Deposit"
 msgstr "Agregar Depósito"
 
-#: hijos/templates/base.html:46
+#: hijos/templates/base.html:49
 msgid "Add Charge"
 msgstr "Agregar Cargo"
 
-#: hijos/templates/base.html:47
+#: hijos/templates/base.html:50
 msgid "Add Grand Lodge Deposit"
 msgstr "Agregar Depósito en Gran Logia"
 
-#: hijos/templates/base.html:48
+#: hijos/templates/base.html:51
 msgid "Add Ingress"
 msgstr "Agregar Ingreso"
 
-#: hijos/templates/base.html:49
+#: hijos/templates/base.html:52
 msgid "Add Egress"
 msgstr "Agregar Egreso"
 
-#: hijos/templates/base.html:50
+#: hijos/templates/base.html:53
 msgid "Add Transfers"
 msgstr "Agregar Transferencia"
 
-#: hijos/templates/base.html:56
+#: hijos/templates/base.html:58
 msgid "My Profile"
 msgstr "Mi Perfil"
 
