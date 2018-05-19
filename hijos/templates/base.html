@@ -18,6 +18,7 @@
 
   <body>
     {% block navbar %}
+    {% if request.user.is_authenticated %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#">hijos</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +52,6 @@
             </div>
           </li>
         </ul>
-        {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'users:user-detail' request.user.username  %}">{% trans "My Profile" %}</a>
         </li>
@@ -59,9 +59,9 @@
           {# URL provided by django-allauth/account/urls.py #}
           <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
         </li>
-        {% endif %}
       </div>
     </nav>
+    {% endif %}
     {% endblock %}
 
     <main role="main" class="container">
