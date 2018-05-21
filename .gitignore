@@ -294,6 +294,7 @@ config/settings/base.py
 config/settings/local.py
 config/settings/test.py
 config/settings/production.py
+compose/production/caddy/Caddyfile
 .envs/.local/.django
 .envs/.production/.caddy
 .envs/.production/.django
