@@ -40,8 +40,15 @@ def period(sender, instance, created, **kwargs):
 
 def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
     if created:
+        if type(instance) is models.Invoice:
+            affiliation = instance.affiliation
+        elif type(instance) is models.Charge:
+            affiliation = instance.debtor
+        else:
+            affiliation = ""
+
         account, new = models.Account.objects.get_or_create(
-            affiliation=instance.debtor
+            affiliation=affiliation
         )
         if type(instance) is models.Invoice:
             account_movement_type = models.ACCOUNTMOVEMENT_INVOICE
@@ -72,7 +79,7 @@ def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
             last_modified_by=instance.last_modified_by
         )
         if instance.send_email:
-            instance.debtor.send_treasure_mail(title, content)
+            affiliation.send_treasure_mail(title, content)
 
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account_movement.is_active = instance.is_active
