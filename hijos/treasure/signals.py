@@ -6,8 +6,8 @@ from hijos.treasure import models
 from hijos.users import models as users
 
 
-def period(sender, instance, created, **kwargs):
-    if created:
+def period(sender, instance, created, raw, **kwargs):
+    if created and not raw:
         affiliations = users.Affiliation.objects.filter(
             lodge=instance.lodge,
             is_active=True
@@ -38,8 +38,8 @@ def period(sender, instance, created, **kwargs):
                 )
 
 
-def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
-    if created:
+def invoice_and_charge(sender, instance, created, update_fields, raw, **kwargs):
+    if created and not raw:
         if type(instance) is models.Invoice:
             affiliation = instance.affiliation
         elif type(instance) is models.Charge:
@@ -89,8 +89,8 @@ def invoice_and_charge(sender, instance, created, update_fields, **kwargs):
         )
 
 
-def deposit(sender, instance, created, update_fields, **kwargs):
-    if created:
+def deposit(sender, instance, created, update_fields, raw, **kwargs):
+    if created and not raw:
         account, new = models.Account.objects.get_or_create(
             affiliation=instance.payer
         )
@@ -136,8 +136,8 @@ def deposit(sender, instance, created, update_fields, **kwargs):
         )
 
 
-def account_movement(sender, instance, created, update_fields, **kwargs):
-    if created:
+def account_movement(sender, instance, created, update_fields, raw, **kwargs):
+    if created and not raw:
         instance.account.balance += instance.amount
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account.balance += -instance.amount
@@ -148,11 +148,13 @@ def account_movement(sender, instance, created, update_fields, **kwargs):
     )
 
 
-def lodge_account_movement(sender, instance, created, update_fields, **kwargs):
+def lodge_account_movement(
+    sender, instance, created, update_fields, raw, **kwargs
+):
     lodge_global_account = (
         instance.lodge_account.handler.lodge.lodge_global_account
     )
-    if created:
+    if created and not raw:
         instance.lodge_account.balance += instance.amount
         lodge_global_account.balance += instance.amount
     elif not created and update_fields and 'is_active' in update_fields:
@@ -188,9 +190,9 @@ def grand_lodge_deposit(sender, instance, created, update_fields, **kwargs):
 
 
 def lodge_account_ingress_and_egress(
-    sender, instance, created, update_fields, **kwargs
+    sender, instance, created, update_fields, raw, **kwargs
 ):
-    if created:
+    if created and not raw:
         if type(instance) is models.LodgeAccountIngress:
             models.LodgeAccountMovement.objects.create(
                 content_object=instance,
@@ -221,8 +223,10 @@ def lodge_account_ingress_and_egress(
         )
 
 
-def lodge_account_transfer(sender, instance, created, update_fields, **kwargs):
-    if created:
+def lodge_account_transfer(
+    sender, instance, created, update_fields, raw, **kwargs
+):
+    if created and not raw:
         models.LodgeAccountMovement.objects.create(
             content_object=instance,
             lodge_account=instance.lodge_account_from,
