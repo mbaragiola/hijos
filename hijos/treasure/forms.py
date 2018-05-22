@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
 
+from hijos.treasure import models
 from hijos.users.models import Affiliation, Lodge
 
 
@@ -41,11 +42,41 @@ class SendAccountBalanceForm(Form):
                 'lodge': str(lodge),
                 'balance': str(affiliation.account.balance)
             }
+
+            last_movements = (_(
+                "\n\nYour last 10 movements are:"
+                "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            ))
+            account_movements = (
+                affiliation.account.movements.filter(is_active=True)[:10]
+            )
+            for m in account_movements.all():
+                if m.account_movement_type == models.ACCOUNTMOVEMENT_INVOICE:
+                    movement_type = _('Invoice')
+                elif m.account_movement_type == models.ACCOUNTMOVEMENT_DEPOSIT:
+                    movement_type = _('Deposit')
+                elif m.account_movement_type == (
+                    models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT
+                ):
+                    movement_type = _('Grand Lodge Deposit')
+                elif m.account_movement_type == models.ACCOUNTMOVEMENT_CHARGE:
+                    movement_type = _('Charge')
+                else:
+                    movement_type = _('Unknown')
+
+                last_movements += (
+                    "%(date)s\t%(type)s\t\t%(amount)s\t\t%(balance)s\n"
+                ) % {
+                    'date': str(m.created_on.date()),
+                    'type': movement_type,
+                    'amount': str(m.amount),
+                    'balance': str(m.balance)
+                }
+
             data_tuple.append(
                 (
                     title,
-                    body % {
-                    },
+                    body + last_movements,
                     lodge.treasurer.email,
                     [affiliation.user.email]
                 )
