@@ -15,7 +15,7 @@ class SendAccountBalanceForm(Form):
         title = _("Your current account balance on %(lodge)s") % {
             'lodge': str(affiliation.lodge)
         }
-        affiliation.send_treasure_mail(title)
+        affiliation.account.send_treasure_mail(title)
 
     def send_mass_email(self, lodge):
         title = _("Your current account balance on %(lodge)s") % {

@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator
+from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -107,6 +108,59 @@ class Account(users.Model):
 
     def get_absolute_url(self):
         return reverse('treasure:account-detail', kwargs={'pk': self.pk})
+
+    def send_treasure_mail(self, title, content=""):
+        if self.affiliation.user.most_worshipful:
+            body = _("Dear M.·.W.·.B.·. %(full_name)s:")
+        elif self.affiliation.user.worshipful:
+            body = _("Dear W.·.B.·. %(full_name)s:")
+        elif self.affiliation.user.past_master:
+            body = _("Dear P.·.M.·. %(full_name)s:")
+        else:
+            body = _("Dear B.·. %(full_name)s:")
+
+        body = body % {'full_name': self.affiliation.user.get_full_name()}
+        body += "\n\t" + content + "\n\t"
+        body += _(
+            "Your current account balance with %(lodge)s is of $ %(balance)s"
+        ) % {
+            'lodge': str(self.affiliation.lodge),
+            'balance': str(self.balance)
+        }
+
+        last_movements = (_(
+            "\n\nYour last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+        ))
+        account_movements = self.movements.filter(is_active=True)[:10]
+        for m in account_movements.all():
+            if m.account_movement_type == ACCOUNTMOVEMENT_INVOICE:
+                movement_type = _('Invoice')
+            elif m.account_movement_type == ACCOUNTMOVEMENT_DEPOSIT:
+                movement_type = _('Deposit')
+            elif m.account_movement_type == ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT:
+                movement_type = _('Grand Lodge Deposit')
+            elif m.account_movement_type == ACCOUNTMOVEMENT_CHARGE:
+                movement_type = _('Charge')
+            else:
+                movement_type = _('Unknown')
+
+            last_movements += (
+                "%(date)s\t%(type)s\t\t%(amount)s\t%(balance)s\n"
+            ) % {
+                'date': str(m.created_on.date()),
+                'type': movement_type,
+                'amount': str(m.amount),
+                'balance': str(m.balance)
+            }
+
+        from_email = self.affiliation.lodge.treasurer.email
+        send_mail(
+            title,
+            body+last_movements,
+            from_email,
+            [self.affiliation.user.email]
+        )
 
     class Meta:
         verbose_name = _('account')

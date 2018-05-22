@@ -79,7 +79,7 @@ def invoice_and_charge(sender, instance, created, update_fields, raw, **kwargs):
             last_modified_by=instance.last_modified_by
         )
         if instance.send_email:
-            affiliation.send_treasure_mail(title, content)
+            affiliation.account.send_treasure_mail(title, content)
 
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account_movement.is_active = instance.is_active
@@ -119,7 +119,7 @@ def deposit(sender, instance, created, update_fields, raw, **kwargs):
                 "A new deposit on your behalf has been made of an amount "
                 "$ %(amount)s."
             ) % {'amount': str(instance.amount)}
-            instance.payer.send_treasure_mail(title, content)
+            instance.payer.account.send_treasure_mail(title, content)
 
     elif not created and update_fields and 'is_active' in update_fields:
         instance.account_movement.is_active = instance.is_active

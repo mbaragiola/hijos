@@ -1,7 +1,6 @@
 from datetime import date
 
 from django.contrib.auth.models import AbstractUser
-from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -255,27 +254,6 @@ class Affiliation(Model):
 
     def get_absolute_url(self):
         return reverse('users:affiliation-detail', kwargs={'pk': self.pk})
-
-    def send_treasure_mail(self, title, content=""):
-        if self.user.most_worshipful:
-            body = _("Dear M.·.W.·.B.·. %(full_name)s:")
-        elif self.user.worshipful:
-            body = _("Dear W.·.B.·. %(full_name)s:")
-        elif self.user.past_master:
-            body = _("Dear P.·.M.·. %(full_name)s:")
-        else:
-            body = _("Dear B.·. %(full_name)s:")
-
-        body = body % {'full_name': self.user.get_full_name()}
-        body += "\n\t" + content + "\n\t"
-        body += _(
-            "Your current account balance with %(lodge)s is of $ %(balance)s"
-        ) % {
-            'lodge': str(self.lodge),
-            'balance': str(self.account.balance)
-        }
-        from_email = self.lodge.treasurer.email
-        send_mail(title, body, from_email, [self.user.email])
 
     class Meta:
         index_together = ('lodge', 'user')
