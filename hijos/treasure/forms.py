@@ -1,5 +1,5 @@
+from common.mail import send_mass_html_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import send_mass_mail
 from django.forms import Form
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -35,18 +35,38 @@ class SendAccountBalanceForm(Form):
                 body = _("Dear B.·. %(full_name)s:")
 
             body = body % {'full_name': affiliation.user.get_full_name()}
+            body_html = '<p>' + body + '</p>'
             body += "\n\n\t"
-            body += _(
+
+            account_balance = _(
                 "Your current account balance with %(lodge)s is of $ %(balance)s"
             ) % {
                 'lodge': str(lodge),
                 'balance': str(affiliation.account.balance)
             }
+            account_balance_html = (
+                "<p>&nbsp;&nbsp;&nbsp;&nbsp;" + account_balance + "</p>"
+            )
 
             last_movements = (_(
                 "\n\nYour last 10 movements are:"
                 "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
             ))
+            last_movements_html = (_(
+                "<br><br>Your last 10 movements are:"
+                "<br><br>"
+                "<table>"
+                "<thead>"
+                "<tr>"
+                "<th>Date</th>"
+                "<th>Type</th>"
+                "<th>Amount</th>"
+                "<th>Balance</th>"
+                "</tr>"
+                "</thead>"
+                "<tbody>"
+            ))
+
             account_movements = (
                 affiliation.account.movements.filter(is_active=True)[:10]
             )
@@ -72,17 +92,32 @@ class SendAccountBalanceForm(Form):
                     'amount': str(m.amount),
                     'balance': str(m.balance)
                 }
+                last_movements_html += (
+                    "<tr>"
+                    "<td>%(date)s</td>"
+                    "<td>%(type)s</td>"
+                    "<td>%(amount)s</td>"
+                    "<td>%(balance)s</td>"
+                    "</tr>"
+                ) % {
+                    'date': str(m.created_on.date()),
+                    'type': movement_type,
+                    'amount': str(m.amount),
+                    'balance': str(m.balance)
+                }
 
+            last_movements_html += "</tbody></table>"
             data_tuple.append(
                 (
                     title,
-                    body + last_movements,
+                    body + account_balance + last_movements,
+                    body_html + account_balance_html + last_movements_html,
                     lodge.treasurer.email,
-                    [affiliation.user.email]
+                    [affiliation.user.email],
                 )
             )
 
-        send_mass_mail(data_tuple)
+        send_mass_html_mail(data_tuple)
 
 
 class SendAccountBalance(LoginRequiredMixin, SingleObjectMixin, FormView):

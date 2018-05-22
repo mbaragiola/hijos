@@ -120,18 +120,44 @@ class Account(users.Model):
             body = _("Dear B.·. %(full_name)s:")
 
         body = body % {'full_name': self.affiliation.user.get_full_name()}
+        body_html = '<p>' + body + '</p>'
         body += "\n\t" + content + "\n\t"
-        body += _(
+
+        if content is not None and content != "":
+            body_html += (
+                "<p>&nbsp;&nbsp;&nbsp;&nbsp;" + content + 
+                "</p>&nbsp;&nbsp;&nbsp;&nbsp;"
+            )
+
+        account_balance = _(
             "Your current account balance with %(lodge)s is of $ %(balance)s"
         ) % {
             'lodge': str(self.affiliation.lodge),
             'balance': str(self.balance)
         }
+        account_balance_html = (
+            "<p>&nbsp;&nbsp;&nbsp;&nbsp;" + account_balance + "</p>"
+        )
 
         last_movements = (_(
             "\n\nYour last 10 movements are:"
             "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
         ))
+        last_movements_html = (_(
+            "<br><br>Your last 10 movements are:"
+            "<br><br>"
+            "<table>"
+            "<thead>"
+            "<tr>"
+            "<th>Date</th>"
+            "<th>Type</th>"
+            "<th>Amount</th>"
+            "<th>Balance</th>"
+            "</tr>"
+            "</thead>"
+            "<tbody>"
+        ))
+
         account_movements = self.movements.filter(is_active=True)[:10]
         for m in account_movements.all():
             if m.account_movement_type == ACCOUNTMOVEMENT_INVOICE:
@@ -153,13 +179,32 @@ class Account(users.Model):
                 'amount': str(m.amount),
                 'balance': str(m.balance)
             }
+            last_movements_html += (
+                "<tr>"
+                "<td>%(date)s</td>"
+                "<td>%(type)s</td>"
+                "<td>%(amount)s</td>"
+                "<td>%(balance)s</td>"
+                "</tr>"
+            ) % {
+                'date': str(m.created_on.date()),
+                'type': movement_type,
+                'amount': str(m.amount),
+                'balance': str(m.balance)
+            }
 
+        last_movements_html += "</tbody></table>"
         from_email = self.affiliation.lodge.treasurer.email
         send_mail(
             title,
-            body+last_movements,
+            body + account_balance + last_movements,
             from_email,
-            [self.affiliation.user.email]
+            [self.affiliation.user.email],
+            False,
+            None,
+            None,
+            None,
+            body_html + account_balance_html + last_movements_html
         )
 
     class Meta:
