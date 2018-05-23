@@ -1,6 +1,8 @@
 from datetime import date
+from decimal import Decimal
 
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -195,7 +197,8 @@ class CategoryPrice(Model):
     price = models.DecimalField(
         _('price'),
         max_digits=10,
-        decimal_places=2
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.00'))],
     )
     date_from = models.DateField(
         _('date from')

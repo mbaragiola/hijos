@@ -462,7 +462,7 @@ class Invoice(users.Model):
         _('amount'),
         max_digits=12,
         decimal_places=2,
-        validators=[MinValueValidator(Decimal('0.01'))]
+        validators=[MinValueValidator(Decimal('0.00'))]
     )
     account_movement = GenericRelation(
         AccountMovement,
