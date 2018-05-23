@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-23 14:48+0000\n"
+"POT-Creation-Date: 2018-05-23 22:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -414,6 +414,9 @@ msgid "Balance"
 msgstr "Balance"
 
 #: hijos/templates/treasure/debtors_list.html:41
+#: hijos/templates/users/affiliation_list.html:27
+#: hijos/templates/users/lodge_detail.html:30
+#: hijos/templates/users/user_list.html:18
 msgid "Total entries"
 msgstr "Entradas totales"
 
@@ -743,55 +746,55 @@ msgstr "Afiliaciones"
 msgid "lodge detail"
 msgstr "detalle de logia"
 
-#: hijos/templates/users/lodge_detail.html:29
+#: hijos/templates/users/lodge_detail.html:35
 msgid "Listings filtered by this lodge"
 msgstr "Listados filtrados por esta logia"
 
-#: hijos/templates/users/lodge_detail.html:35
+#: hijos/templates/users/lodge_detail.html:41
 msgid "List Lodge Accounts"
 msgstr "Listar Cuentas de Logias"
 
-#: hijos/templates/users/lodge_detail.html:40
+#: hijos/templates/users/lodge_detail.html:46
 msgid "List Debtors"
 msgstr "Listar Deudores"
 
-#: hijos/templates/users/lodge_detail.html:45
+#: hijos/templates/users/lodge_detail.html:51
 msgid "List Periods"
 msgstr "Listar Períodos"
 
-#: hijos/templates/users/lodge_detail.html:50
+#: hijos/templates/users/lodge_detail.html:56
 msgid "List Invoices"
 msgstr "Listar Recibos"
 
-#: hijos/templates/users/lodge_detail.html:55
+#: hijos/templates/users/lodge_detail.html:61
 msgid "List Charges"
 msgstr "Listar Cargos"
 
-#: hijos/templates/users/lodge_detail.html:60
+#: hijos/templates/users/lodge_detail.html:66
 msgid "List Deposit"
 msgstr "Listar Depósitos"
 
-#: hijos/templates/users/lodge_detail.html:65
+#: hijos/templates/users/lodge_detail.html:71
 msgid "List Grand Lodge Deposits"
 msgstr "Listar Depósitos en Gran Logia"
 
-#: hijos/templates/users/lodge_detail.html:70
+#: hijos/templates/users/lodge_detail.html:76
 msgid "List Ingresses"
 msgstr "Listar Ingresos"
 
-#: hijos/templates/users/lodge_detail.html:75
+#: hijos/templates/users/lodge_detail.html:81
 msgid "List Egresses"
 msgstr "Listar Egresos"
 
-#: hijos/templates/users/lodge_detail.html:80
+#: hijos/templates/users/lodge_detail.html:86
 msgid "List Transfers"
 msgstr "Listar Transferencias"
 
-#: hijos/templates/users/lodge_detail.html:86
+#: hijos/templates/users/lodge_detail.html:93
 msgid "Actions"
 msgstr "Acciones"
 
-#: hijos/templates/users/lodge_detail.html:94
+#: hijos/templates/users/lodge_detail.html:101
 msgid "Send Mass Email with Account Balance"
 msgstr "Enviar Correo Masivo con Balances"
 
@@ -902,7 +905,7 @@ msgstr ""
 "th><th>Tipo</th><th>Monto</th><th>Balance</th></tr></thead><tbody>"
 
 #: hijos/treasure/models.py:19 hijos/treasure/models.py:397
-#: hijos/users/models.py:147 hijos/users/models.py:229
+#: hijos/users/models.py:149 hijos/users/models.py:232
 msgid "lodge"
 msgstr "logia"
 
@@ -927,7 +930,7 @@ msgstr "encargado"
 #: hijos/treasure/models.py:61 hijos/treasure/models.py:302
 #: hijos/treasure/models.py:520 hijos/treasure/models.py:594
 #: hijos/treasure/models.py:677 hijos/treasure/models.py:749
-#: hijos/treasure/models.py:819 hijos/users/models.py:164
+#: hijos/treasure/models.py:819 hijos/users/models.py:166
 msgid "description"
 msgstr "descripción"
 
@@ -942,7 +945,7 @@ msgid "lodge accounts"
 msgstr "cuentas de logias"
 
 #: hijos/treasure/models.py:93 hijos/treasure/models.py:455
-#: hijos/users/models.py:261
+#: hijos/users/models.py:264
 msgid "affiliation"
 msgstr "afiliación"
 
@@ -1192,135 +1195,135 @@ msgstr ""
 msgid "This username has already been taken."
 msgstr "Este nombre de usuario está ocupado."
 
-#: hijos/users/apps.py:8 hijos/users/models.py:76
+#: hijos/users/apps.py:8 hijos/users/models.py:78
 msgid "users"
 msgstr "usuarios"
 
-#: hijos/users/models.py:12
+#: hijos/users/models.py:14
 msgid "Entered Apprentice"
 msgstr "Aprendiz"
 
-#: hijos/users/models.py:13
+#: hijos/users/models.py:15
 msgid "Fellow Craft"
 msgstr "Compañero"
 
-#: hijos/users/models.py:14
+#: hijos/users/models.py:16
 msgid "Master Mason"
 msgstr "Maestro Masón"
 
-#: hijos/users/models.py:22
+#: hijos/users/models.py:24
 msgid "degree"
 msgstr "grado"
 
-#: hijos/users/models.py:28
+#: hijos/users/models.py:30
 msgid "initiated"
 msgstr "iniciado"
 
-#: hijos/users/models.py:31
+#: hijos/users/models.py:33
 msgid "Initiation date."
 msgstr "Fecha de iniciación."
 
-#: hijos/users/models.py:34
+#: hijos/users/models.py:36
 msgid "passed"
 msgstr "ascendido"
 
-#: hijos/users/models.py:37
+#: hijos/users/models.py:39
 msgid "Passed to Fellow Craft date."
 msgstr "Fecha de ascenso."
 
-#: hijos/users/models.py:40
+#: hijos/users/models.py:42
 msgid "raised"
 msgstr "exaltado"
 
-#: hijos/users/models.py:43
+#: hijos/users/models.py:45
 msgid "Raised to Master Mason date."
 msgstr "Fecha de exaltación."
 
-#: hijos/users/models.py:46
+#: hijos/users/models.py:48
 msgid "past master"
 msgstr "ex venerable"
 
-#: hijos/users/models.py:49
+#: hijos/users/models.py:51
 msgid "Is or was Worshipful Master."
 msgstr "Es o fue Venerable Maestro."
 
-#: hijos/users/models.py:52
+#: hijos/users/models.py:54
 msgid "worshipful"
 msgstr "respetable"
 
-#: hijos/users/models.py:55
+#: hijos/users/models.py:57
 msgid "Is or was elected official of the Grand Lodge."
 msgstr "Ocupa o ha ocupado cargo electo en la Gran Logia."
 
-#: hijos/users/models.py:58
+#: hijos/users/models.py:60
 msgid "most worshipful"
 msgstr "muy respetable"
 
-#: hijos/users/models.py:62
+#: hijos/users/models.py:64
 msgid "Is or was elected as Most Worshipful Master of the Grand Lodge."
 msgstr "Ocupa o ha ocupado el cargo de Gran Maestre."
 
-#: hijos/users/models.py:75 hijos/users/models.py:237
+#: hijos/users/models.py:77 hijos/users/models.py:240
 msgid "user"
 msgstr "usuario"
 
-#: hijos/users/models.py:89
+#: hijos/users/models.py:91
 msgid "is active?"
 msgstr "¿es activo?"
 
-#: hijos/users/models.py:93
+#: hijos/users/models.py:95
 msgid "created on"
 msgstr "creado en"
 
-#: hijos/users/models.py:97
+#: hijos/users/models.py:99
 msgid "last modified on"
 msgstr "modificado en"
 
-#: hijos/users/models.py:102
+#: hijos/users/models.py:104
 msgid "created by"
 msgstr "creado por"
 
-#: hijos/users/models.py:110
+#: hijos/users/models.py:112
 msgid "last modified by"
 msgstr "modificado por"
 
-#: hijos/users/models.py:125 hijos/users/models.py:159
+#: hijos/users/models.py:127 hijos/users/models.py:161
 msgid "name"
 msgstr "nombre"
 
-#: hijos/users/models.py:131
+#: hijos/users/models.py:133
 msgid "treasurer"
 msgstr "tesorero"
 
-#: hijos/users/models.py:148
+#: hijos/users/models.py:150
 msgid "lodges"
 msgstr "logias"
 
-#: hijos/users/models.py:177 hijos/users/models.py:189
-#: hijos/users/models.py:245
+#: hijos/users/models.py:179 hijos/users/models.py:191
+#: hijos/users/models.py:248
 msgid "category"
 msgstr "categoría"
 
-#: hijos/users/models.py:178
+#: hijos/users/models.py:180
 msgid "categories"
 msgstr "categorías"
 
-#: hijos/users/models.py:196 hijos/users/models.py:218
+#: hijos/users/models.py:198 hijos/users/models.py:221
 msgid "price"
 msgstr "precio"
 
-#: hijos/users/models.py:201
+#: hijos/users/models.py:204
 msgid "date from"
 msgstr "fecha desde"
 
-#: hijos/users/models.py:204
+#: hijos/users/models.py:207
 msgid "date until"
 msgstr "fecha hasta"
 
-#: hijos/users/models.py:219
+#: hijos/users/models.py:222
 msgid "prices"
 msgstr "precios"
 
-#: hijos/users/models.py:262
+#: hijos/users/models.py:265
 msgid "affiliations"
 msgstr "afiliaciones"
