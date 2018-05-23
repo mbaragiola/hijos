@@ -264,4 +264,4 @@ class Affiliation(Model):
         verbose_name = _('affiliation')
         verbose_name_plural = _('affiliations')
         default_permissions = ('add', 'change', 'delete', 'view')
-        ordering = ['-created_on']
+        ordering = ['user__last_name', 'user__first_name']
