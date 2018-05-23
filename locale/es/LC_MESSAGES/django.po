@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 21:56+0000\n"
+"POT-Creation-Date: 2018-05-23 14:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,6 +378,45 @@ msgstr "lista cargos"
 msgid "Charges"
 msgstr "Cargos"
 
+#: hijos/templates/treasure/debtors_list.html:5
+msgid "debtors list"
+msgstr "lista deudores"
+
+#: hijos/templates/treasure/debtors_list.html:9
+msgid "Debtors"
+msgstr "Deudores"
+
+#: hijos/templates/treasure/debtors_list.html:13
+msgid "Total"
+msgstr "Total"
+
+#: hijos/templates/treasure/debtors_list.html:14
+msgid "Maximum"
+msgstr "Máximo"
+
+#: hijos/templates/treasure/debtors_list.html:15
+msgid "Average"
+msgstr "Promedio"
+
+#: hijos/templates/treasure/debtors_list.html:16
+msgid "Minimum"
+msgstr "Mínimo"
+
+#: hijos/templates/treasure/debtors_list.html:32
+#: hijos/templates/treasure/lodgeaccount_detail.html:18
+#: hijos/templates/treasure/lodgeaccount_detail.html:28
+#: hijos/templates/treasure/lodgeaccount_list.html:29
+#: hijos/templates/users/affiliation_detail.html:23
+#: hijos/templates/users/affiliation_detail.html:32
+#: hijos/templates/users/user_detail.html:57
+#: hijos/templates/users/user_detail.html:66
+msgid "Balance"
+msgstr "Balance"
+
+#: hijos/templates/treasure/debtors_list.html:41
+msgid "Total entries"
+msgstr "Entradas totales"
+
 #: hijos/templates/treasure/deposit_add.html:5
 msgid "add deposit"
 msgstr "agregar depósito"
@@ -484,16 +523,6 @@ msgstr "agregar cuenta de logia"
 #: hijos/templates/treasure/lodgeaccount_detail.html:5
 msgid "lodge account detail"
 msgstr "cuenta de logia hasta"
-
-#: hijos/templates/treasure/lodgeaccount_detail.html:18
-#: hijos/templates/treasure/lodgeaccount_detail.html:28
-#: hijos/templates/treasure/lodgeaccount_list.html:29
-#: hijos/templates/users/affiliation_detail.html:23
-#: hijos/templates/users/affiliation_detail.html:32
-#: hijos/templates/users/user_detail.html:57
-#: hijos/templates/users/user_detail.html:66
-msgid "Balance"
-msgstr "Balance"
 
 #: hijos/templates/treasure/lodgeaccount_detail.html:26
 #: hijos/templates/users/affiliation_detail.html:30
@@ -723,42 +752,46 @@ msgid "List Lodge Accounts"
 msgstr "Listar Cuentas de Logias"
 
 #: hijos/templates/users/lodge_detail.html:40
+msgid "List Debtors"
+msgstr "Listar Deudores"
+
+#: hijos/templates/users/lodge_detail.html:45
 msgid "List Periods"
 msgstr "Listar Períodos"
 
-#: hijos/templates/users/lodge_detail.html:45
+#: hijos/templates/users/lodge_detail.html:50
 msgid "List Invoices"
 msgstr "Listar Recibos"
 
-#: hijos/templates/users/lodge_detail.html:50
+#: hijos/templates/users/lodge_detail.html:55
 msgid "List Charges"
 msgstr "Listar Cargos"
 
-#: hijos/templates/users/lodge_detail.html:55
+#: hijos/templates/users/lodge_detail.html:60
 msgid "List Deposit"
 msgstr "Listar Depósitos"
 
-#: hijos/templates/users/lodge_detail.html:60
+#: hijos/templates/users/lodge_detail.html:65
 msgid "List Grand Lodge Deposits"
 msgstr "Listar Depósitos en Gran Logia"
 
-#: hijos/templates/users/lodge_detail.html:65
+#: hijos/templates/users/lodge_detail.html:70
 msgid "List Ingresses"
 msgstr "Listar Ingresos"
 
-#: hijos/templates/users/lodge_detail.html:70
+#: hijos/templates/users/lodge_detail.html:75
 msgid "List Egresses"
 msgstr "Listar Egresos"
 
-#: hijos/templates/users/lodge_detail.html:75
+#: hijos/templates/users/lodge_detail.html:80
 msgid "List Transfers"
 msgstr "Listar Transferencias"
 
-#: hijos/templates/users/lodge_detail.html:81
+#: hijos/templates/users/lodge_detail.html:86
 msgid "Actions"
 msgstr "Acciones"
 
-#: hijos/templates/users/lodge_detail.html:89
+#: hijos/templates/users/lodge_detail.html:94
 msgid "Send Mass Email with Account Balance"
 msgstr "Enviar Correo Masivo con Balances"
 
@@ -1112,19 +1145,19 @@ msgstr "ingreso de cuenta de logia"
 msgid "lodge account ingresses"
 msgstr "ingresos de cuenta de logia"
 
-#: hijos/treasure/signals.py:27
+#: hijos/treasure/signals.py:25
 msgid "Category's price not found."
 msgstr "Precio de categoría no encontrado."
 
-#: hijos/treasure/signals.py:29
+#: hijos/treasure/signals.py:27
 msgid "More than one price found."
 msgstr "Se ha encontrado más de un precio."
 
-#: hijos/treasure/signals.py:55
+#: hijos/treasure/signals.py:53
 msgid "New invoice"
 msgstr "Nuevo recibo"
 
-#: hijos/treasure/signals.py:57
+#: hijos/treasure/signals.py:55
 #, python-format
 msgid ""
 "A new invoice has been issued to you for the period %(period)s of an amount "
@@ -1132,24 +1165,24 @@ msgid ""
 msgstr ""
 "Tiene un nuevo recibo del período %(period)s por el monto de $ %(amount)s."
 
-#: hijos/treasure/signals.py:65
+#: hijos/treasure/signals.py:63
 msgid "New charge"
 msgstr "Nuevo cargo"
 
-#: hijos/treasure/signals.py:67
+#: hijos/treasure/signals.py:65
 #, python-format
 msgid "A new charge has been issued to you of an amount $ %(amount)s."
 msgstr "Se te ha realizado un cargo de monto $ %(amount)s."
 
-#: hijos/treasure/signals.py:70
+#: hijos/treasure/signals.py:68
 msgid "Invalid account movement type."
 msgstr "Tipo de movimiento de cuenta inválido."
 
-#: hijos/treasure/signals.py:117
+#: hijos/treasure/signals.py:115
 msgid "New deposit"
 msgstr "Nuevo depósito"
 
-#: hijos/treasure/signals.py:119
+#: hijos/treasure/signals.py:117
 #, python-format
 msgid "A new deposit on your behalf has been made of an amount $ %(amount)s."
 msgstr ""
