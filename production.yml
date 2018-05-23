@@ -14,6 +14,7 @@ services:
     volumes:
       - sqlite_data:/app/data
     command: /gunicorn.sh
+    restart: always
 
   caddy:
     build:
@@ -28,3 +29,4 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+    restart: always
