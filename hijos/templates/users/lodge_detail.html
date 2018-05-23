@@ -36,6 +36,11 @@
       </a>
     </li>
     <li>
+      <a href="{% url 'treasure:debtor-list' lodge.id %}">
+        {% trans "List Debtors" %}
+      </a>
+    </li>
+    <li>
       <a href="{% url 'treasure:period-list' lodge.id %}">
         {% trans "List Periods" %}
       </a>

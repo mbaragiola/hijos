@@ -138,5 +138,10 @@ urlpatterns = [
         'transfers/<int:pk>/',
         view=views.LodgeAccountTransferDetailView.as_view(),
         name='lodgeaccounttransfer-detail'
+    ),
+    path(
+        'lodges/<int:pk>/debtors/',
+        view=views.DebtorsByLodgeList.as_view(),
+        name='debtor-list'
     )
 ]

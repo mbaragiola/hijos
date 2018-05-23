@@ -1,5 +1,7 @@
+from decimal import Decimal
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Avg, Max, Min, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, ListView
 
@@ -358,3 +360,28 @@ class LodgeAccountTransferCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         form.instance.last_modified_by = self.request.user
         return super().form_valid(form)
+
+
+class DebtorsByLodgeList(LoginRequiredMixin, ListView):
+    template_name = 'treasure/debtors_list.html'
+    context_object_name = 'debtor_accounts'
+
+    def get_queryset(self):
+        self.lodge = get_object_or_404(
+            users.Lodge, pk=self.kwargs['pk']
+        )
+        return models.Account.objects.filter(
+            affiliation__lodge=self.lodge,
+            balance__lt=Decimal('0.00')
+        ).order_by('balance')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lodge'] = self.lodge
+        context['aggregations'] = self.object_list.aggregate(
+            debt_sum=Sum('balance'),
+            debt_avg=Avg('balance'),
+            debt_max=Max('balance'),
+            debt_min=Min('balance')
+        )
+        return context

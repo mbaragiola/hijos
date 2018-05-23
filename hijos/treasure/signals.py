@@ -1,5 +1,4 @@
 from django.db.models import Q
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from hijos.treasure import models
@@ -12,7 +11,6 @@ def period(sender, instance, created, raw, **kwargs):
             lodge=instance.lodge,
             is_active=True
         )
-        today = timezone.now().date()
         for affiliation in affiliations.all():
             try:
                 category_price = users.CategoryPrice.objects.get(

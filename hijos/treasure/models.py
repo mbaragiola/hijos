@@ -125,7 +125,7 @@ class Account(users.Model):
 
         if content is not None and content != "":
             body_html += (
-                "<p>&nbsp;&nbsp;&nbsp;&nbsp;" + content + 
+                "<p>&nbsp;&nbsp;&nbsp;&nbsp;" + content +
                 "</p>&nbsp;&nbsp;&nbsp;&nbsp;"
             )
 

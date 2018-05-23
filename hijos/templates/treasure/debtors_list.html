@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "debtors list" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col"><h1>{% trans "Debtors" %} - {{ lodge }}</h1></div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>{% trans "Total" %} $ {{ aggregations.debt_sum }}</p>
+    <p>{% trans "Maximum" %} $ {{ aggregations.debt_min }}</p>
+    <p>{% trans "Average" %} $ {{ aggregations.debt_avg }}</p>
+    <p>{% trans "Minimum" %} $ {{ aggregations.debt_max }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul>
+      {% for d in debtor_accounts %}
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'users:affiliation-detail' d.affiliation.id %}">
+            <b>{{ d.affiliation }}</b>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <b>{% trans "Balance" %} $ {{ d.balance }}</b>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {% trans "Total entries" %} {{ debtor_accounts.count }}
+  </div>
+</div>
+{% endblock %}
