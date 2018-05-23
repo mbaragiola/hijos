@@ -26,6 +26,12 @@
   </div>
 </div>
 <div class="row">
+  <div class="col">
+    {% trans "Total entries" %} {{ lodge.affiliations.count }}
+  </div>
+</div>
+<br>
+<div class="row">
   <div class="col"><h3>{% trans "Listings filtered by this lodge" %}</h1></div>
 </div>
 <div class="row">
@@ -82,6 +88,7 @@
     </li>
   </div>
 </div>
+<br>
 <div class="row">
   <div class="col"><h3>{% trans "Actions" %}</h1></div>
 </div>

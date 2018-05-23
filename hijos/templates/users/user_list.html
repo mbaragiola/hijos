@@ -13,5 +13,10 @@
       </a>
     {% endfor %}
   </div>
+  <div class="row">
+    <div class="col">
+      {% trans "Total entries" %} {{ user_list.count }}
+    </div>
+  </div>
 </div>
 {% endblock content %}
