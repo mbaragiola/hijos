@@ -35,7 +35,7 @@ class LodgeAccountDetailView(LoginRequiredMixin, DetailView):
 
 class LodgeAccountCreateView(LoginRequiredMixin, CreateView):
     model = models.LodgeAccount
-    fields = ['lodge', 'handler']
+    fields = ['handler', 'description']
     template_name = 'treasure/lodgeaccount_add.html'
 
     def form_valid(self, form):
