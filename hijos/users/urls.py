@@ -32,7 +32,7 @@ urlpatterns = [
     path(
         'lodges/<int:pk>/affiliations/',
         view=views.AffiliationsByLodgeList.as_view(),
-        name='affiliations-list'
+        name='affiliation-list'
     ),
     path(
         'affiliations/<int:pk>/',
