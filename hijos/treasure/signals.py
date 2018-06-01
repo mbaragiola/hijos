@@ -21,9 +21,9 @@ def period(sender, instance, created, raw, **kwargs):
                     Q(date_from__lte=instance.end),
                     Q(date_until__gte=instance.end)
                 )
-            except models.CategoryPrice.DoesNotExist:
+            except users.CategoryPrice.DoesNotExist:
                 raise Exception(_("Category's price not found."))
-            except models.CategoryPrice.MultipleObjectsReturned:
+            except users.CategoryPrice.MultipleObjectsReturned:
                 raise Exception(_("More than one price found."))
             else:
                 models.Invoice.objects.create(
