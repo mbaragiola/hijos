@@ -1,5 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
+
+from hijos.treasure import models as treasure
 from hijos.users import models
 
 
@@ -46,6 +48,10 @@ class UserTestCase(TestCase):
         url_detail = reverse('users:user-detail', args=['test'])
         self.assertRedirects(response, url_detail)
         user = models.User.objects.get(username='test')
+        self.assertEqual(user.first_name, 'Test')
+        self.assertEqual(user.last_name, 'Test')
+        self.assertEqual(user.email, 'test@test.com')
+        self.assertEqual(user.degree, models.DEGREE_ENTEREDAPPRENTICE)
         self.assertFalse(user.is_active)
         self.assertFalse(user.is_superuser)
 
@@ -136,6 +142,13 @@ class AffiliationTestCase(TestCase):
             self.url_login + '?next=' + url_create
         )
 
+
+        self.assertFalse(
+            treasure.Account.objects.filter(
+                affiliation__lodge=self.lodge,
+                affiliation__user=self.user4
+            ).exists()
+        )
         self.client.force_login(user=self.user1)
         response = self.client.post(url_create, data, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -147,6 +160,9 @@ class AffiliationTestCase(TestCase):
             'users:affiliation-detail', args=[affiliation.pk]
         )
         self.assertRedirects(response, url_detail)
+        self.assertTrue(
+            treasure.Account.objects.filter(affiliation=affiliation).exists()
+        )
 
     def test_read(self):
         url_list = reverse('users:affiliation-list', args=[self.lodge.pk])
