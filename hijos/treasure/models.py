@@ -692,7 +692,7 @@ class Charge(users.Model):
     )
 
     def __str__(self):
-        return str(self.debtor) + '- $ ' + str(self.amount) + (
+        return str(self.debtor) + ' - $ ' + str(self.amount) + (
             ' (#' + str(self.id) + ')'
         )
 
