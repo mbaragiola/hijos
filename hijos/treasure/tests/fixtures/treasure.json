@@ -1,0 +1,247 @@
+[
+{
+ "model": "treasure.lodgeglobalaccount",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:47:40.459Z",
+  "last_modified_on": "2018-04-13T17:47:40.459Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge": 1,
+  "balance": "0.00"
+ }
+},
+{
+ "model": "treasure.account",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:54:18.354Z",
+  "last_modified_on": "2018-05-23T21:27:56.989Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "affiliation": 1,
+  "balance": "-300.00"
+ }
+},
+{
+ "model": "treasure.account",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:54:50.509Z",
+  "last_modified_on": "2018-05-23T21:28:08.092Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "affiliation": 2,
+  "balance": "-300.00"
+ }
+},
+{
+ "model": "treasure.account",
+ "pk": 3,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:57:21.234Z",
+  "last_modified_on": "2018-05-22T17:32:34.429Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "affiliation": 3,
+  "balance": "-150.00"
+ }
+},
+{
+ "model": "treasure.lodgeaccount",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T20:26:49.502Z",
+  "last_modified_on": "2018-05-22T17:32:34.229Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "handler": 1,
+  "description": "",
+  "balance": "200.00"
+ }
+},
+{
+ "model": "treasure.period",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.683Z",
+  "last_modified_on": "2018-05-18T19:49:44.683Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge": 1,
+  "begin": "2018-01-01",
+  "end": "2018-03-31",
+  "price_multiplier": 3,
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.invoice",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.690Z",
+  "last_modified_on": "2018-05-18T19:49:44.690Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "period": 1,
+  "affiliation": 1,
+  "amount": "300.00",
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.invoice",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.704Z",
+  "last_modified_on": "2018-05-18T19:49:44.704Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "period": 1,
+  "affiliation": 2,
+  "amount": "300.00",
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.invoice",
+ "pk": 3,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.710Z",
+  "last_modified_on": "2018-05-18T19:49:44.710Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "period": 1,
+  "affiliation": 3,
+  "amount": "150.00",
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.accountmovement",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.695Z",
+  "last_modified_on": "2018-05-18T19:49:44.695Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "account": 1,
+  "amount": "-300.00",
+  "balance": "-300.00",
+  "account_movement_type": "I",
+  "object_ct": 22,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.accountmovement",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.695Z",
+  "last_modified_on": "2018-05-18T19:49:44.695Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "account": 2,
+  "amount": "-300.00",
+  "balance": "-300.00",
+  "account_movement_type": "I",
+  "object_ct": 22,
+  "object_id": 2
+ }
+},
+{
+ "model": "treasure.accountmovement",
+ "pk": 3,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.695Z",
+  "last_modified_on": "2018-05-18T19:49:44.695Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "account": 3,
+  "amount": "-150.00",
+  "balance": "-150.00",
+  "account_movement_type": "I",
+  "object_ct": 22,
+  "object_id": 3
+ }
+},
+{
+ "model": "treasure.charge",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-19T11:31:55.514Z",
+  "last_modified_on": "2018-05-19T11:31:55.514Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "debtor": 2,
+  "amount": "200.00",
+  "charge_type": "O",
+  "description": "",
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.accountmovement",
+ "pk": 4,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-17T19:49:44.695Z",
+  "last_modified_on": "2018-05-17T19:49:44.695Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "account": 2,
+  "amount": "-200.00",
+  "balance": "-200.00",
+  "account_movement_type": "C",
+  "object_ct": 20,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.deposit",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-19T11:37:24.141Z",
+  "last_modified_on": "2018-05-19T11:37:24.141Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "payer": 2,
+  "lodge_account": 1,
+  "amount": "200.00",
+  "description": "",
+  "receipt": "",
+  "send_email": false
+ }
+},
+{
+ "model": "treasure.accountmovement",
+ "pk": 5,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:49:44.695Z",
+  "last_modified_on": "2018-05-18T19:49:44.695Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "account": 2,
+  "amount": "200.00",
+  "balance": "0.00",
+  "account_movement_type": "D",
+  "object_ct": 20,
+  "object_id": 1
+ }
+}
+]

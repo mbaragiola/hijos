@@ -1,0 +1,213 @@
+[
+{
+ "model": "users.user",
+ "pk": 1,
+ "fields": {
+  "password": "argon2$argon2i$v=19$m=512,t=2,p=2$V0djNHB4VUo2dkZa$ebDWAwDMhBFq2QxEjD55+w",
+  "last_login": null,
+  "is_superuser": false,
+  "username": "user1",
+  "first_name": "User",
+  "last_name": "One",
+  "email": "user1@user.com",
+  "is_staff": false,
+  "is_active": true,
+  "date_joined": "2018-04-13T14:43:03Z",
+  "degree": "3",
+  "initiated": "2014-11-01",
+  "passed": "2016-04-27",
+  "raised": "2017-08-04",
+  "past_master": true,
+  "worshipful": true,
+  "most_worshipful": true,
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
+ "model": "users.user",
+ "pk": 2,
+ "fields": {
+  "password": "argon2$argon2i$v=19$m=512,t=2,p=2$V0djNHB4VUo2dkZa$ebDWAwDMhBFq2QxEjD55+w",
+  "last_login": null,
+  "is_superuser": false,
+  "username": "user2",
+  "first_name": "User",
+  "last_name": "Two",
+  "email": "user2@user.com",
+  "is_staff": false,
+  "is_active": true,
+  "date_joined": "2018-04-13T14:43:03Z",
+  "degree": "3",
+  "initiated": "2014-11-01",
+  "passed": "2016-04-27",
+  "raised": "2017-08-04",
+  "past_master": true,
+  "worshipful": true,
+  "most_worshipful": false,
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
+ "model": "users.user",
+ "pk": 3,
+ "fields": {
+  "password": "argon2$argon2i$v=19$m=512,t=2,p=2$V0djNHB4VUo2dkZa$ebDWAwDMhBFq2QxEjD55+w",
+  "last_login": null,
+  "is_superuser": false,
+  "username": "user3",
+  "first_name": "User",
+  "last_name": "Three",
+  "email": "user3@user.com",
+  "is_staff": false,
+  "is_active": true,
+  "date_joined": "2018-04-13T14:43:03Z",
+  "degree": "3",
+  "initiated": "2014-11-01",
+  "passed": "2016-04-27",
+  "raised": "2017-08-04",
+  "past_master": true,
+  "worshipful": false,
+  "most_worshipful": false,
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
+ "model": "users.user",
+ "pk": 4,
+ "fields": {
+  "password": "argon2$argon2i$v=19$m=512,t=2,p=2$V0djNHB4VUo2dkZa$ebDWAwDMhBFq2QxEjD55+w",
+  "last_login": null,
+  "is_superuser": false,
+  "username": "user4",
+  "first_name": "User",
+  "last_name": "Four",
+  "email": "user4@user.com",
+  "is_staff": false,
+  "is_active": true,
+  "date_joined": "2018-04-13T14:43:03Z",
+  "degree": "3",
+  "initiated": "2014-11-01",
+  "passed": "2016-04-27",
+  "raised": "2017-08-04",
+  "past_master": false,
+  "worshipful": false,
+  "most_worshipful": false,
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
+ "model": "users.lodge",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:47:40.457Z",
+  "last_modified_on": "2018-05-19T17:54:50.060Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "name": "Example",
+  "treasurer": 1
+ }
+},
+{
+ "model": "users.category",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:49:20.571Z",
+  "last_modified_on": "2018-04-13T17:49:20.571Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "name": "Simple",
+  "description": ""
+ }
+},
+{
+ "model": "users.category",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:49:42.991Z",
+  "last_modified_on": "2018-04-13T17:49:42.991Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "name": "Discount",
+  "description": ""
+ }
+},
+{
+ "model": "users.categoryprice",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:52:01.506Z",
+  "last_modified_on": "2018-05-18T19:13:55.395Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "category": 1,
+  "price": "100.00",
+  "date_from": "2018-01-01",
+  "date_until": "3000-12-31"
+ }
+},
+{
+ "model": "users.categoryprice",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:52:20.824Z",
+  "last_modified_on": "2018-05-18T19:13:27.637Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "category": 2,
+  "price": "50.00",
+  "date_from": "2018-01-01",
+  "date_until": "3000-12-31"
+ }
+},
+{
+ "model": "users.affiliation",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:54:18.353Z",
+  "last_modified_on": "2018-04-13T17:54:18.353Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge": 1,
+  "user": 1,
+  "category": 1
+ }
+},
+{
+ "model": "users.affiliation",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:54:18.353Z",
+  "last_modified_on": "2018-04-13T17:54:18.353Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge": 1,
+  "user": 2,
+  "category": 1
+ }
+},
+{
+ "model": "users.affiliation",
+ "pk": 3,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T17:54:18.353Z",
+  "last_modified_on": "2018-04-13T17:54:18.353Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge": 1,
+  "user": 3,
+  "category": 2
+ }
+}
+]
