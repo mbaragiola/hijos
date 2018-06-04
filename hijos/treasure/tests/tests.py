@@ -175,6 +175,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user1,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -195,6 +196,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user2,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -215,6 +217,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user3,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-50.00'),
                 balance=Decimal('-200.00')
             ).exists()
@@ -248,6 +251,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user1,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -290,6 +294,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user2,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -332,6 +337,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user3,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-50.00'),
                 balance=Decimal('-200.00')
             ).exists()
@@ -394,6 +400,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user1,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -414,6 +421,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user2,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -434,6 +442,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user3,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-50.00'),
                 balance=Decimal('-200.00')
             ).exists()
@@ -468,6 +477,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user1,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -487,6 +497,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user2,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -506,6 +517,7 @@ class PeriodTestCase(TestCase):
             models.AccountMovement.objects.filter(
                 account__affiliation__lodge=self.lodge,
                 account__affiliation__user=self.user3,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-50.00'),
                 balance=Decimal('-200.00')
             ).exists()
@@ -609,6 +621,7 @@ class InvoiceTestCase(TestCase):
         self.assertFalse(
             models.AccountMovement.objects.filter(
                 account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -630,6 +643,7 @@ class InvoiceTestCase(TestCase):
         self.assertTrue(
             models.AccountMovement.objects.filter(
                 account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -679,6 +693,7 @@ class InvoiceTestCase(TestCase):
         self.assertFalse(
             models.AccountMovement.objects.filter(
                 account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -701,6 +716,7 @@ class InvoiceTestCase(TestCase):
         self.assertTrue(
             models.AccountMovement.objects.filter(
                 account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_INVOICE,
                 amount=Decimal('-100.00'),
                 balance=Decimal('-400.00')
             ).exists()
@@ -750,4 +766,204 @@ class InvoiceTestCase(TestCase):
         self.assertTemplateUsed(
             response,
             'treasure/invoice_detail.html'
+        )
+
+
+class ChargeTestCase(TestCase):
+    """
+    """
+    fixtures = [
+        'hijos/treasure/tests/fixtures/users.json',
+        'hijos/treasure/tests/fixtures/treasure.json'
+    ]
+
+    def setUp(self):
+        self.user1 = users.User.objects.get(username='user1')
+        self.user2 = users.User.objects.get(username='user2')
+        self.lodge = users.Lodge.objects.get(name='Example')
+        self.affiliation = users.Affiliation.objects.get(
+            lodge=self.lodge,
+            user=self.user1
+        )
+        self.charge = models.Charge.objects.get(
+            debtor=self.affiliation,
+            amount=Decimal('100.00')
+        )
+        self.url_login = reverse('account_login')
+        self.today = date.today()
+
+    def test_str(self):
+        self.assertEqual(
+            str(self.charge),
+            "One, User (3) @ Example - $ 100.00 (#1)"
+        )
+
+    def test_create_with_email(self):
+        url_create = reverse('treasure:charge-create')
+        data = {
+            'debtor': self.affiliation.pk,
+            'amount': Decimal('100.00'),
+            'description': 'Sup',
+            'charge_type': models.CHARGE_RAISE,
+            'send_email': True,
+            'is_active': False
+        }
+
+        self.client.logout()
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_create
+        )
+
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_CHARGE,
+                amount=Decimal('-100.00'),
+                balance=Decimal('-400.00')
+            ).exists()
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        charge = models.Charge.objects.get(
+            debtor=self.affiliation,
+            amount=Decimal('100.00'),
+            charge_type=models.CHARGE_RAISE
+        )
+        url_detail = reverse('treasure:charge-detail', args=[charge.pk])
+        self.assertRedirects(response, url_detail)
+        self.assertEqual(charge.description, 'Sup')
+        self.assertTrue(charge.send_email)
+        self.assertTrue(charge.is_active)
+
+        self.assertTrue(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_CHARGE,
+                amount=Decimal('-100.00'),
+                balance=Decimal('-400.00')
+            ).exists()
+        )
+        msg = mail.outbox[0]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'New charge'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\t"
+            "A new charge has been issued to you of an amount $ 100.00."
+            "\n\t"
+            "Your current account balance with Example is of $ -400.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n" +
+            str(self.today) + "\tCharge\t\t-100.00\t\t-400.00\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
+    def test_create_without_email(self):
+        url_create = reverse('treasure:charge-create')
+        data = {
+            'debtor': self.affiliation.pk,
+            'amount': Decimal('100.00'),
+            'charge_type': models.CHARGE_PASS,
+            'send_email': False,
+            'is_active': False
+        }
+
+        self.client.logout()
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_create
+        )
+
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_CHARGE,
+                amount=Decimal('-100.00'),
+                balance=Decimal('-400.00')
+            ).exists()
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        charge = models.Charge.objects.get(
+            debtor=self.affiliation,
+            amount=Decimal('100.00'),
+            charge_type=models.CHARGE_PASS
+        )
+        url_detail = reverse('treasure:charge-detail', args=[charge.pk])
+        self.assertRedirects(response, url_detail)
+        self.assertEqual(charge.description, "")
+        self.assertFalse(charge.send_email)
+        self.assertTrue(charge.is_active)
+        self.assertFalse(mail.outbox)
+
+        self.assertTrue(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_CHARGE,
+                amount=Decimal('-100.00'),
+                balance=Decimal('-400.00')
+            ).exists()
+        )
+
+    def test_read(self):
+        url_list = reverse('treasure:charge-list', args=[self.lodge.pk])
+        url_detail = reverse('treasure:charge-detail', args=[self.charge.pk])
+
+        self.client.logout()
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_list
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_detail
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/charge_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/charge_detail.html'
+        )
+
+        self.client.force_login(user=self.user2)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/charge_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/charge_detail.html'
         )
