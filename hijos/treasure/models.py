@@ -548,7 +548,7 @@ class Deposit(users.Model):
 
     def __str__(self):
         return str(self.payer) + '->' + (
-            str(self.lodge_account.handler) + ' $ ' + str(self.amount)
+            str(self.lodge_account.handler) + ' + $ ' + str(self.amount)
         ) + ' (#' + str(self.id) + ')'
 
     def get_absolute_url(self):
