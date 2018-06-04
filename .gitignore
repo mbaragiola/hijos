@@ -299,4 +299,5 @@ compose/production/caddy/Caddyfile
 .envs/.production/.caddy
 .envs/.production/.django
 .env
-backup_*.json
+backup*.json
+base_data.json
