@@ -1187,12 +1187,9 @@ class LodgeAccountIngressTestCase(TestCase):
         self.user2 = users.User.objects.get(username='user2')
         self.user3 = users.User.objects.get(username='user3')
         self.lodge = users.Lodge.objects.get(name='Example')
-        self.affiliation = users.Affiliation.objects.get(
-            lodge=self.lodge,
-            user=self.user1
-        )
         self.lodge_account = models.LodgeAccount.objects.get(
-            handler=self.affiliation
+            handler__lodge=self.lodge,
+            handler__user=self.user1
         )
         self.ingress = models.LodgeAccountIngress.objects.get(
             lodge_account__handler__lodge=self.lodge,
@@ -1323,12 +1320,9 @@ class LodgeAccountEgressTestCase(TestCase):
         self.user2 = users.User.objects.get(username='user2')
         self.user3 = users.User.objects.get(username='user3')
         self.lodge = users.Lodge.objects.get(name='Example')
-        self.affiliation = users.Affiliation.objects.get(
-            lodge=self.lodge,
-            user=self.user1
-        )
         self.lodge_account = models.LodgeAccount.objects.get(
-            handler=self.affiliation
+            handler__lodge=self.lodge,
+            handler__user=self.user1
         )
         self.egress = models.LodgeAccountEgress.objects.get(
             lodge_account__handler__lodge=self.lodge,
@@ -1443,4 +1437,158 @@ class LodgeAccountEgressTestCase(TestCase):
         self.assertTemplateUsed(
             response,
             'treasure/lodgeaccountegress_detail.html'
+        )
+
+
+class LodgeAccountTransferTestCase(TestCase):
+    """
+    """
+    fixtures = [
+        'hijos/treasure/tests/fixtures/users.json',
+        'hijos/treasure/tests/fixtures/treasure.json'
+    ]
+
+    def setUp(self):
+        self.user1 = users.User.objects.get(username='user1')
+        self.user2 = users.User.objects.get(username='user2')
+        self.user3 = users.User.objects.get(username='user3')
+        self.lodge = users.Lodge.objects.get(name='Example')
+        self.lodge_account_user1 = models.LodgeAccount.objects.get(
+            handler__lodge=self.lodge,
+            handler__user=self.user1,
+        )
+        self.lodge_account_user3 = models.LodgeAccount.objects.get(
+            handler__lodge=self.lodge,
+            handler__user=self.user3,
+        )
+        self.transfer = models.LodgeAccountTransfer.objects.get(
+            lodge_account_from=self.lodge_account_user3,
+            lodge_account_to=self.lodge_account_user1,
+            amount=Decimal('200.00')
+        )
+        self.url_login = reverse('account_login')
+        self.today = date.today()
+
+    def test_str(self):
+        self.assertEqual(
+            str(self.transfer),
+            "(#1) Three, User (3) @ Example -> $ 200.00 -> "
+            "One, User (3) @ Example"
+        )
+
+    def test_create(self):
+        url_create = reverse('treasure:lodgeaccounttransfer-create')
+        data = {
+            'lodge_account_from': self.lodge_account_user1.pk,
+            'lodge_account_to': self.lodge_account_user3.pk,
+            'amount': Decimal('100.00'),
+            'description': 'Sup',
+            'is_active': False
+        }
+
+        self.client.logout()
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_create
+        )
+
+        self.assertFalse(
+            models.LodgeAccountMovement.objects.filter(
+                lodge_account=self.lodge_account_user1,
+                lodgeaccount_movement_type=models.LODGEACCOUNTMOVEMENT_TRANSFER,
+                amount=Decimal('-100.00'),
+                balance=Decimal('100.00')
+            ).exists()
+        )
+        self.assertFalse(
+            models.LodgeAccountMovement.objects.filter(
+                lodge_account=self.lodge_account_user3,
+                lodgeaccount_movement_type=models.LODGEACCOUNTMOVEMENT_TRANSFER,
+                amount=Decimal('100.00'),
+                balance=Decimal('100.00')
+            ).exists()
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        transfer = models.LodgeAccountTransfer.objects.get(
+            lodge_account_from=self.lodge_account_user1,
+            lodge_account_to=self.lodge_account_user3,
+            amount=Decimal('100.00')
+        )
+        url_detail = reverse(
+            'treasure:lodgeaccounttransfer-detail', args=[transfer.pk]
+        )
+        self.assertRedirects(response, url_detail)
+        self.assertEqual(transfer.description, "Sup")
+        self.assertTrue(transfer.is_active)
+
+        self.assertTrue(
+            models.LodgeAccountMovement.objects.filter(
+                lodge_account=self.lodge_account_user1,
+                lodgeaccount_movement_type=models.LODGEACCOUNTMOVEMENT_TRANSFER,
+                amount=Decimal('-100.00'),
+                balance=Decimal('100.00')
+            ).exists()
+        )
+        self.assertTrue(
+            models.LodgeAccountMovement.objects.filter(
+                lodge_account=self.lodge_account_user3,
+                lodgeaccount_movement_type=models.LODGEACCOUNTMOVEMENT_TRANSFER,
+                amount=Decimal('100.00'),
+                balance=Decimal('100.00')
+            ).exists()
+        )
+
+    def test_read(self):
+        url_list = reverse(
+            'treasure:lodgeaccounttransfer-list', args=[self.lodge.pk]
+        )
+        url_detail = reverse(
+            'treasure:lodgeaccounttransfer-detail', args=[self.transfer.pk]
+        )
+
+        self.client.logout()
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_list
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_detail
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/lodgeaccounttransfer_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/lodgeaccounttransfer_detail.html'
+        )
+
+        self.client.force_login(user=self.user2)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/lodgeaccounttransfer_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/lodgeaccounttransfer_detail.html'
         )
