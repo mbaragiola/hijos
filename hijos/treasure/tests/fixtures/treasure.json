@@ -9,7 +9,7 @@
   "created_by": 1,
   "last_modified_by": 1,
   "lodge": 1,
-  "balance": "0.00"
+  "balance": "200.00"
  }
 },
 {
@@ -63,6 +63,20 @@
   "handler": 1,
   "description": "",
   "balance": "200.00"
+ }
+},
+{
+ "model": "treasure.lodgeaccount",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-04-13T20:26:49.502Z",
+  "last_modified_on": "2018-05-22T17:32:34.229Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "handler": 3,
+  "description": "",
+  "balance": "0.00"
  }
 },
 {
@@ -241,6 +255,121 @@
   "balance": "0.00",
   "account_movement_type": "D",
   "object_ct": 20,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.lodgeaccountingress",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:57:44.095Z",
+  "last_modified_on": "2018-05-18T19:57:44.095Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 2,
+  "amount": "400.00",
+  "ingress_type": "O",
+  "description": "",
+  "receipt": ""
+ }
+},
+{
+ "model": "treasure.lodgeaccountmovement",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T19:57:44.099Z",
+  "last_modified_on": "2018-05-18T19:57:44.099Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 2,
+  "amount": "400.00",
+  "balance": "400.00",
+  "lodgeaccount_movement_type": "I",
+  "object_ct": 25,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.lodgeaccountegress",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T20:05:20.254Z",
+  "last_modified_on": "2018-05-18T20:05:20.254Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 2,
+  "amount": "200.00",
+  "egress_type": "E",
+  "description": "",
+  "receipt": ""
+ }
+},
+{
+ "model": "treasure.lodgeaccountmovement",
+ "pk": 2,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T20:05:20.256Z",
+  "last_modified_on": "2018-05-18T20:05:20.256Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 2,
+  "amount": "-200.00",
+  "balance": "200.00",
+  "lodgeaccount_movement_type": "E",
+  "object_ct": 24,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.lodgeaccounttransfer",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T20:02:24.644Z",
+  "last_modified_on": "2018-05-18T20:02:24.644Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account_from": 2,
+  "lodge_account_to": 1,
+  "description": "",
+  "amount": "200.00"
+ }
+},
+{
+ "model": "treasure.lodgeaccountmovement",
+ "pk": 3,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T20:02:24.656Z",
+  "last_modified_on": "2018-05-18T20:02:24.656Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 1,
+  "amount": "200.00",
+  "balance": "200.00",
+  "lodgeaccount_movement_type": "T",
+  "object_ct": 27,
+  "object_id": 1
+ }
+},
+{
+ "model": "treasure.lodgeaccountmovement",
+ "pk": 4,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-18T20:02:24.656Z",
+  "last_modified_on": "2018-05-18T20:02:24.656Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "lodge_account": 2,
+  "amount": "-200.00",
+  "balance": "0.00",
+  "lodgeaccount_movement_type": "T",
+  "object_ct": 27,
   "object_id": 1
  }
 }
