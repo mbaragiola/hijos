@@ -311,7 +311,9 @@ class LodgeAccountTransfer(users.Model):
     )
 
     def __str__(self):
-        return str(self.amount)
+        return '(#' + str(self.id) + ') ' + str(self.lodge_account_from) + (
+            ' -> $ ' + str(self.amount) + ' -> ' + str(self.lodge_account_to)
+        )
 
     def get_absolute_url(self):
         return reverse(
