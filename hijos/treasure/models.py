@@ -836,7 +836,9 @@ class LodgeAccountIngress(users.Model):
     )
 
     def __str__(self):
-        return str(self.lodge_account) + '+ $ ' + str(self.amount)
+        return str(self.lodge_account) + ' + $ ' + str(self.amount) + (
+            ' (#' + str(self.id) + ')'
+        )
 
     def get_absolute_url(self):
         return reverse(
