@@ -1592,3 +1592,197 @@ class LodgeAccountTransferTestCase(TestCase):
             response,
             'treasure/lodgeaccounttransfer_detail.html'
         )
+
+
+class GrandLodgeDepositTestCase(TestCase):
+    """
+    """
+    fixtures = [
+        'hijos/treasure/tests/fixtures/users.json',
+        'hijos/treasure/tests/fixtures/treasure.json'
+    ]
+
+    def setUp(self):
+        self.user1 = users.User.objects.get(username='user1')
+        self.user2 = users.User.objects.get(username='user2')
+        self.lodge = users.Lodge.objects.get(name='Example')
+        self.affiliation = users.Affiliation.objects.get(
+            lodge=self.lodge,
+            user=self.user1
+        )
+        self.lodge_account = models.LodgeAccount.objects.get(
+            handler=self.affiliation
+        )
+        self.deposit = models.GrandLodgeDeposit.objects.get(
+            payer__lodge=self.lodge,
+            payer__user=self.user2,
+            amount=Decimal('200.00')
+        )
+        self.url_login = reverse('account_login')
+        self.today = date.today()
+
+    def test_str(self):
+        self.assertEqual(
+            str(self.deposit),
+            "Two, User (3) @ Example -> GL + $ 200.00 (#1)"
+        )
+
+    def test_create_with_email(self):
+        url_create = reverse('treasure:grandlodgedeposit-create')
+        data = {
+            'payer': self.affiliation.pk,
+            'amount': Decimal('100.00'),
+            'description': 'Sup',
+            'status': models.GRANDLODGEDEPOSIT_ACCREDITED,
+            'send_email': True,
+            'is_active': False
+        }
+
+        self.client.logout()
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_create
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit = models.GrandLodgeDeposit.objects.get(
+            payer=self.affiliation,
+            amount=Decimal('100.00')
+        )
+        url_detail = reverse(
+            'treasure:grandlodgedeposit-detail', args=[deposit.pk]
+        )
+        self.assertRedirects(response, url_detail)
+        self.assertEqual(deposit.description, 'Sup')
+        self.assertNotEqual(deposit.status, models.GRANDLODGEDEPOSIT_ACCREDITED)
+        self.assertTrue(deposit.send_email)
+        self.assertTrue(deposit.is_active)
+
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+        msg = mail.outbox[0]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'New GL deposit pending'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\t"
+            "A new GL deposit on your behalf has been made of an amount "
+            "$ 100.00 is pending to be accredited. "
+            "You'll be notified as soon as it does."
+            "\n\t"
+            "Your current account balance with Example is of $ -300.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
+    def test_create_without_email(self):
+        url_create = reverse('treasure:grandlodgedeposit-create')
+        data = {
+            'payer': self.affiliation.pk,
+            'amount': Decimal('100.00'),
+            'send_email': False,
+            'is_active': False
+        }
+
+        self.client.logout()
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_create
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_create, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit = models.GrandLodgeDeposit.objects.get(
+            payer=self.affiliation,
+            amount=Decimal('100.00')
+        )
+        url_detail = reverse(
+            'treasure:grandlodgedeposit-detail', args=[deposit.pk]
+        )
+        self.assertRedirects(response, url_detail)
+        self.assertEqual(deposit.description, "")
+        self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_PENDING)
+        self.assertFalse(deposit.send_email)
+        self.assertTrue(deposit.is_active)
+        self.assertFalse(mail.outbox)
+
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+
+    def test_read(self):
+        url_list = reverse(
+            'treasure:grandlodgedeposit-list', args=[self.lodge.pk]
+        )
+        url_detail = reverse(
+            'treasure:grandlodgedeposit-detail', args=[self.deposit.pk]
+        )
+
+        self.client.logout()
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_list
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_detail
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/grandlodgedeposit_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/grandlodgedeposit_detail.html'
+        )
+
+        self.client.force_login(user=self.user2)
+        response = self.client.get(url_list, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/grandlodgedeposit_list.html'
+        )
+        response = self.client.get(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'treasure/grandlodgedeposit_detail.html'
+        )

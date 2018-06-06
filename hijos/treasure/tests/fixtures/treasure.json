@@ -372,5 +372,22 @@
   "object_ct": 27,
   "object_id": 1
  }
+},
+{
+ "model": "treasure.grandlodgedeposit",
+ "pk": 1,
+ "fields": {
+  "is_active": true,
+  "created_on": "2018-05-19T11:37:24.141Z",
+  "last_modified_on": "2018-05-19T11:37:24.141Z",
+  "created_by": 1,
+  "last_modified_by": 1,
+  "payer": 2,
+  "amount": "200.00",
+  "status": "P",
+  "description": "",
+  "receipt": "",
+  "send_email": false
+ }
 }
 ]
