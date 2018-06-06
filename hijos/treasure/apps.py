@@ -70,3 +70,11 @@ class TreasureConfig(AppConfig):
             ),
             weak=False
         )
+        post_save.connect(
+            receiver=signals.grand_lodge_deposit,
+            sender=models.GrandLodgeDeposit,
+            dispatch_uid=(
+                'Treasure_GrandLodgeDeposit_SyncAccount'
+            ),
+            weak=False
+        )

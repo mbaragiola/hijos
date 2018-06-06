@@ -624,7 +624,7 @@ class GrandLodgeDeposit(users.Model):
     )
 
     def __str__(self):
-        return str(self.payer) + ': $ ' + str(self.amount) + (
+        return str(self.payer) + ' -> GL + $ ' + str(self.amount) + (
             ' (#' + str(self.id) + ')'
         )
 

@@ -225,7 +225,6 @@ class GrandLodgeDepositCreateView(LoginRequiredMixin, CreateView):
     model = models.GrandLodgeDeposit
     fields = [
         'payer',
-        'status',
         'amount',
         'description',
         'receipt',

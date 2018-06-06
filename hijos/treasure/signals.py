@@ -170,6 +170,14 @@ def lodge_account_movement(
 
 
 def grand_lodge_deposit(sender, instance, created, update_fields, **kwargs):
+    if created and instance.send_email:
+        title = _("New GL deposit pending")
+        content = _(
+            "A new GL deposit on your behalf has been made of an amount "
+            "$ %(amount)s is pending to be accredited. "
+            "You'll be notified as soon as it does."
+        ) % {'amount': str(instance.amount)}
+        instance.payer.account.send_treasure_mail(title, content)
     if not created and update_fields and 'status' in update_fields:
         account, new = models.Account.objects.get_or_create(
             affiliation=instance.payer
@@ -185,6 +193,21 @@ def grand_lodge_deposit(sender, instance, created, update_fields, **kwargs):
                 created_by=instance.created_by,
                 last_modified_by=instance.last_modified_by
             )
+            if instance.send_email:
+                title = _("Your pending GL deposit has been accredited")
+                content = _(
+                    "Your pending GL deposit made on your behalf of an amount "
+                    "$ %(amount)s has been accredited."
+                ) % {'amount': str(instance.amount)}
+                instance.payer.account.send_treasure_mail(title, content)
+        elif instance.status == models.GRANDLODGEDEPOSIT_REJECTED:
+            if instance.send_email:
+                title = _("Your pending GL deposit has been rejected")
+                content = _(
+                    "Your pending GL deposit made on your behalf of an amount "
+                    "$ %(amount)s has been rejected."
+                ) % {'amount': str(instance.amount)}
+                instance.payer.account.send_treasure_mail(title, content)
 
 
 def lodge_account_ingress_and_egress(
