@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-06 14:47+0000\n"
+"POT-Creation-Date: 2018-06-07 16:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mariano Baragiola <mbaragiola@linux.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,6 +305,7 @@ msgid "Other"
 msgstr "Otro"
 
 #: hijos/templates/treasure/charge_detail.html:31
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:32
 #: hijos/templates/treasure/lodgeaccount_detail.html:46
 #: hijos/templates/treasure/lodgeaccountegress_detail.html:35
 #: hijos/templates/treasure/lodgeaccountingress_detail.html:31
@@ -329,7 +330,7 @@ msgstr "Monto"
 
 #: hijos/templates/treasure/charge_detail.html:39
 #: hijos/templates/treasure/deposit_detail.html:31
-#: hijos/templates/treasure/grandlodgedeposit_detail.html:23
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:38
 #: hijos/templates/treasure/lodgeaccountegress_detail.html:43
 #: hijos/templates/treasure/lodgeaccountingress_detail.html:39
 #: hijos/templates/treasure/lodgeaccounttransfer_detail.html:31
@@ -338,7 +339,7 @@ msgstr "Descripción"
 
 #: hijos/templates/treasure/charge_detail.html:43
 #: hijos/templates/treasure/deposit_detail.html:42
-#: hijos/templates/treasure/grandlodgedeposit_detail.html:34
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:49
 #: hijos/templates/treasure/invoice_detail.html:32
 #: hijos/templates/treasure/lodgeaccountegress_detail.html:47
 #: hijos/templates/treasure/lodgeaccountingress_detail.html:43
@@ -355,7 +356,7 @@ msgstr ""
 
 #: hijos/templates/treasure/charge_detail.html:51
 #: hijos/templates/treasure/deposit_detail.html:50
-#: hijos/templates/treasure/grandlodgedeposit_detail.html:42
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:57
 #: hijos/templates/treasure/invoice_detail.html:40
 #: hijos/templates/treasure/lodgeaccountegress_detail.html:55
 #: hijos/templates/treasure/lodgeaccountingress_detail.html:51
@@ -465,6 +466,7 @@ msgstr "agregar depósito en gran logia"
 
 #: hijos/templates/treasure/grandlodgedeposit_add.html:8
 #: hijos/templates/treasure/grandlodgedeposit_detail.html:9
+#: hijos/templates/treasure/grandlodgedeposit_edit.html:8
 #: hijos/templates/users/affiliation_detail.html:48
 #: hijos/templates/users/user_detail.html:82 hijos/treasure/forms.py:81
 #: hijos/treasure/models.py:168 hijos/treasure/models.py:337
@@ -474,6 +476,41 @@ msgstr "Depósito en Gran Logia"
 #: hijos/templates/treasure/grandlodgedeposit_detail.html:5
 msgid "grand lodge deposit detail"
 msgstr "detalle depósito en gran logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:24
+msgid "Status"
+msgstr "Estado"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:26
+#: hijos/treasure/models.py:570
+msgid "Pending"
+msgstr "Pendiente"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:28
+#: hijos/treasure/models.py:571
+msgid "Accredited"
+msgstr "Acreditado"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:30
+#: hijos/treasure/models.py:572
+msgid "Rejected"
+msgstr "Rechazado"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:69
+msgid "Mark as ACCREDITED"
+msgstr "Marcar como ACREDITADO"
+
+#: hijos/templates/treasure/grandlodgedeposit_detail.html:79
+msgid "Mark as REJECTED"
+msgstr "Marcar como RECHAZADO"
+
+#: hijos/templates/treasure/grandlodgedeposit_edit.html:5
+msgid "update grand lodge deposit"
+msgstr "actualizar depósito en gran logia"
+
+#: hijos/templates/treasure/grandlodgedeposit_edit.html:14
+msgid "Update"
+msgstr "Actualizar"
 
 #: hijos/templates/treasure/grandlodgedeposit_list.html:5
 msgid "grand lodge deposit list"
@@ -1076,18 +1113,6 @@ msgstr "depósito"
 msgid "deposits"
 msgstr "depósitos"
 
-#: hijos/treasure/models.py:570
-msgid "Pending"
-msgstr "Pendiente"
-
-#: hijos/treasure/models.py:571
-msgid "Accredited"
-msgstr "Acreditado"
-
-#: hijos/treasure/models.py:572
-msgid "Rejected"
-msgstr "Rechazado"
-
 #: hijos/treasure/models.py:609
 msgid "status"
 msgstr "estado"
@@ -1201,7 +1226,8 @@ msgid ""
 "A new GL deposit on your behalf has been made of an amount $ %(amount)s is "
 "pending to be accredited. You'll be notified as soon as it does."
 msgstr ""
-"Se ha realizado un nuevo depósito pendiente de tu parte en la GL por un monto de $ %(amount)s. Serás notificado ni bien se acredite."
+"Se ha realizado un nuevo depósito pendiente de tu parte en la GL por un "
+"monto de $ %(amount)s. Serás notificado ni bien se acredite."
 
 #: hijos/treasure/signals.py:197
 msgid "Your pending GL deposit has been accredited"
@@ -1225,7 +1251,8 @@ msgid ""
 "Your pending GL deposit made on your behalf of an amount $ %(amount)s has "
 "been rejected."
 msgstr ""
-"Su depósito pendiente en la GL realizado de su parte por un monto de $ %(amount)s ha sido rechazado."
+"Su depósito pendiente en la GL realizado de su parte por un monto de $ "
+"%(amount)s ha sido rechazado."
 
 #: hijos/users/admin.py:18
 msgid "This username has already been taken."
