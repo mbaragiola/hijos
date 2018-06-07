@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "update grand lodge deposit" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Grand Lodge Deposit" %} {{ grandlodgedeposit.id }}</h1>
+  <form class="form-horizontal" method="post" action="{% url 'treasure:grandlodgedeposit-update' grandlodgedeposit.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn">{% trans "Update" %}</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

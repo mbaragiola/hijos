@@ -156,3 +156,60 @@ class SendMassAccountBalance(LoginRequiredMixin, SingleObjectMixin, FormView):
         return reverse(
             'users:lodge-detail', kwargs={'pk': self.object.pk}
         )
+
+
+class GrandLodgeDepositForm(Form):
+
+    def accredit(self, deposit):
+        if deposit.status == models.GRANDLODGEDEPOSIT_PENDING:
+            deposit.status = models.GRANDLODGEDEPOSIT_ACCREDITED
+            deposit.save(
+                update_fields=('status', 'last_modified_by', 'last_modified_on')
+            )
+
+    def reject(self, deposit):
+        if deposit.status == models.GRANDLODGEDEPOSIT_PENDING:
+            deposit.status = models.GRANDLODGEDEPOSIT_REJECTED
+            deposit.save(
+                update_fields=('status', 'last_modified_by', 'last_modified_on')
+            )
+
+
+class GrandLodgeDepositAccredit(
+    LoginRequiredMixin, SingleObjectMixin, FormView
+):
+    model = models.GrandLodgeDeposit
+    template_name = 'treasure/grandlodgedeposit_detail.html'
+    form_class = GrandLodgeDepositForm
+
+    def form_valid(self, form):
+        form.accredit(self.object)
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse(
+            'treasure:grandlodgedeposit-detail', kwargs={'pk': self.object.pk}
+        )
+
+
+class GrandLodgeDepositReject(LoginRequiredMixin, SingleObjectMixin, FormView):
+    model = models.GrandLodgeDeposit
+    template_name = 'treasure/grandlodgedeposit_detail.html'
+    form_class = GrandLodgeDepositForm
+
+    def form_valid(self, form):
+        form.reject(self.object)
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse(
+            'treasure:grandlodgedeposit-detail', kwargs={'pk': self.object.pk}
+        )

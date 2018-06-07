@@ -20,6 +20,21 @@
   <div class="col">{% trans "Amount" %}: $ {{ grand_lodge_deposit.amount }}</div>
 </div>
 <div class="row">
+  <div class="col">
+    {% trans "Status" %}: 
+    {% if grand_lodge_deposit.status == "P" %}
+      {% trans "Pending" %}
+    {% elif grand_lodge_deposit.status == "A" %}
+      {% trans "Accredited" %}
+    {% elif grand_lodge_deposit.status == "R" %}
+      {% trans "Rejected" %}
+    {% else %}
+      {% trans "Unknown" %}
+    {% endif %}
+  </div>
+</div>
+
+<div class="row">
   <div class="col">{% trans "Description" %}: {{ grand_lodge_deposit.description }}</div>
 </div>
 {% if grand_lodge_deposit.receipt %}
@@ -44,5 +59,27 @@
   {% endblocktrans %}
   </div>
 </div>
+{% endif %}
+{% if grand_lodge_deposit.status == "P" %}
+<form class="form-horizontal" method="post" action="{% url 'treasure:grandlodgedeposit-accredit' grand_lodge_deposit.id %}">
+  {% csrf_token %}
+  <div class="control-group">
+  <div class="controls">
+    <button type="submit" class="btn">
+        {% trans "Mark as ACCREDITED" %}
+    </button>
+  </div>
+  </div>
+</form>
+<form class="form-horizontal" method="post" action="{% url 'treasure:grandlodgedeposit-reject' grand_lodge_deposit.id %}">
+  {% csrf_token %}
+  <div class="control-group">
+  <div class="controls">
+    <button type="submit" class="btn">
+        {% trans "Mark as REJECTED" %}
+    </button>
+  </div>
+  </div>
+</form>
 {% endif %}
 {% endblock %}

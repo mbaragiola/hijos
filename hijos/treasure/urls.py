@@ -1,6 +1,6 @@
 from django.urls import path
 
-from hijos.treasure import views
+from hijos.treasure import forms, views
 
 app_name = 'treasure'
 urlpatterns = [
@@ -88,6 +88,21 @@ urlpatterns = [
         'grandlodgedeposits/add/',
         view=views.GrandLodgeDepositCreateView.as_view(),
         name='grandlodgedeposit-create'
+    ),
+    path(
+        'grandlodgedeposits/<int:pk>/edit/',
+        view=views.GrandLodgeDepositUpdateView.as_view(),
+        name='grandlodgedeposit-update'
+    ),
+    path(
+        'grandlodgedeposits/<int:pk>/accredit/',
+        view=forms.GrandLodgeDepositAccredit.as_view(),
+        name='grandlodgedeposit-accredit'
+    ),
+    path(
+        'grandlodgedeposits/<int:pk>/reject/',
+        view=forms.GrandLodgeDepositReject.as_view(),
+        name='grandlodgedeposit-reject'
     ),
     path(
         'grandlodgedeposits/<int:pk>/',

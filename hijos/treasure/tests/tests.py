@@ -1694,6 +1694,107 @@ class GrandLodgeDepositTestCase(TestCase):
             "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
         )
 
+        # Reject
+        url_reject = reverse(
+            'treasure:grandlodgedeposit-reject', args=[deposit.pk]
+        )
+
+        self.client.logout()
+        response = self.client.post(url_reject, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_reject
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_reject, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit.refresh_from_db()
+        self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_REJECTED)
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+        msg = mail.outbox[1]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your pending GL deposit has been rejected'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\t"
+            "Your pending GL deposit made on your behalf of an amount "
+            "$ 100.00 has been rejected."
+            "\n\t"
+            "Your current account balance with Example is of $ -300.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
+        # Accredit
+        deposit.status = models.GRANDLODGEDEPOSIT_PENDING
+        deposit.save(force_update=True)
+        url_accredit = reverse(
+            'treasure:grandlodgedeposit-accredit', args=[deposit.pk]
+        )
+
+        self.client.logout()
+        response = self.client.post(url_accredit, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_accredit
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_accredit, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit.refresh_from_db()
+        self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_ACCREDITED)
+        self.assertTrue(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+        msg = mail.outbox[2]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your pending GL deposit has been accredited'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\t"
+            "Your pending GL deposit made on your behalf of an amount "
+            "$ 100.00 has been accredited."
+            "\n\t"
+            "Your current account balance with Example is of $ -200.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n" +
+            str(self.today) + "\tGrand Lodge Deposit\t\t100.00\t\t-200.00\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
     def test_create_without_email(self):
         url_create = reverse('treasure:grandlodgedeposit-create')
         data = {
@@ -1729,6 +1830,64 @@ class GrandLodgeDepositTestCase(TestCase):
         self.assertFalse(mail.outbox)
 
         self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+
+        # Reject
+        url_reject = reverse(
+            'treasure:grandlodgedeposit-reject', args=[deposit.pk]
+        )
+
+        self.client.logout()
+        response = self.client.post(url_reject, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_reject
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_reject, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit.refresh_from_db()
+        self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_REJECTED)
+        self.assertFalse(mail.outbox)
+        self.assertFalse(
+            models.AccountMovement.objects.filter(
+                account__affiliation=self.affiliation,
+                account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,
+                amount=Decimal('100.00'),
+                balance=Decimal('-200.00')
+            ).exists()
+        )
+
+        # Accredit
+        deposit.status = models.GRANDLODGEDEPOSIT_PENDING
+        deposit.save(force_update=True)
+        url_accredit = reverse(
+            'treasure:grandlodgedeposit-accredit', args=[deposit.pk]
+        )
+
+        self.client.logout()
+        response = self.client.post(url_accredit, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_accredit
+        )
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_accredit, data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        deposit.refresh_from_db()
+        self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_ACCREDITED)
+        self.assertFalse(mail.outbox)
+        self.assertTrue(
             models.AccountMovement.objects.filter(
                 account__affiliation=self.affiliation,
                 account_movement_type=models.ACCOUNTMOVEMENT_GRANDLODGEDEPOSIT,

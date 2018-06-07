@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg, Max, Min, Q, Sum
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from hijos.treasure import models
 from hijos.users import models as users
@@ -234,6 +234,16 @@ class GrandLodgeDepositCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        form.instance.last_modified_by = self.request.user
+        return super().form_valid(form)
+
+
+class GrandLodgeDepositUpdateView(LoginRequiredMixin, UpdateView):
+    model = models.GrandLodgeDeposit
+    fields = ['receipt']
+    template_name = 'treasure/grandlodgedeposit_edit.html'
+
+    def form_valid(self, form):
         form.instance.last_modified_by = self.request.user
         return super().form_valid(form)
 
