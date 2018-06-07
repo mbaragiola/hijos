@@ -1708,7 +1708,7 @@ class GrandLodgeDepositTestCase(TestCase):
         )
 
         self.client.force_login(user=self.user1)
-        response = self.client.post(url_reject, data, follow=True)
+        response = self.client.post(url_reject, follow=True)
         self.assertEqual(response.status_code, 200)
         deposit.refresh_from_db()
         self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_REJECTED)
@@ -1759,7 +1759,7 @@ class GrandLodgeDepositTestCase(TestCase):
         )
 
         self.client.force_login(user=self.user1)
-        response = self.client.post(url_accredit, data, follow=True)
+        response = self.client.post(url_accredit, follow=True)
         self.assertEqual(response.status_code, 200)
         deposit.refresh_from_db()
         self.assertEqual(deposit.status, models.GRANDLODGEDEPOSIT_ACCREDITED)
