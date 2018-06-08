@@ -1,4 +1,4 @@
-Hijos
+Hijos 🕯⛓⚒⚔️
 =====
 
 Free, open, small and simple lodge book-keeping management system
@@ -13,10 +13,10 @@ Free, open, small and simple lodge book-keeping management system
 Features
 ---------
 
-* Multiple lodge invoicing
-* English and Spanish supported
-* Keep track of expenses, debtors, donors, etc.
-* Send individual account balance email or mass account balances to each member.
+* Multiple lodge invoicing 💵
+* 🇬🇧English and 🇪🇸Spanish supported
+* Keep track of expenses, debtors, donors, etc. 💸💸
+* Send individual account balance email or mass account balances to each member. 🔨
 
 
 Technical description
