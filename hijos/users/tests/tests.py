@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.core import mail
 
 from hijos.treasure import models as treasure
 from hijos.users import models
@@ -106,7 +107,8 @@ class AffiliationTestCase(TestCase):
     """
     """
     fixtures = [
-        'hijos/users/tests/fixtures/users.json'
+        'hijos/users/tests/fixtures/users.json',
+        'hijos/treasure/tests/fixtures/treasure.json'
     ]
 
     def setUp(self):
@@ -141,7 +143,6 @@ class AffiliationTestCase(TestCase):
             response,
             self.url_login + '?next=' + url_create
         )
-
 
         self.assertFalse(
             treasure.Account.objects.filter(
@@ -212,12 +213,51 @@ class AffiliationTestCase(TestCase):
             'users/affiliation_detail.html'
         )
 
+    def test_send_account_balance(self):
+        url_detail = reverse(
+            'users:affiliation-detail', args=[self.affiliation.pk]
+        )
+
+        self.client.logout()
+        response = self.client.post(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_detail
+        )
+        self.assertFalse(mail.outbox)
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        msg = mail.outbox[0]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your current account balance on Example'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\t"
+            "\n\t"
+            "Your current account balance with Example is of $ -300.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
 
 class LodgeTestCase(TestCase):
     """
     """
     fixtures = [
-        'hijos/users/tests/fixtures/users.json'
+        'hijos/users/tests/fixtures/users.json',
+        'hijos/treasure/tests/fixtures/treasure.json'
     ]
 
     def setUp(self):
@@ -261,4 +301,80 @@ class LodgeTestCase(TestCase):
         self.assertTemplateUsed(
             response,
             'users/lodge_detail.html'
+        )
+
+    def test_send_mass_account_balance(self):
+        url_detail = reverse('users:lodge-detail', args=[self.lodge.pk])
+
+        self.client.logout()
+        response = self.client.post(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            self.url_login + '?next=' + url_detail
+        )
+        self.assertFalse(mail.outbox)
+
+        self.client.force_login(user=self.user1)
+        response = self.client.post(url_detail, follow=True)
+        self.assertEqual(response.status_code, 200)
+        msg = mail.outbox[0]
+        self.assertEqual(
+            msg.recipients(),
+            ['user1@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your current account balance on Example'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear M.·.W.·.B.·. User One:"
+            "\n\n\t"
+            "Your current account balance with Example is of $ -300.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+        )
+
+        msg = mail.outbox[1]
+        self.assertEqual(
+            msg.recipients(),
+            ['user3@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your current account balance on Example'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear P.·.M.·. User Three:"
+            "\n\n\t"
+            "Your current account balance with Example is of $ -150.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-150.00\t\t-150.00\n"
+        )
+        msg = mail.outbox[2]
+        self.assertEqual(
+            msg.recipients(),
+            ['user2@user.com']
+        )
+        self.assertEqual(
+            msg.subject,
+            'Your current account balance on Example'
+        )
+        self.assertEqual(
+            msg.body,
+            "Dear W.·.B.·. User Two:"
+            "\n\n\t"
+            "Your current account balance with Example is of $ -300.00"
+            "\n\n"
+            "Your last 10 movements are:"
+            "\n\nDate\tType\t\tAmount\t\tBalance\n\n"
+            "2018-05-18\tInvoice\t\t-300.00\t\t-300.00\n"
+            "2018-05-18\tDeposit\t\t200.00\t\t0.00\n"
+            "2018-05-17\tCharge\t\t-200.00\t\t-200.00\n"
         )
