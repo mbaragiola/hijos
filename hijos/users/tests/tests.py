@@ -1,6 +1,6 @@
+from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
-from django.core import mail
 
 from hijos.treasure import models as treasure
 from hijos.users import models
