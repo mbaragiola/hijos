@@ -15,7 +15,7 @@
 </div>
 <div class="row">
   <div class="col">
-    {% trans "User" %}: <a href="{% url 'users:user-detail' affiliation.user.id %}">{{ affiliation.user }}</a>
+    {% trans "User" %}: <a href="{% url 'users:user-detail' affiliation.user.username %}">{{ affiliation.user }}</a>
   </div>
 </div>
 <div class="row">
