@@ -10,3 +10,4 @@ django==2.1.5  # pyup: < 2.2  # https://www.djangoproject.com/
 django-environ==0.4.4  # https://github.com/joke2k/django-environ
 django-allauth==0.38.0  # https://github.com/pennersr/django-allauth
 #django-crispy-forms==1.7.2  # https://github.com/django-crispy-forms/django-crispy-forms
+channels==2.1.7
