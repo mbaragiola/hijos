@@ -1,12 +1,11 @@
-pytz==2018.3  # https://github.com/stub42/pytz
+pytz==2018.9  # https://github.com/stub42/pytz
 awesome-slugify==1.6.5  # https://github.com/dimka665/awesome-slugify
-Pillow==5.0.0  # https://github.com/python-pillow/Pillow
-argon2-cffi==18.1.0  # https://github.com/hynek/argon2_cffi
-whitenoise==3.3.1  # https://github.com/evansd/whitenoise
+Pillow==5.4.1 # https://github.com/python-pillow/Pillow
+argon2-cffi==19.1.0  # https://github.com/hynek/argon2_cffi
+whitenoise==4.1.2  # https://github.com/evansd/whitenoise
 
 # Django
 # ------------------------------------------------------------------------------
 django==2.1.7  # pyup: < 2.2  # https://www.djangoproject.com/
-django-environ==0.4.4  # https://github.com/joke2k/django-environ
-django-allauth==0.38.0  # https://github.com/pennersr/django-allauth
-#django-crispy-forms==1.7.2  # https://github.com/django-crispy-forms/django-crispy-forms
+django-environ==0.4.5  # https://github.com/joke2k/django-environ
+django-allauth==0.39.1  # https://github.com/pennersr/django-allauth
