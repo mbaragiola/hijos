@@ -75,7 +75,6 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'channels'
 ]
 LOCAL_APPS = [
     'hijos.users.apps.UsersConfig',
@@ -238,6 +237,3 @@ SOCIALACCOUNT_ADAPTER = 'hijos.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-
-# Channels
-ASGI_APPLICATION = "routing.application"
