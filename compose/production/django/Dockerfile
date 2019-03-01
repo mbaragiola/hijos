@@ -29,6 +29,16 @@ RUN sed -i 's/\r//' /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 RUN chown django /entrypoint.sh
 
+COPY ./compose/production/django/celery/run_worker.sh /run_worker.sh
+RUN sed -i 's/\r//' /run_worker.sh
+RUN chmod +x /run_worker.sh
+RUN chown django /run_worker.sh
+
+COPY ./compose/production/django/celery/run_beat.sh /run_beat.sh
+RUN sed -i 's/\r//' /run_beat.sh
+RUN chmod +x /run_beat.sh
+RUN chown django /run_beat.sh
+
 COPY . /app
 
 RUN chown -R django /app

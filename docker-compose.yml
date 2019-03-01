@@ -16,3 +16,43 @@ services:
     ports:
       - "8000:8000"
     command: /start.sh
+
+  broker-master:
+    image: redis:5.0.3-alpine3.9
+    hostname: broker-master
+
+  celeryworker:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    volumes:
+      - .:/app
+      - sqlite_data_local:/app/data
+    env_file:
+      - ./.envs/.local/.django
+    depends_on:
+      - django
+      - broker-master
+    command: /run_worker.sh
+    links:
+      - django
+      - broker-master
+
+  celerybeat:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    volumes:
+      - .:/app
+      - sqlite_data_local:/app/data
+    env_file:
+      - ./.envs/.local/.django
+    depends_on:
+      - django
+      - broker-master
+      - celeryworker
+    command: /run_beat.sh
+    links:
+      - django
+      - broker-master
+      - celeryworker

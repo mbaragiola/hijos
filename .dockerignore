@@ -2,3 +2,5 @@
 !.coveragerc
 !.env
 !.pylintrc
+celerybeat-schedule
+celerybeat.pid

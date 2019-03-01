@@ -1,3 +1,6 @@
 # General
 # ------------------------------------------------------------------------------
 USE_DOCKER=yes
+
+# Celery
+CELERY_BROKER_URL=redis://broker-master:6379/0

@@ -301,3 +301,5 @@ compose/production/caddy/Caddyfile
 .env
 backup*.json
 base_data.json
+celerybeat-schedule
+celerybeat.pid
