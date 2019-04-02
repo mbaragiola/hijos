@@ -3,11 +3,11 @@ awesome-slugify==1.6.5  # https://github.com/dimka665/awesome-slugify
 Pillow==5.4.1 # https://github.com/python-pillow/Pillow
 argon2-cffi==19.1.0  # https://github.com/hynek/argon2_cffi
 whitenoise==4.1.2  # https://github.com/evansd/whitenoise
-celery[redis]==4.2.1
+celery[redis]==4.3.0
 django-celery-beat==1.4.0
 
 # Django
 # ------------------------------------------------------------------------------
-django==2.1.7  # pyup: < 2.2  # https://www.djangoproject.com/
+django==2.2.0  # https://www.djangoproject.com/
 django-environ==0.4.5  # https://github.com/joke2k/django-environ
 django-allauth==0.39.1  # https://github.com/pennersr/django-allauth
